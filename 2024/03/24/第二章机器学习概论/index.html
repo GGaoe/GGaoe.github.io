@@ -88,7 +88,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-quill-pen-line"></i>
             <span class="post-meta-item-text"> 字数统计:</span>
-            <span class="post-count">166</span>
+            <span class="post-count">248</span>
         </span>
     </span>
 
@@ -110,7 +110,17 @@
   
     <div class="article-entry" itemprop="articleBody">
        
-  <p>机器学习例子：线性回归<br>通过训练集找到特征和标签之间的映射关系，在测试集进行精确度测试<br><img src="/2024/03/24/%E7%AC%AC%E4%BA%8C%E7%AB%A0%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E6%A6%82%E8%AE%BA/pic1.png" alt="pic1"><br>三要素：模型 学习准则 优化方法<br>假设一个函数集合F，通过观察在测试集的特性找出理想假设<br>其中𝑓(𝒙; 𝜃)是参数为𝜃 的函数，也称为模型（Model），𝐷 为参数的数量．<br>F分为线性模型和非线性模型两种<br><img src="/2024/03/24/%E7%AC%AC%E4%BA%8C%E7%AB%A0%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E6%A6%82%E8%AE%BA/pic2.png" alt="pic2"><br><img src="/2024/03/24/%E7%AC%AC%E4%BA%8C%E7%AB%A0%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E6%A6%82%E8%AE%BA/pic3.png" alt="pic3"><br>ℛ(𝜃) &#x3D; 𝔼(𝒙,𝑦)∼𝑝𝑟(𝒙,𝑦)[ℒ(𝑦, 𝑓(𝒙; 𝜃))]<br>ℒ(𝑦, 𝑓(𝒙; 𝜃))为损失函数：<br>01损失函数&#x2F;平方损失函数（不用于分类问题）&#x2F;交叉熵损失函数（用于分类问题）&#x2F;Hinge损失函数<br>ℒ(𝒚, 𝑓(𝒙; 𝜃)) &#x3D; −𝒚Tlog 𝑓(𝒙; 𝜃)<br>&#x3D;−<br>𝐶<br>∑ 𝑦𝑐log 𝑓𝑐(𝒙; 𝜃).<br>𝑐&#x3D;1</p>
+  <p>机器学习例子：线性回归</p>
+<p>通过训练集找到特征和标签之间的映射关系，在测试集进行精确度测试</p>
+<p><img src="/2024/03/24/%E7%AC%AC%E4%BA%8C%E7%AB%A0%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E6%A6%82%E8%AE%BA/pic1.png" alt="pic1"></p>
+<p><strong>三要素：</strong>模型 学习准则 优化方法</p>
+<p>假设一个函数集合F，通过观察在测试集的特性找出理想假设<br>其中𝑓(𝒙; 𝜃)是参数为𝜃 的函数，也称为模型（Model），𝐷 为参数的数量．</p>
+<p>F分为线性模型和非线性模型两种</p>
+<p><img src="/2024/03/24/%E7%AC%AC%E4%BA%8C%E7%AB%A0%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E6%A6%82%E8%AE%BA/pic2.png" alt="pic2"><br><img src="/2024/03/24/%E7%AC%AC%E4%BA%8C%E7%AB%A0%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E6%A6%82%E8%AE%BA/pic3.png" alt="pic3"></p>
+<p>ℛ(𝜃)为期望风险<br>ℛ(𝜃) &#x3D; 𝔼(𝒙,𝑦)∼𝑝𝑟(𝒙,𝑦)[ℒ(𝑦, 𝑓(𝒙; 𝜃))]<br>ℒ(𝑦, 𝑓(𝒙; 𝜃))为损失函数：</p>
+<p>01损失函数&#x2F;平方损失函数（不用于分类问题）&#x2F;交叉熵损失函数（用于分类问题）&#x2F;Hinge损失函数</p>
+<p><strong>风险最小化准则：</strong>通过数据集计算出经验风险，找到参数使经验风险最小</p>
+<p><strong>过拟合问题：</strong>经验风险最小化原则很容易导致模型在训练集上错误率很低，但是在未知数据上错误率很高．这就是所谓的过拟合</p>
  
       <!-- reward -->
       
