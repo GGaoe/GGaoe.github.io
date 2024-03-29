@@ -88,7 +88,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-quill-pen-line"></i>
             <span class="post-meta-item-text"> 字数统计:</span>
-            <span class="post-count">1k</span>
+            <span class="post-count">1.2k</span>
         </span>
     </span>
 
@@ -97,7 +97,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-book-open-line"></i>
             <span class="post-meta-item-text"> 阅读时长≈</span>
-            <span class="post-count">5 分钟</span>
+            <span class="post-count">6 分钟</span>
         </span>
     </span>
 </div>
@@ -148,6 +148,11 @@
 <p>Two positive integers j and k have greatest common divisor 1 (and thus are relatively prime) if and only if there are integers x and y such that jx + ky &#x3D; 1.</p>
 <p>For any positive integer n, an element a of Zn has a multiplicative inverse if and only if gcd(a, n) &#x3D; 1.</p>
 <p>For any prime p, every nonzero element a of Zp has an inverse.</p>
+<h2 id="数论算法"><a href="#数论算法" class="headerlink" title="数论算法"></a>数论算法</h2><h5 id="TC-31-1"><a href="#TC-31-1" class="headerlink" title="TC 31.1"></a>TC 31.1</h5><p>如果任意整数a和b 不都为0, 则 gcd(a, b)是a 与 b 的线性组合集{ax+by: x, y∈Z} 中的最小正元素。</p>
+<p><strong>欧几里得算法：</strong>对任意非负整数a和任意正整数b,gcd(a,b) &#x3D; gcd(b,a mod b) </p>
+<p>如果a&gt;b&gt;&#x3D;l 并且EUCLID(a, b)执行了 k&gt;&#x3D;l 次递归调用，则a&gt;&#x3D;Fk+2,b&gt;&#x3D;Fk+1</p>
+<p>(Lame定理) 对任意整数k&gt;&#x3D;l, 如果a&gt;b&gt;&#x3D;l, 且b&lt; Fk+1 则 EUCLID(a, b)的递归调用次数少于K次。</p>
+<p>欧几里得算法的扩展形式<br><img src="/2024/03/29/%E9%97%AE%E6%B1%824/pic11.png" alt="pic11"></p>
  
       <!-- reward -->
       
