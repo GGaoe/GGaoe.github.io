@@ -88,7 +88,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-quill-pen-line"></i>
             <span class="post-meta-item-text"> 字数统计:</span>
-            <span class="post-count">196</span>
+            <span class="post-count">340</span>
         </span>
     </span>
 
@@ -116,7 +116,10 @@
 <h5 id="Sigmoid型函数包括Logistic函数和Tanh函数，特点是两端饱和函数。（S型曲线函数）"><a href="#Sigmoid型函数包括Logistic函数和Tanh函数，特点是两端饱和函数。（S型曲线函数）" class="headerlink" title="Sigmoid型函数包括Logistic函数和Tanh函数，特点是两端饱和函数。（S型曲线函数）"></a>Sigmoid型函数包括Logistic函数和Tanh函数，特点是两端饱和函数。（S型曲线函数）</h5><p>Logistic函数把实数域的值挤压到0-1之间，并且连续可导<br>Tanh函数是放大版的Logistic函数，值域是-1到1<br>但是均计算开销较大，可以用一阶泰勒展开来近似</p>
 <h5 id="ReLU函数"><a href="#ReLU函数" class="headerlink" title="ReLU函数"></a>ReLU函数</h5><p>修正线性单元，深度神经网络中经常使用的激活函数，是一个斜坡函数，定义为max(0,x)<br>计算更高效且有生物合理性<br>有死亡 ReLU 问题问题，实际应用中使用一些变种来解决<br>带泄露的ReLU：在x&lt;0时维持一个很小的梯度，避免永远无法激活<br>带参数的ReLU<br>ELU函数、Softplus函数</p>
 <h5 id="Swish函数"><a href="#Swish函数" class="headerlink" title="Swish函数"></a>Swish函数</h5><p>swish(𝑥) &#x3D; 𝑥𝜎(𝛽𝑥)</p>
- 
+<h5 id="GELU函数"><a href="#GELU函数" class="headerlink" title="GELU函数"></a>GELU函数</h5><p>GELU(𝑥) &#x3D; 𝑥𝑃(𝑋 ≤ 𝑥)</p>
+<h5 id="Maxout单元"><a href="#Maxout单元" class="headerlink" title="Maxout单元"></a>Maxout单元</h5><h3 id="网络结构"><a href="#网络结构" class="headerlink" title="网络结构"></a>网络结构</h3><h5 id="前馈网络"><a href="#前馈网络" class="headerlink" title="前馈网络"></a>前馈网络</h5><p>前馈网络可以看作一个函数，通过简单非线性函数的多次复合，实现输入空间到输出空间的复杂映射。前馈神经网络包括全连接前馈网络和卷积神经网络。信息单向传递</p>
+<h5 id="记忆网络"><a href="#记忆网络" class="headerlink" title="记忆网络"></a>记忆网络</h5><p>也叫反馈网络，有记忆能力，能够查看自己的历史信息，包括循环神经网络、Hopfield 网络、玻尔兹曼机、受限玻尔兹曼机等</p>
+<h5 id="图网络"><a href="#图网络" class="headerlink" title="图网络"></a>图网络</h5><h4 id="前馈神经网络"><a href="#前馈神经网络" class="headerlink" title="前馈神经网络"></a>前馈神经网络</h4> 
       <!-- reward -->
       
     </div>
