@@ -15,7 +15,7 @@
         name="viewport"
         content="width=device-width, initial-scale=1, maximum-scale=1"
       />
-      <title>第四章前馈神经网络 |  高歌</title>
+      <title> 高歌</title>
   <meta name="generator" content="hexo-theme-ayer">
       
       <link rel="shortcut icon" href="/favicon.ico" />
@@ -57,38 +57,24 @@
     <main class="content on">
       <section class="outer">
   <article
-  id="post-第四章前馈神经网络"
+  id="post-OT"
   class="article article-type-post"
   itemscope
   itemprop="blogPost"
   data-scroll-reveal
 >
   <div class="article-inner">
-    
-    <header class="article-header">
-       
-<h1 class="article-title sea-center" style="border-left:0" itemprop="name">
-  第四章前馈神经网络
-</h1>
- 
-
-      
-    </header>
      
     <div class="article-meta">
-      <a href="/2024/04/07/%E7%AC%AC%E5%9B%9B%E7%AB%A0%E5%89%8D%E9%A6%88%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/" class="article-date">
-  <time datetime="2024-04-07T04:47:44.280Z" itemprop="datePublished">2024-04-07</time>
-</a> 
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/scientific-research-training/">scientific_research_training</a>
-  </div>
-  
+      <a href="/2024/04/09/OT/" class="article-date">
+  <time datetime="2024-04-09T02:42:34.104Z" itemprop="datePublished">2024-04-09</time>
+</a>   
 <div class="word_count">
     <span class="post-time">
         <span class="post-meta-item-icon">
             <i class="ri-quill-pen-line"></i>
             <span class="post-meta-item-text"> 字数统计:</span>
-            <span class="post-count">373</span>
+            <span class="post-count">59</span>
         </span>
     </span>
 
@@ -104,23 +90,14 @@
  
     </div>
       
-    <div class="tocbot"></div>
-
 
 
 
   
     <div class="article-entry" itemprop="articleBody">
        
-  <p><img src="/2024/04/07/%E7%AC%AC%E5%9B%9B%E7%AB%A0%E5%89%8D%E9%A6%88%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/pic1.png" alt="pic1"></p>
-<h5 id="Sigmoid型函数包括Logistic函数和Tanh函数，特点是两端饱和函数。（S型曲线函数）"><a href="#Sigmoid型函数包括Logistic函数和Tanh函数，特点是两端饱和函数。（S型曲线函数）" class="headerlink" title="Sigmoid型函数包括Logistic函数和Tanh函数，特点是两端饱和函数。（S型曲线函数）"></a>Sigmoid型函数包括Logistic函数和Tanh函数，特点是两端饱和函数。（S型曲线函数）</h5><p>Logistic函数把实数域的值挤压到0-1之间，并且连续可导<br>Tanh函数是放大版的Logistic函数，值域是-1到1<br>但是均计算开销较大，可以用一阶泰勒展开来近似</p>
-<h5 id="ReLU函数"><a href="#ReLU函数" class="headerlink" title="ReLU函数"></a>ReLU函数</h5><p>修正线性单元，深度神经网络中经常使用的激活函数，是一个斜坡函数，定义为max(0,x)<br>计算更高效且有生物合理性<br>有死亡 ReLU 问题问题，实际应用中使用一些变种来解决<br>带泄露的ReLU：在x&lt;0时维持一个很小的梯度，避免永远无法激活<br>带参数的ReLU<br>ELU函数、Softplus函数</p>
-<h5 id="Swish函数"><a href="#Swish函数" class="headerlink" title="Swish函数"></a>Swish函数</h5><p>swish(𝑥) &#x3D; 𝑥𝜎(𝛽𝑥)</p>
-<h5 id="GELU函数"><a href="#GELU函数" class="headerlink" title="GELU函数"></a>GELU函数</h5><p>GELU(𝑥) &#x3D; 𝑥𝑃(𝑋 ≤ 𝑥)</p>
-<h5 id="Maxout单元"><a href="#Maxout单元" class="headerlink" title="Maxout单元"></a>Maxout单元</h5><h3 id="网络结构"><a href="#网络结构" class="headerlink" title="网络结构"></a>网络结构</h3><h5 id="前馈网络"><a href="#前馈网络" class="headerlink" title="前馈网络"></a>前馈网络</h5><p>前馈网络可以看作一个函数，通过简单非线性函数的多次复合，实现输入空间到输出空间的复杂映射。前馈神经网络包括全连接前馈网络和卷积神经网络。信息单向传递</p>
-<h5 id="记忆网络"><a href="#记忆网络" class="headerlink" title="记忆网络"></a>记忆网络</h5><p>也叫反馈网络，有记忆能力，能够查看自己的历史信息，包括循环神经网络、Hopfield 网络、玻尔兹曼机、受限玻尔兹曼机等</p>
-<h5 id="图网络"><a href="#图网络" class="headerlink" title="图网络"></a>图网络</h5><h4 id="前馈神经网络"><a href="#前馈神经网络" class="headerlink" title="前馈神经网络"></a>前馈神经网络</h4><p><img src="/2024/04/07/%E7%AC%AC%E5%9B%9B%E7%AB%A0%E5%89%8D%E9%A6%88%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/pic2.png" alt="pic2"><br>在神经网络的训练中经常使用反向传播算法来高效地计算梯度．</p>
-<h5 id="反向传播算法"><a href="#反向传播算法" class="headerlink" title="反向传播算法"></a>反向传播算法</h5> 
+  <p>1.离散对数的定义<br>2.离散对数的求解<br>3.圆锥曲线的定义<br>4.圆锥曲线上定义加法&#x2F;乘法&#x2F;阿贝尔群<br>5.定义加法的前提<br>6.加密&#x2F;解密<br>7.签名</p>
+ 
       <!-- reward -->
       
     </div>
@@ -172,32 +149,21 @@
     <a class="modal-close" href="javascript:;"><i class="ri-close-circle-line"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//api.qrserver.com/v1/create-qr-code/?size=150x150&data=http://example.com/2024/04/07/%E7%AC%AC%E5%9B%9B%E7%AB%A0%E5%89%8D%E9%A6%88%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/" alt="微信分享二维码">
+      <img src="//api.qrserver.com/v1/create-qr-code/?size=150x150&data=http://example.com/2024/04/09/OT/" alt="微信分享二维码">
     </div>
 </div>
 
 <div id="share-mask"></div>  
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Neural-Networks-and-Deep-Learning/" rel="tag">Neural Networks and Deep Learning</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/scientific-research-training/" rel="tag">scientific_research_training</a></li></ul>
-
     </footer>
   </div>
 
    
   <nav class="article-nav">
     
-      <a href="/2024/04/09/OT/" class="article-nav-link">
-        <strong class="article-nav-caption">上一篇</strong>
-        <div class="article-nav-title">
-          
-            (no title)
-          
-        </div>
-      </a>
     
-    
-      <a href="/2024/04/07/%E7%AC%AC%E4%B8%89%E7%AB%A0%E7%BA%BF%E6%80%A7%E6%A8%A1%E5%9E%8B/" class="article-nav-link">
+      <a href="/2024/04/07/%E7%AC%AC%E5%9B%9B%E7%AB%A0%E5%89%8D%E9%A6%88%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/" class="article-nav-link">
         <strong class="article-nav-caption">下一篇</strong>
-        <div class="article-nav-title">第三章线性模型</div>
+        <div class="article-nav-title">第四章前馈神经网络</div>
       </a>
     
   </nav>
