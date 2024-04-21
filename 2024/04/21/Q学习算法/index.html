@@ -15,7 +15,7 @@
         name="viewport"
         content="width=device-width, initial-scale=1, maximum-scale=1"
       />
-      <title>tags |  高歌</title>
+      <title>DQN、Q学习算法、SARSA算法 |  高歌</title>
   <meta name="generator" content="hexo-theme-ayer">
       
       <link rel="shortcut icon" href="/favicon.ico" />
@@ -56,13 +56,147 @@
       
     <main class="content on">
       <section class="outer">
+  <article
+  id="post-Q学习算法"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h1 class="article-title sea-center" style="border-left:0" itemprop="name">
+  DQN、Q学习算法、SARSA算法
+</h1>
+ 
+
+      
+    </header>
+     
+    <div class="article-meta">
+      <a href="/2024/04/21/Q%E5%AD%A6%E4%B9%A0%E7%AE%97%E6%B3%95/" class="article-date">
+  <time datetime="2024-04-21T12:26:54.847Z" itemprop="datePublished">2024-04-21</time>
+</a> 
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/scientific-research-training/">scientific_research_training</a>
+  </div>
   
-    <h1 class="page-type-title">标签</h1>
-    <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Deep-reinforcement-learning/" rel="tag">Deep reinforcement learning</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Neural-Networks-and-Deep-Learning/" rel="tag">Neural Networks and Deep Learning</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Problem-solving/" rel="tag">Problem solving</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/scientific-research-training/" rel="tag">scientific_research_training</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/tools/" rel="tag">tools</a></li></ul>
+<div class="word_count">
+    <span class="post-time">
+        <span class="post-meta-item-icon">
+            <i class="ri-quill-pen-line"></i>
+            <span class="post-meta-item-text"> 字数统计:</span>
+            <span class="post-count">412</span>
+        </span>
+    </span>
+
+    <span class="post-time">
+        &nbsp; | &nbsp;
+        <span class="post-meta-item-icon">
+            <i class="ri-book-open-line"></i>
+            <span class="post-meta-item-text"> 阅读时长≈</span>
+            <span class="post-count">1 分钟</span>
+        </span>
+    </span>
+</div>
+ 
+    </div>
+      
+    <div class="tocbot"></div>
+
+
+
+
   
+    <div class="article-entry" itemprop="articleBody">
+       
+  <h4 id="基础概念"><a href="#基础概念" class="headerlink" title="基础概念"></a>基础概念</h4><p>Rt代表当前时间的奖励<br>折扣回报价值函数Ut是t时刻后所有奖励的加权和<br>Ut的随机性完全来自t+1时刻后的动作和状态<br>对其求条件期望即可得到当前的动作价值函数Qt<br>最优动作价值函数去除了策略函数的影响Q*t<br>控制智能体与环境交互的策略被称作行为策略。行为策略的作用是收集经验 (Experience)，即观测的环境、动作、奖励<br>训练的目的是得到一个策略函数，在结束训练之后，用这个策略函数来控制智能体；这个策略函数就叫做目标策略。在本章中，目标策略是一个确定性的策略，即用 DQN 控制智能体：</p>
+<h4 id="时间差分算法（TD）"><a href="#时间差分算法（TD）" class="headerlink" title="时间差分算法（TD）"></a>时间差分算法（TD）</h4><p>常见的TD算法有Q学习和SARSA</p>
+<h5 id="用Q算法训练DQN：（目标是学习到最优动作价值函数Q-）"><a href="#用Q算法训练DQN：（目标是学习到最优动作价值函数Q-）" class="headerlink" title="用Q算法训练DQN：（目标是学习到最优动作价值函数Q*）"></a>用Q算法训练DQN：（目标是学习到最优动作价值函数Q*）</h5><p><img src="/2024/04/21/Q%E5%AD%A6%E4%B9%A0%E7%AE%97%E6%B3%95/pic1.png"><br><img src="/2024/04/21/Q%E5%AD%A6%E4%B9%A0%E7%AE%97%E6%B3%95/pic2.png"><br>训练流程：<br>先用$\epsilon$ -greedy 策略收集数据<br>即以1-$\epsilon$的概率选择当前环境Q最大的动作，以$\epsilon$的概率选择A中任意一个动作<br>先对DQN进行正向传播，得到Q值<br><img src="/2024/04/21/Q%E5%AD%A6%E4%B9%A0%E7%AE%97%E6%B3%95/pic3.png"><br>计算TD目标和TD误差<br>对DQN进行反向传播，做梯度下降更新参数</p>
+<h5 id="SARSA算法"><a href="#SARSA算法" class="headerlink" title="SARSA算法"></a>SARSA算法</h5><p>训练目的是来学习表格q作为动作价值函数$Q_{\pi}$的近似，评价策略的好坏，不同的策略$\pi$对应的Q就会不同<br>根据当前策略进行随机抽样，从而得到TD误差和TD目标，从而更新表格中的$Q_{\pi}$</p>
+<p><strong>神经网络的SARSA</strong></p>
+ 
+      <!-- reward -->
+      
+    </div>
+    
+
+    <!-- copyright -->
+    
+    <footer class="article-footer">
+       
+<div class="share-btn">
+      <span class="share-sns share-outer">
+        <i class="ri-share-forward-line"></i>
+        分享
+      </span>
+      <div class="share-wrap">
+        <i class="arrow"></i>
+        <div class="share-icons">
+          
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="ri-weibo-fill"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="ri-wechat-fill"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="ri-qq-fill"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="ri-douban-line"></i>
+          </a>
+          <!-- <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a> -->
+          
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="ri-facebook-circle-fill"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="ri-twitter-fill"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="ri-google-fill"></i>
+          </a>
+        </div>
+      </div>
+</div>
+
+<div class="wx-share-modal">
+    <a class="modal-close" href="javascript:;"><i class="ri-close-circle-line"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//api.qrserver.com/v1/create-qr-code/?size=150x150&data=http://example.com/2024/04/21/Q%E5%AD%A6%E4%B9%A0%E7%AE%97%E6%B3%95/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div id="share-mask"></div>  
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Deep-reinforcement-learning/" rel="tag">Deep reinforcement learning</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/scientific-research-training/" rel="tag">scientific_research_training</a></li></ul>
+
+    </footer>
+  </div>
+
+   
+  <nav class="article-nav">
+    
+    
+      <a href="/2024/04/07/%E7%AC%AC%E5%9B%9B%E7%AB%A0%E5%89%8D%E9%A6%88%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/" class="article-nav-link">
+        <strong class="article-nav-caption">下一篇</strong>
+        <div class="article-nav-title">第四章前馈神经网络</div>
+      </a>
+    
+  </nav>
+
+  
+   
+  
+    
+</article>
+
 </section>
-
-
       <footer class="footer">
   <div class="outer">
     <ul>
@@ -193,6 +327,22 @@
 <script src="/js/lazyload.min.js"></script>
 
 <!-- Tocbot -->
+ 
+<script src="/js/tocbot.min.js"></script>
+
+<script>
+  tocbot.init({
+    tocSelector: ".tocbot",
+    contentSelector: ".article-entry",
+    headingSelector: "h1, h2, h3, h4, h5, h6",
+    hasInnerContainers: true,
+    scrollSmooth: true,
+    scrollContainer: "main",
+    positionFixedSelector: ".tocbot",
+    positionFixedClass: "is-position-fixed",
+    fixedSidebarOffset: "auto",
+  });
+</script>
 
 <script src="https://cdn.staticfile.org/jquery-modal/0.9.2/jquery.modal.min.js"></script>
 <link

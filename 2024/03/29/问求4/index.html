@@ -88,7 +88,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-quill-pen-line"></i>
             <span class="post-meta-item-text"> 字数统计:</span>
-            <span class="post-count">2.3k</span>
+            <span class="post-count">2.4k</span>
         </span>
     </span>
 
@@ -170,7 +170,7 @@
 <p><img src="/2024/03/29/%E9%97%AE%E6%B1%824/pic18.png" alt="pic18"></p>
 <p><img src="/2024/03/29/%E9%97%AE%E6%B1%824/pic19.png" alt="pic19"></p>
 <p>如果p是一个奇素数且 e&gt;&#x3D;l, 则方程x^2&#x3D;l(mod p^e)仅有两个解，即 x&#x3D;l x&#x3D;-1<br>如果对模n存在1的非平凡平方根，则n是合数。</p>
-<h3 id="密码学"><a href="#密码学" class="headerlink" title="密码学"></a>密码学</h3><p>凯撒密码：简单的密码移位<br>仿射密码：f(p)&#x3D;ap+b mod 26,gcd(a,26)&#x3D;1<br>多字母密码系统：<img src="/2024/03/29/%E9%97%AE%E6%B1%824/pic20.png" alt="20"><br>RSA加密系统：<br>利用大数分解的复杂性，找两个大质数p，q，n&#x3D;pq，m&#x3D;(p-1)(q-1),找到一个e，使得gcd(e,m)&#x3D;1,我们可以找到D,De&#x3D;1(mod \phi n),n和e是公开的<br>发送人将x^e发送过去，接收者用y^D来解密(mod n).<br>M&#x3D; SA(PA(M))<br>M&#x3D; PA(SA(M))<br>发送者可以查看接收者的公钥，将信息M通过公钥进行加密，而接收者可以使用自己的私钥来解密被加密的消息<br>接收者想要回复信息，但不希望被伪造，因此可以在信息后面加上自己的签名，通过私钥对签名进行加密，发给发送者<br>发送者通过查看接受者的公钥，对消息进行解密，若签名能够通过核验，则非伪造（公开的，任何知道公钥的人均可解密）<br>若想要回复的信息是私密的，那么只需要对信息和签名分开加密，用对方的公钥对信息加密，用自己的私钥对签名进行加密。</p>
+<h3 id="密码学"><a href="#密码学" class="headerlink" title="密码学"></a>密码学</h3><p>凯撒密码：简单的密码移位<br>仿射密码：f(p)&#x3D;ap+b mod 26,gcd(a,26)&#x3D;1<br>多字母密码系统：<img src="/2024/03/29/%E9%97%AE%E6%B1%824/pic20.png" alt="20"><br>RSA加密系统：<br>利用大数分解的复杂性，找两个大质数p，q，n&#x3D;pq，m&#x3D;(p-1)(q-1),找到一个e，使得gcd(e,m)&#x3D;1,我们可以找到D,$De&#x3D;1(mod \phi n)$,n和e是公开的<br>发送人将$x^e$发送过去，接收者用$y^D$来解密(mod n).<br>M&#x3D; SA(PA(M))<br>M&#x3D; PA(SA(M))<br>发送者可以查看接收者的公钥，将信息M通过公钥进行加密，而接收者可以使用自己的私钥来解密被加密的消息<br>接收者想要回复信息，但不希望被伪造，因此可以在信息后面加上自己的签名，通过私钥对签名进行加密，发给发送者<br>发送者通过查看接受者的公钥，对消息进行解密，若签名能够通过核验，则非伪造（公开的，任何知道公钥的人均可解密）<br>若想要回复的信息是私密的，那么只需要对信息和签名分开加密，用对方的公钥对信息加密，用自己的私钥对签名进行加密。</p>
 <h3 id="编码学"><a href="#编码学" class="headerlink" title="编码学"></a>编码学</h3><p>奇偶校验位-只能检验单个错误，无纠错能力<br>最大似然解码<br>块代码<br>把m位二进制数编码成n位二进制数<br>哈密顿距离：所有位数值不同的个数之和<br>权：n位中数值为1的个数<br><img src="/2024/03/29/%E9%97%AE%E6%B1%824/pic21.png" alt="21"></p>
 <p>Let C be a code with dmin &#x3D; 2n + 1. Then C can correct any n or fewer errors. Furthermore, any 2n or fewer errors can be detected in C.</p>
 <p> A group code is acode that is also a subgroup of [Z_{2}^{n}]</p>

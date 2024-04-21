@@ -88,7 +88,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-quill-pen-line"></i>
             <span class="post-meta-item-text"> 字数统计:</span>
-            <span class="post-count">373</span>
+            <span class="post-count">1.1k</span>
         </span>
     </span>
 
@@ -97,7 +97,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-book-open-line"></i>
             <span class="post-meta-item-text"> 阅读时长≈</span>
-            <span class="post-count">1 分钟</span>
+            <span class="post-count">3 分钟</span>
         </span>
     </span>
 </div>
@@ -120,7 +120,33 @@
 <h5 id="Maxout单元"><a href="#Maxout单元" class="headerlink" title="Maxout单元"></a>Maxout单元</h5><h3 id="网络结构"><a href="#网络结构" class="headerlink" title="网络结构"></a>网络结构</h3><h5 id="前馈网络"><a href="#前馈网络" class="headerlink" title="前馈网络"></a>前馈网络</h5><p>前馈网络可以看作一个函数，通过简单非线性函数的多次复合，实现输入空间到输出空间的复杂映射。前馈神经网络包括全连接前馈网络和卷积神经网络。信息单向传递</p>
 <h5 id="记忆网络"><a href="#记忆网络" class="headerlink" title="记忆网络"></a>记忆网络</h5><p>也叫反馈网络，有记忆能力，能够查看自己的历史信息，包括循环神经网络、Hopfield 网络、玻尔兹曼机、受限玻尔兹曼机等</p>
 <h5 id="图网络"><a href="#图网络" class="headerlink" title="图网络"></a>图网络</h5><h4 id="前馈神经网络"><a href="#前馈神经网络" class="headerlink" title="前馈神经网络"></a>前馈神经网络</h4><p><img src="/2024/04/07/%E7%AC%AC%E5%9B%9B%E7%AB%A0%E5%89%8D%E9%A6%88%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/pic2.png" alt="pic2"><br>在神经网络的训练中经常使用反向传播算法来高效地计算梯度．</p>
-<h5 id="反向传播算法"><a href="#反向传播算法" class="headerlink" title="反向传播算法"></a>反向传播算法</h5> 
+<h5 id="反向传播算法"><a href="#反向传播算法" class="headerlink" title="反向传播算法"></a>反向传播算法</h5><p>1）非凸优化问题和2）梯度消失问题．</p>
+<p>卷积神经网络（Convolutional Neural Network，CNN或ConvNet）是一种具有局部连接、权重共享等特性的深层前馈神经网络．</p>
+<p>局部连接、权重共享以及汇聚</p>
+<p>卷积层的作用是提取一个局部区域的特征，不同的卷积核相当于不同的特征提取器．</p>
+<p>汇聚层（Pooling Layer）也叫子采样层（Subsampling Layer），其作用是进行特征选择，降低特征数量，从而减少参数数量．</p>
+<p>一个典型的卷积网络是由卷积层、汇聚层、全连接层交叉堆叠而成</p>
+<p>参数为卷积核中权重以及偏置</p>
+<p>只需要计算卷积层中参数的梯度</p>
+<p>循环神经网络是一类具有短期记忆能力的神经网络．在循环神经网络中，神经元不但可以接受其他神经元的信息，也<br>可以接受自身的信息，形成具有环路的网络结构</p>
+<p>随时间反向传播算法</p>
+<p>梯度爆炸和消失问题</p>
+<p>递归神经网络和图网络</p>
+<p>延时神经网络是在前馈网络中的非输出层都添加一个延时器，记录神经元的最近几次活性值．在第 t 个时刻，第 𝑙 层神经元的活性值依赖于第 𝑙 − 1 层神经元的最近𝐾 个时刻的活性值</p>
+<p>循环神经网络（Recurrent Neural Network，RNN）通过使用带自反馈的神<br>经元，能够处理任意长度的时序数据．</p>
+<p>随时间反向传播（BPTT）算法和实时循环学习（RTRL）算法．</p>
+<p>循环网络的梯度爆炸问题比较容易解决，一般通过权重衰<br>减或梯度截断来避免．</p>
+<p>引入门控机制来控制信息的累积速度，包括有选择地加入新<br>的信息，并有选择地遗忘之前累积的信息</p>
+<p>长短<br>期记忆网络和门控循环单元网络</p>
+<p>一种常见的增加循环神经网络深度的做法是将多个循环网络堆叠起来，称<br>为堆叠循环神经网络</p>
+<p>优化问题 泛化问题<br>从网络优化和网络正则化方面解决</p>
+<p>在高维空间中，非凸优化的难点并不在于如何逃离局部最优点，而是如何<br>逃离鞍点<br>鞍点的梯度是0，但是在一些维<br>度上是最高点，在另一些维度上是最低点</p>
+<p>随机梯度下降对于高维空间中的非凸优化问题十分重要，通过在梯度<br>方向上引入随机性，可以有效地逃离鞍点．</p>
+<p>批量梯度下降、随机<br>梯度下降以及小批量梯度下降</p>
+<p>无模型方法又可以分为价值学习和策略学习。</p>
+<p>公式中的期望消除了 t 时刻之后的所有状态 St+1, ··· , Sn 与所有动作 At+1, ··· , An。最<br>优动作价值函数用最大化消除策略 π：</p>
+<p>时间差分 (TD) 算法</p>
+ 
       <!-- reward -->
       
     </div>
@@ -184,6 +210,15 @@
 
    
   <nav class="article-nav">
+    
+      <a href="/2024/04/21/Q%E5%AD%A6%E4%B9%A0%E7%AE%97%E6%B3%95/" class="article-nav-link">
+        <strong class="article-nav-caption">上一篇</strong>
+        <div class="article-nav-title">
+          
+            DQN、Q学习算法、SARSA算法
+          
+        </div>
+      </a>
     
     
       <a href="/2024/04/07/%E7%AC%AC%E4%B8%89%E7%AB%A0%E7%BA%BF%E6%80%A7%E6%A8%A1%E5%9E%8B/" class="article-nav-link">
