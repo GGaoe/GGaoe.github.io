@@ -88,7 +88,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-quill-pen-line"></i>
             <span class="post-meta-item-text"> 字数统计:</span>
-            <span class="post-count">412</span>
+            <span class="post-count">544</span>
         </span>
     </span>
 
@@ -116,7 +116,9 @@
 <h4 id="时间差分算法（TD）"><a href="#时间差分算法（TD）" class="headerlink" title="时间差分算法（TD）"></a>时间差分算法（TD）</h4><p>常见的TD算法有Q学习和SARSA</p>
 <h5 id="用Q算法训练DQN：（目标是学习到最优动作价值函数Q-）"><a href="#用Q算法训练DQN：（目标是学习到最优动作价值函数Q-）" class="headerlink" title="用Q算法训练DQN：（目标是学习到最优动作价值函数Q*）"></a>用Q算法训练DQN：（目标是学习到最优动作价值函数Q*）</h5><p><img src="/2024/04/21/Q%E5%AD%A6%E4%B9%A0%E7%AE%97%E6%B3%95/pic1.png"><br><img src="/2024/04/21/Q%E5%AD%A6%E4%B9%A0%E7%AE%97%E6%B3%95/pic2.png"><br>训练流程：<br>先用$\epsilon$ -greedy 策略收集数据<br>即以1-$\epsilon$的概率选择当前环境Q最大的动作，以$\epsilon$的概率选择A中任意一个动作<br>先对DQN进行正向传播，得到Q值<br><img src="/2024/04/21/Q%E5%AD%A6%E4%B9%A0%E7%AE%97%E6%B3%95/pic3.png"><br>计算TD目标和TD误差<br>对DQN进行反向传播，做梯度下降更新参数</p>
 <h5 id="SARSA算法"><a href="#SARSA算法" class="headerlink" title="SARSA算法"></a>SARSA算法</h5><p>训练目的是来学习表格q作为动作价值函数$Q_{\pi}$的近似，评价策略的好坏，不同的策略$\pi$对应的Q就会不同<br>根据当前策略进行随机抽样，从而得到TD误差和TD目标，从而更新表格中的$Q_{\pi}$</p>
-<p><strong>神经网络的SARSA</strong></p>
+<p><strong>神经网络的SARSA</strong><br><img src="/2024/04/21/Q%E5%AD%A6%E4%B9%A0%E7%AE%97%E6%B3%95/pic4.png"></p>
+<p>多步TD目标：获得m个回合的奖励，然后通过基于这m局的事实和后面t-m+1回合的估计，获得当前的TD目标<br>如果令m&#x3D;n-t+1，则多步TD目标就变成了对ut的实际观测</p>
+<p><strong>蒙特卡洛</strong><br>我们鼓励价值网络q(s_t,a_t,W)接近ut<br>蒙特卡洛是无偏的，但是方差大，收敛速度慢<br>自举则是用自己来估计自己，Q算法和SARSA都是自举，方差小但是有偏差</p>
  
       <!-- reward -->
       
