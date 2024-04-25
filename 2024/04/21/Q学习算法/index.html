@@ -88,7 +88,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-quill-pen-line"></i>
             <span class="post-meta-item-text"> 字数统计:</span>
-            <span class="post-count">1k</span>
+            <span class="post-count">1.1k</span>
         </span>
     </span>
 
@@ -125,6 +125,8 @@
 <p><strong>对决网络</strong>：对 DQN 的神经网络的结构的改进<br>将最优动作价值 Q* 分解成最优状态价值 V* 与最优优势 D* 。<br><img src="/2024/04/21/Q%E5%AD%A6%E4%B9%A0%E7%AE%97%E6%B3%95/pic6.png"></p>
 <p><strong>噪声网络</strong></p>
 <h4 id="策略梯度方法"><a href="#策略梯度方法" class="headerlink" title="策略梯度方法"></a>策略梯度方法</h4><p><img src="/2024/04/21/Q%E5%AD%A6%E4%B9%A0%E7%AE%97%E6%B3%95/pic7.png"><br><img src="/2024/04/21/Q%E5%AD%A6%E4%B9%A0%E7%AE%97%E6%B3%95/pic8.png"><br><img src="/2024/04/21/Q%E5%AD%A6%E4%B9%A0%E7%AE%97%E6%B3%95/pic9.png"></p>
+<p>**REINFORCE:*<em>用ut来近似代替Q</em>每次收集一组四元组，计算回报，进行反向传播，做随机梯度上升来更新策略网络参数</p>
+<p><strong>Actor-Critic</strong> 方法用神经网络近似 Qπ。</p>
  
       <!-- reward -->
       
