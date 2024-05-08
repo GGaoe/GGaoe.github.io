@@ -88,7 +88,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-quill-pen-line"></i>
             <span class="post-meta-item-text"> 字数统计:</span>
-            <span class="post-count">545</span>
+            <span class="post-count">839</span>
         </span>
     </span>
 
@@ -97,7 +97,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-book-open-line"></i>
             <span class="post-meta-item-text"> 阅读时长≈</span>
-            <span class="post-count">1 分钟</span>
+            <span class="post-count">3 分钟</span>
         </span>
     </span>
 </div>
@@ -115,9 +115,10 @@
   <h3 id="多智能体系统"><a href="#多智能体系统" class="headerlink" title="多智能体系统"></a>多智能体系统</h3><p>多智能体系统 (Multi-Agent System，缩写MAS) 中包含 m 个智能体，智能体共享环境，智能体之间会相互影响。智能体之间是如何相互影响的呢？一个智能体的动作会改变环境状态，从而影响其余所有智能体。</p>
 <p>多智能体系统有四种常见设定：合作关系 (Fully Cooperative)、竞争关系 (Fully Competitive)、合作竞争的混合 (Mixed Cooperative &amp; Competitive)、利己主义 (Self-Interested)。</p>
 <p>第十三章给出了几种 MARL 的实验环境。</p>
-<h3 id="合作关系设定下的多智能体强化学习"><a href="#合作关系设定下的多智能体强化学习" class="headerlink" title="合作关系设定下的多智能体强化学习"></a>合作关系设定下的多智能体强化学习</h3><p><img src="/2024/05/08/%E5%A4%9A%E6%99%BA%E8%83%BD%E4%BD%93%E7%B3%BB%E7%BB%9F/pic1.png"><br><img src="/2024/05/08/%E5%A4%9A%E6%99%BA%E8%83%BD%E4%BD%93%E7%B3%BB%E7%BB%9F/pic2.png"><br><img src="/2024/05/08/%E5%A4%9A%E6%99%BA%E8%83%BD%E4%BD%93%E7%B3%BB%E7%BB%9F/pic3.png"><br>更新策略函数的公式：<br>[\Theta^i\leftarrow \Theta^i-\beta\cdot \delta_t\cdot ln\pi (a^i_t|s_t;\Theta^i)]</p>
+<h3 id="合作关系设定下的多智能体强化学习"><a href="#合作关系设定下的多智能体强化学习" class="headerlink" title="合作关系设定下的多智能体强化学习"></a>合作关系设定下的多智能体强化学习</h3><p><img src="/2024/05/08/%E5%A4%9A%E6%99%BA%E8%83%BD%E4%BD%93%E7%B3%BB%E7%BB%9F/pic1.png"><br><img src="/2024/05/08/%E5%A4%9A%E6%99%BA%E8%83%BD%E4%BD%93%E7%B3%BB%E7%BB%9F/pic2.png"><br><img src="/2024/05/08/%E5%A4%9A%E6%99%BA%E8%83%BD%E4%BD%93%E7%B3%BB%E7%BB%9F/pic3.png"><br>更新策略函数的公式：<br>[\Theta^i\leftarrow \Theta^i-\beta\cdot \delta_t\cdot ln\pi (a^i_t|s_t;\Theta^i) ]</p>
 <p>实现的难点： MARL 的常见设定下，第 i 号智能体只知道 oi，而观测不到全局状态<br>决策和训练都依赖于全局状态，因此两者都无法实现<br>可行途径有两种：不同智能体之间进行通信，但是会导致训练速度减慢，对价值网络和策略网络进行近似，但是可能导致训练不收敛，做出错误决策<br>中心化：通信<br>去中心化：近似<br><img src="/2024/05/08/%E5%A4%9A%E6%99%BA%E8%83%BD%E4%BD%93%E7%B3%BB%E7%BB%9F/pic4.png"><br>“中心化训练 + 中心化决策”严格按照 MAC-A2C 的算法实现<br>“去中心化训练 + 去中心化决策”在每个智能体上部署一个策略网络和一个价值网络。智能体之间不共享参数，这样一来，训练就可以在智能体本地完成，无需中央控制器的参与，无需任何通信。本质就是m个单智体学习<br>“中心化训练 + 去中心化决策”在中央控制器训练价值函数和目标函数，每跑一轮计算TD目标和TD误差，把TD误差广播到所有智能体，训练策略函数，训练结束后丢弃价值函数，利用各个智能体的策略函数来进行决策，速度很快（因为决策过程无需通信）</p>
-<h3 id="非合作关系设定下的多智能体强化学习"><a href="#非合作关系设定下的多智能体强化学习" class="headerlink" title="非合作关系设定下的多智能体强化学习"></a>非合作关系设定下的多智能体强化学习</h3><p>[J^i(\Theta^1,\Theta^2…\Theta^m)&#x3D;E_S(V^i_{pi}(s))]</p>
+<h3 id="非合作关系设定下的多智能体强化学习"><a href="#非合作关系设定下的多智能体强化学习" class="headerlink" title="非合作关系设定下的多智能体强化学习"></a>非合作关系设定下的多智能体强化学习</h3><p>[J^i(\Theta^1,\Theta^2…\Theta^m)&#x3D;E_S(V^i_{pi}(s))]<br>收敛标准：在实验中，如果所有智能体的平均回报都不再变化，就可以认为达到了纳什均衡。在纳什均衡的情况下，谁也没有动机去单独改变自己的策略，因为改变策略不会增加自己的收益。<br>评价训练优劣：在非合作关系的设定下，该如何评价两种方法 M+ 和 M− 的优劣呢？以捕食者—猎物的游戏为例，我们让一种方法训练出的捕食者与另一种方法训练出的猎物对决：记录下两方捕食者的平均回报，记作 J+predator、J−predator。两者的大小可以反映出 M+ 和M− 的优劣。<br><img src="/2024/05/08/%E5%A4%9A%E6%99%BA%E8%83%BD%E4%BD%93%E7%B3%BB%E7%BB%9F/pic5.png"><br>训练过程中对1-m，分别训练其价值网络函数，目标网络函数和策略网络参数</p>
+<h4 id="三种架构：略"><a href="#三种架构：略" class="headerlink" title="三种架构：略"></a>三种架构：略</h4><h4 id="连续控制与-MADDPG"><a href="#连续控制与-MADDPG" class="headerlink" title="连续控制与 MADDPG"></a>连续控制与 MADDPG</h4><p>一种适用于连续控制的多智能体强化学习 (MARL) 方法。多智能体深度确定策略梯度 (Multi-Agent Deep Deterministic Policy Gradient，缩写 MADDPG) 是一种很有名的 MARL 方法，它的架构是“中心化训练 + 去中心化决策”</p>
  
       <!-- reward -->
       
