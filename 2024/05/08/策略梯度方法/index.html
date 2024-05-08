@@ -88,7 +88,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-quill-pen-line"></i>
             <span class="post-meta-item-text"> 字数统计:</span>
-            <span class="post-count">69</span>
+            <span class="post-count">208</span>
         </span>
     </span>
 
@@ -104,14 +104,17 @@
  
     </div>
       
+    <div class="tocbot"></div>
+
 
 
 
   
     <div class="article-entry" itemprop="articleBody">
        
-  <p>用神经网络 π(a|s; θ) 近似策略函数 π(a|s)。神经网络 π(a|s; θ) 被称为策略网络。θ 表示神经网络的参数；一开始随机初始化 θ，随后利用收集的状态、动作、奖励去更新 θ。<br><img src="/2024/05/08/%E7%AD%96%E7%95%A5%E6%A2%AF%E5%BA%A6%E6%96%B9%E6%B3%95/pic1.png"><br><img src="/2024/05/08/%E7%AD%96%E7%95%A5%E6%A2%AF%E5%BA%A6%E6%96%B9%E6%B3%95/pic3.png"></p>
- 
+  <h3 id="策略梯度方法"><a href="#策略梯度方法" class="headerlink" title="策略梯度方法"></a>策略梯度方法</h3><p>用神经网络 π(a|s; θ) 近似策略函数 π(a|s)。神经网络 π(a|s; θ) 被称为策略网络。θ 表示神经网络的参数；一开始随机初始化 θ，随后利用收集的状态、动作、奖励去更新 θ。<br><img src="/2024/05/08/%E7%AD%96%E7%95%A5%E6%A2%AF%E5%BA%A6%E6%96%B9%E6%B3%95/pic1.png"><br><img src="/2024/05/08/%E7%AD%96%E7%95%A5%E6%A2%AF%E5%BA%A6%E6%96%B9%E6%B3%95/pic3.png"><br><img src="/2024/05/08/%E7%AD%96%E7%95%A5%E6%A2%AF%E5%BA%A6%E6%96%B9%E6%B3%95/pic2.png"><br>之后用两种方法来近似动作价值函数Qπ：一种方法是 REINFORCE，用实际观测的回报 u 近似 Qπ(s, a)；另一种方法是Actor-Critic，用神经网络 q(s, a; w) 近似 Qπ(s, a)。<br>REINFORCE让智能体完成一局游戏，然后利用这局游戏的数据来反向传播计算，做随机梯度上升来更新参数。<br>同策略，不适用于经验回放</p>
+<p>Actor-Critic：<br>用SARSA算法更新价值网络Qπ<br><img src="/2024/05/08/%E7%AD%96%E7%95%A5%E6%A2%AF%E5%BA%A6%E6%96%B9%E6%B3%95/pic4.png"></p>
+<h3 id="带基线的策略梯度方法"><a href="#带基线的策略梯度方法" class="headerlink" title="带基线的策略梯度方法"></a>带基线的策略梯度方法</h3> 
       <!-- reward -->
       
     </div>
