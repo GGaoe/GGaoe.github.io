@@ -88,7 +88,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-quill-pen-line"></i>
             <span class="post-meta-item-text"> 字数统计:</span>
-            <span class="post-count">208</span>
+            <span class="post-count">377</span>
         </span>
     </span>
 
@@ -114,7 +114,9 @@
        
   <h3 id="策略梯度方法"><a href="#策略梯度方法" class="headerlink" title="策略梯度方法"></a>策略梯度方法</h3><p>用神经网络 π(a|s; θ) 近似策略函数 π(a|s)。神经网络 π(a|s; θ) 被称为策略网络。θ 表示神经网络的参数；一开始随机初始化 θ，随后利用收集的状态、动作、奖励去更新 θ。<br><img src="/2024/05/08/%E7%AD%96%E7%95%A5%E6%A2%AF%E5%BA%A6%E6%96%B9%E6%B3%95/pic1.png"><br><img src="/2024/05/08/%E7%AD%96%E7%95%A5%E6%A2%AF%E5%BA%A6%E6%96%B9%E6%B3%95/pic3.png"><br><img src="/2024/05/08/%E7%AD%96%E7%95%A5%E6%A2%AF%E5%BA%A6%E6%96%B9%E6%B3%95/pic2.png"><br>之后用两种方法来近似动作价值函数Qπ：一种方法是 REINFORCE，用实际观测的回报 u 近似 Qπ(s, a)；另一种方法是Actor-Critic，用神经网络 q(s, a; w) 近似 Qπ(s, a)。<br>REINFORCE让智能体完成一局游戏，然后利用这局游戏的数据来反向传播计算，做随机梯度上升来更新参数。<br>同策略，不适用于经验回放</p>
 <p>Actor-Critic：<br>用SARSA算法更新价值网络Qπ<br><img src="/2024/05/08/%E7%AD%96%E7%95%A5%E6%A2%AF%E5%BA%A6%E6%96%B9%E6%B3%95/pic4.png"></p>
-<h3 id="带基线的策略梯度方法"><a href="#带基线的策略梯度方法" class="headerlink" title="带基线的策略梯度方法"></a>带基线的策略梯度方法</h3> 
+<h3 id="带基线的策略梯度方法"><a href="#带基线的策略梯度方法" class="headerlink" title="带基线的策略梯度方法"></a>带基线的策略梯度方法</h3><p>把 b 作为动作价值函数 Qπ(S, A) 的基线 (Baseline)，用 Qπ(S, A) − b 替换掉 Qπ。设 b 是任意的函数，只要不依赖于动作 A 就可以；例如，b 可以是状态价值函数 Vπ(S)。<br>带基线可以帮助减少方差并加速学习过程。</p>
+<h3 id="策略学习高级算法"><a href="#策略学习高级算法" class="headerlink" title="策略学习高级算法"></a>策略学习高级算法</h3><p>置信域策略优化 (Trust Region Policy Optimization, TRPO)有两个优势：第一，TRPO表现更稳定，收敛曲线不会剧烈波动，而且对学习率不敏感；第二，TRPO 用更少的经验（即智能体收集到的状态、动作、奖励）就能达到与策略梯度方法相同的表现。</p>
+ 
       <!-- reward -->
       
     </div>
@@ -559,42 +561,6 @@
 </style>
     
     
-<script>
-  const password = "123457";
-  const lock_password = window.sessionStorage.getItem("lock_password");
-  console.log(password, lock_password);
-  if (lock_password !== password) {
-    Swal.fire({
-      title: "请输入访问密码",
-      input: "text",
-      inputAttributes: {
-        autocapitalize: "off",
-      },
-      showCancelButton: false,
-      showLoaderOnConfirm: true,
-      allowOutsideClick: false,
-      confirmButtonText: "确定",
-    }).then((result) => {
-      console.log(result);
-      if (result.isConfirmed) {
-        console.log(password);
-        if (result.value === password) {
-          window.sessionStorage.setItem("lock_password", result.value);
-        } else {
-          Swal.fire({
-            icon: "error",
-            title: "密码错误，请重试",
-            confirmButtonText: "确定",
-            allowOutsideClick: false,
-          }).then(() => {
-            window.location.reload();
-          });
-        }
-      }
-    });
-  }
-</script>
-
 
   </div>
 </body>
