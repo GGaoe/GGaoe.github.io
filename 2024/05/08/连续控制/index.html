@@ -88,7 +88,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-quill-pen-line"></i>
             <span class="post-meta-item-text"> 字数统计:</span>
-            <span class="post-count">633</span>
+            <span class="post-count">943</span>
         </span>
     </span>
 
@@ -97,7 +97,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-book-open-line"></i>
             <span class="post-meta-item-text"> 阅读时长≈</span>
-            <span class="post-count">2 分钟</span>
+            <span class="post-count">3 分钟</span>
         </span>
     </span>
 </div>
@@ -118,7 +118,12 @@
 <p>综上：第一，用截断双 Q 学习，缓解价值网络的高估。第二，往目标策略网络中加噪声，起到平滑作用。第三，降低策略网络和三个目标网络的更新频率。使用这三种技巧的算法被称作双延时确定策略梯度 (Twin Delayed Deep Deterministic Policy Gradient)，缩写是 TD3</p>
 <h3 id="随机高斯策略"><a href="#随机高斯策略" class="headerlink" title="随机高斯策略"></a>随机高斯策略</h3><p>策略网络是随机的，它是随机正态分布（也叫高斯分布）</p>
 <h3 id="对状态的不完全观测："><a href="#对状态的不完全观测：" class="headerlink" title="对状态的不完全观测："></a>对状态的不完全观测：</h3><p>用循环神经网络（RNN）<br><img src="/2024/05/08/%E8%BF%9E%E7%BB%AD%E6%8E%A7%E5%88%B6/pic2.png"></p>
-<h3 id="并行计算"><a href="#并行计算" class="headerlink" title="并行计算"></a>并行计算</h3> 
+<h4 id="并行计算"><a href="#并行计算" class="headerlink" title="并行计算"></a>并行计算</h4><p><img src="/2024/05/08/%E8%BF%9E%E7%BB%AD%E6%8E%A7%E5%88%B6/pic3.png"><br>这种计算相当简单，复杂度来源于不同设备之间的通信。<br>MapReduce 是由 Google 开发的一种软件系统，用于大规模的数据分析和机器学习。<br>广播:服务器把信息发送给所有节点<br>映射：映射操作要求所有节点都要同时执行同一个函数，将服务器发送来的信息映射到一个向量z<br>规约：Worker 节点可以向服务器发送信息，最常用的通信操作是规约。这种操作可以把 Worker 节点上的数据做归并，并且传输到服务器上。</p>
+<p>用 MapReduce 实现并行梯度下降<br><img src="/2024/05/08/%E8%BF%9E%E7%BB%AD%E6%8E%A7%E5%88%B6/pic4.png"></p>
+<h4 id="同步与异步"><a href="#同步与异步" class="headerlink" title="同步与异步"></a>同步与异步</h4><p>同步算法必须等待一次计算中最慢者完成计算，才能开始下一轮计算，有“短板效应”<br>异步算法去除了同步屏障，计算完一次后立即开展下一次计算，系统利用率高</p>
+<h3 id="并行强化学习"><a href="#并行强化学习" class="headerlink" title="并行强化学习"></a>并行强化学习</h3><h4 id="并行双Q学习："><a href="#并行双Q学习：" class="headerlink" title="并行双Q学习："></a>并行双Q学习：</h4><p><img src="/2024/05/08/%E8%BF%9E%E7%BB%AD%E6%8E%A7%E5%88%B6/pic5.png"><br>每个Worker节点本地有独立的环境，独立的经验回放数组，还有一个 DQN 和一个目标网络。</p>
+<h4 id="A3C-异步并行-A2C"><a href="#A3C-异步并行-A2C" class="headerlink" title="A3C: 异步并行 A2C"></a>A3C: 异步并行 A2C</h4><p>A2C 属于同策略,异步并行 A2C 被称作 Asynchronous Advantage Actor-Critic (A3C)。<br><img src="/2024/05/08/%E8%BF%9E%E7%BB%AD%E6%8E%A7%E5%88%B6/pic6.png"></p>
+ 
       <!-- reward -->
       
     </div>
