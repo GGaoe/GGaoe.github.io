@@ -88,7 +88,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-quill-pen-line"></i>
             <span class="post-meta-item-text"> 字数统计:</span>
-            <span class="post-count">2.4k</span>
+            <span class="post-count">2.7k</span>
         </span>
     </span>
 
@@ -97,7 +97,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-book-open-line"></i>
             <span class="post-meta-item-text"> 阅读时长≈</span>
-            <span class="post-count">11 分钟</span>
+            <span class="post-count">13 分钟</span>
         </span>
     </span>
 </div>
@@ -186,6 +186,9 @@
 <p>Let H be a binary matrix. The null space of H is a single error-correcting code if and only if H does not contain any zero columns and no two columns of H are identical.</p>
 <p>Let the m × n binary matrix H determine a linear code and let x be the received n-tuple. Write x as x &#x3D; c + e, where c is the transmitted codeword and e is the transmission error. Then the syndrome Hx of the received codeword x is also the syndrome of the error e.</p>
 <p><img src="/2024/03/29/%E9%97%AE%E6%B1%824/pic25.png"></p>
+<h2 id="随机算法设计策略"><a href="#随机算法设计策略" class="headerlink" title="随机算法设计策略"></a>随机算法设计策略</h2><p>1.挫败敌手：敌手通过设计输入使固定策略表现不佳，可以收集一组固定策略，随机选择其一，从而让对手无法通过一个输入来击溃策略。<br>2.足量的证人：检查x mod y&#x3D;0比证明在没有别的条件下x in L更加容易，难点在于搜索空间可能很大，证人不易找出。即我们通过足量的证据可以大概率推断x是否有某种性质。<br>3.指纹技术&#x2F;自由技术：用于等价问题的判定。判定两个表示是否展示的是同一个物体。工作原理分为下面三个步骤:<br>从类M中随机选择一个映射h，计算hR，检查两个hR是否相同。<br>工作原理是hR比R要短的多，但是hR只有对象O一部分的信息，无法保证准确性。因此我们要保证如果R1和R2不是一个的话，我们检测出的概率要超过1&#x2F;2，即用蒙特卡洛的单向误差。（是一种特殊版本的证人方法）<br>4.随机采样：从一个总体中抽取几个样本来代表整个整体。<br>5.松弛算法和随机舍入</p>
+<p>随机算法的设计<br>1.找一个非二次剩余：<br>基于两个事实<br>  1.可以在多项式时间内计算a的b次方 快速幂<br>  2.在1-p-1之间有正好一半是非二次剩余。<br><img src="/2024/03/29/%E9%97%AE%E6%B1%824/pic26.png"></p>
+<p>2.质数检验：<br><img src="/2024/03/29/%E9%97%AE%E6%B1%824/pic27.png"><br><img src="/2024/03/29/%E9%97%AE%E6%B1%824/pic28.png"></p>
  
       <!-- reward -->
       
