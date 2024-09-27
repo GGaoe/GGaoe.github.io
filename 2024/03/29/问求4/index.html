@@ -88,7 +88,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-quill-pen-line"></i>
             <span class="post-meta-item-text"> 字数统计:</span>
-            <span class="post-count">2.7k</span>
+            <span class="post-count">2.6k</span>
         </span>
     </span>
 
@@ -97,7 +97,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-book-open-line"></i>
             <span class="post-meta-item-text"> 阅读时长≈</span>
-            <span class="post-count">13 分钟</span>
+            <span class="post-count">12 分钟</span>
         </span>
     </span>
 </div>
@@ -112,83 +112,219 @@
   
     <div class="article-entry" itemprop="articleBody">
        
-  <h2 id="格与布尔代数"><a href="#格与布尔代数" class="headerlink" title="格与布尔代数"></a>格与布尔代数</h2><p><strong>格</strong>：满足偏序关系的集合，满足三个公理：<br>[L1] Commutative law:<br>(1a) a ∧ b &#x3D; b ∧ a (1b) a ∨ b &#x3D; b ∨ a<br>[L2] Associative law:<br>(2a) (a ∧ b) ∧ c &#x3D; a ∧ (b ∧ c) (2b) (a ∨ b) ∨ c &#x3D; a ∨ (b ∨ c)<br>[L3] Absorption law:<br>(3a) a ∧ (a ∨ b) &#x3D; a (3b) a ∨ (a ∧ b) &#x3D; a</p>
+  <h2 id="格与布尔代数">格与布尔代数</h2>
+<p><strong>格</strong>：满足偏序关系的集合，满足三个公理： [L1]
+Commutative law: (1a) a ∧ b = b ∧ a (1b) a ∨ b = b ∨ a [L2] Associative
+law: (2a) (a ∧ b) ∧ c = a ∧ (b ∧ c) (2b) (a ∨ b) ∨ c = a ∨ (b ∨ c) [L3]
+Absorption law: (3a) a ∧ (a ∨ b) = a (3b) a ∨ (a ∧ b) = a</p>
 <p><strong>子格</strong>：满足格的定义并且在原格的运算下封闭</p>
-<p><strong>格同构</strong>：存在一个one to one的映射f，f (a ∧ b) &#x3D; f (a) ∧ f (b) and f (a ∨ b) &#x3D; f (a) ∨ f (b)</p>
-<p><strong>有界格</strong>：A lattice L is said to have a lower bound 0 if for any element x in L we have 0 《&#x3D; x. Analogously, L is said to have an upper bound I if for any x in L we have x 《&#x3D; I .</p>
-<p><strong>DISTRIBUTIVE LATTICES分布格</strong>： Distributive law:<br>(4a) a ∧ (b ∨ c) &#x3D; (a ∧ b) ∨ (a ∧ c) (4b) a ∨ (b ∧ c) &#x3D; (a ∨ b) ∧ (a ∨ c)</p>
-<p><img src="/2024/03/29/%E9%97%AE%E6%B1%824/pic1.png" alt="pic1"></p>
-<p><strong>Join Irreducible Elements</strong>：<br>a &#x3D; x ∨ y implies a &#x3D; x or a &#x3D; y.</p>
-<p><strong>Atoms</strong>：Those elements which immediately succeed 0, called atoms, are join irreducible.</p>
-<p><strong>补</strong>：Let L be a bounded lattice with lower bound 0 and upper bound I . Let a be an element of L. An element x in L is called a complement of a if a ∨ x &#x3D; I and a ∧ x &#x3D; 0</p>
-<p><strong>Theorem 14.9</strong>: Let L be a bounded distributive lattice. Then complements are unique if they exist.</p>
-<p><strong>互补格Complemented Lattices</strong>：<br>AlatticeLis said to be complemented if L is bounded and every element in L has a complement.</p>
-<p><strong>Theorem 14.10</strong>: Let L be a complemented lattice with unique complements. Then the join irreducible elements of L, other than 0, are its atoms.</p>
-<p><strong>Theorem 14.11</strong>: Let L be a finite complemented distributive lattice. Then every element a in L is the join of a unique set of atoms.</p>
-<p><strong>Boolean algebra</strong><br>Let B be a nonempty set with two binary operations + and ∗, a unary operation’, and two distinct elements 0 and 1. Then B is called a Boolean algebra if the following axioms hold where a, b, c are any elements in B:<br><strong>[B1]</strong> Commutative laws:<br>(1a) a + b &#x3D; b + a (1b) a ∗ b &#x3D; b ∗ a<br><strong>[B2]</strong> Distributive laws:<br>(2a) a + (b ∗ c) &#x3D; (a + b) ∗ (a + c) (2b) a ∗ (b + c) &#x3D; (a ∗ b) + (a ∗ c)<br><strong>[B3]</strong> Identity laws:<br>(3a) a + 0 &#x3D; a (3b) a ∗ 1 &#x3D; a<br><strong>[B4]</strong> Complement laws:<br>(4a) a + a’ &#x3D; 1 (4b) a ∗ a’ &#x3D; 0</p>
-<p><strong>同构布尔代数</strong>：<br>Two Boolean algebras B and B’ are said to be isomorphic if there is a one-to-one correspondence f: B → B’<br>which preserves the three operations, i.e., such that, for any elements, a, b in B,<br>f (a + b) &#x3D; f (a) + f (b), f (a ∗ b) &#x3D; f (a) ∗ f (b) and f (a’ ) &#x3D; f (a)’	</p>
-<p><strong>some Theorem</strong><br>(i) Idempotent laws:<br>(5a) a + a &#x3D; a (5b) a ∗ a &#x3D; a<br>(ii) Boundedness laws:<br>(6a) a + 1 &#x3D; 1 (6b) a ∗ 0 &#x3D; 0<br>(iii) Absorption laws:<br>(7a) a + (a ∗ b) &#x3D; a (7b) a ∗ (a + b) &#x3D; a<br>(iv) Associative laws:<br>(8a) (a + b) + c &#x3D; a + (b + c) (8b) (a ∗ b) ∗ c &#x3D; a ∗ (b ∗ c)</p>
-<p>(i) (Uniqueness of Complement) If a + x &#x3D; 1 and a ∗ x &#x3D; 0, then x &#x3D; a’.<br>(ii) (Involution law) (a’ )’ &#x3D; a.<br>(iii) (9a) 0’ &#x3D; 1. (9b) 1’ &#x3D; 0.<br>(10a) (a + b)’ &#x3D; a’ ∗ b’ . (10b) (a ∗ b)’ &#x3D; a’ + b’.</p>
-<p><strong>代替定义</strong>：<br>A Boolean algebra B is a bounded, distributive and complemented lattice.</p>
-<p><strong>表示公理</strong>：<br>Theorem 15.6: The above mapping f: B → P (A) is an isomorphism.<br>Corollary 15.7: A finite Boolean algebra has 2n elements for some positive integer n.</p>
-<p>A Boolean expression E is called a <strong>sum-of-products expression</strong> if E is a fundamental product or the sum of two or more fundamental products none of which is <strong>contained in another</strong>.</p>
-<p><strong>积之和表达式</strong><br><img src="/2024/03/29/%E9%97%AE%E6%B1%824/pic2.png" alt="pic2"></p>
-<p><strong>质数表示</strong><br><img src="/2024/03/29/%E9%97%AE%E6%B1%824/pic3.png" alt="pic3"></p>
-<p><strong>Consensus of Fundamental Products</strong><br>Suppose Q is the consensus of P1 and P2. Then P1 + P2 + Q &#x3D; P1 + P2.&#x2F;&#x2F;把互补的变量同时从两个布尔表达式中去掉，剩下非互补的相乘</p>
-<p><strong>通过Consensus方法把积之和表达式化简为质数表示</strong><br><img src="/2024/03/29/%E9%97%AE%E6%B1%824/pic4.png" alt="pic4"></p>
-<p><strong>把质数表示化简为最简表示</strong><br><img src="/2024/03/29/%E9%97%AE%E6%B1%824/pic5.png" alt="pic5"></p>
-<p>真值表书写<br><img src="/2024/03/29/%E9%97%AE%E6%B1%824/pic6.png" alt="pic6"></p>
+<p><strong>格同构</strong>：存在一个one to one的映射f，f (a ∧ b) = f (a)
+∧ f (b) and f (a ∨ b) = f (a) ∨ f (b)</p>
+<p><strong>有界格</strong>：A lattice L is said to have a lower bound 0
+if for any element x in L we have 0 《= x. Analogously, L is said to
+have an upper bound I if for any x in L we have x 《= I .</p>
+<p><strong>DISTRIBUTIVE LATTICES分布格</strong>： Distributive law: (4a)
+a ∧ (b ∨ c) = (a ∧ b) ∨ (a ∧ c) (4b) a ∨ (b ∧ c) = (a ∨ b) ∧ (a ∨ c)</p>
+<figure>
+<img src="/2024/03/29/%E9%97%AE%E6%B1%824/pic1.png" alt="pic1">
+<figcaption aria-hidden="true">pic1</figcaption>
+</figure>
+<p><strong>Join Irreducible Elements</strong>： a = x ∨ y implies a = x
+or a = y.</p>
+<p><strong>Atoms</strong>：Those elements which immediately succeed 0,
+called atoms, are join irreducible.</p>
+<p><strong>补</strong>：Let L be a bounded lattice with lower bound 0
+and upper bound I . Let a be an element of L. An element x in L is
+called a complement of a if a ∨ x = I and a ∧ x = 0</p>
+<p><strong>Theorem 14.9</strong>: Let L be a bounded distributive
+lattice. Then complements are unique if they exist.</p>
+<p><strong>互补格Complemented Lattices</strong>： AlatticeLis said to be
+complemented if L is bounded and every element in L has a
+complement.</p>
+<p><strong>Theorem 14.10</strong>: Let L be a complemented lattice with
+unique complements. Then the join irreducible elements of L, other than
+0, are its atoms.</p>
+<p><strong>Theorem 14.11</strong>: Let L be a finite complemented
+distributive lattice. Then every element a in L is the join of a unique
+set of atoms.</p>
+<p><strong>Boolean algebra</strong> Let B be a nonempty set with two
+binary operations + and ∗, a unary operation', and two distinct elements
+0 and 1. Then B is called a Boolean algebra if the following axioms hold
+where a, b, c are any elements in B: <strong>[B1]</strong> Commutative
+laws: (1a) a + b = b + a (1b) a ∗ b = b ∗ a <strong>[B2]</strong>
+Distributive laws: (2a) a + (b ∗ c) = (a + b) ∗ (a + c) (2b) a ∗ (b + c)
+= (a ∗ b) + (a ∗ c) <strong>[B3]</strong> Identity laws: (3a) a + 0 = a
+(3b) a ∗ 1 = a <strong>[B4]</strong> Complement laws: (4a) a + a' = 1
+(4b) a ∗ a' = 0</p>
+<p><strong>同构布尔代数</strong>： Two Boolean algebras B and B' are
+said to be isomorphic if there is a one-to-one correspondence f: B → B'
+which preserves the three operations, i.e., such that, for any elements,
+a, b in B, f (a + b) = f (a) + f (b), f (a ∗ b) = f (a) ∗ f (b) and f
+(a' ) = f (a)'</p>
+<p><strong>some Theorem</strong> (i) Idempotent laws: (5a) a + a = a
+(5b) a ∗ a = a (ii) Boundedness laws: (6a) a + 1 = 1 (6b) a ∗ 0 = 0
+(iii) Absorption laws: (7a) a + (a ∗ b) = a (7b) a ∗ (a + b) = a (iv)
+Associative laws: (8a) (a + b) + c = a + (b + c) (8b) (a ∗ b) ∗ c = a ∗
+(b ∗ c)</p>
+<ol type="i">
+<li>(Uniqueness of Complement) If a + x = 1 and a ∗ x = 0, then x =
+a'.</li>
+<li>(Involution law) (a' )' = a.</li>
+<li>(9a) 0' = 1. (9b) 1' = 0. (10a) (a + b)' = a' ∗ b' . (10b) (a ∗ b)'
+= a' + b'.</li>
+</ol>
+<p><strong>代替定义</strong>： A Boolean algebra B is a bounded,
+distributive and complemented lattice.</p>
+<p><strong>表示公理</strong>： Theorem 15.6: The above mapping f: B → P
+(A) is an isomorphism. Corollary 15.7: A finite Boolean algebra has 2n
+elements for some positive integer n.</p>
+<p>A Boolean expression E is called a <strong>sum-of-products
+expression</strong> if E is a fundamental product or the sum of two or
+more fundamental products none of which is <strong>contained in
+another</strong>.</p>
+<p><strong>积之和表达式</strong> <img src="/2024/03/29/%E9%97%AE%E6%B1%824/pic2.png" alt="pic2"></p>
+<p><strong>质数表示</strong> <img src="/2024/03/29/%E9%97%AE%E6%B1%824/pic3.png" alt="pic3"></p>
+<p><strong>Consensus of Fundamental Products</strong> Suppose Q is the
+consensus of P1 and P2. Then P1 + P2 + Q = P1 +
+P2.//把互补的变量同时从两个布尔表达式中去掉，剩下非互补的相乘</p>
+<p><strong>通过Consensus方法把积之和表达式化简为质数表示</strong> <img src="/2024/03/29/%E9%97%AE%E6%B1%824/pic4.png" alt="pic4"></p>
+<p><strong>把质数表示化简为最简表示</strong> <img src="/2024/03/29/%E9%97%AE%E6%B1%824/pic5.png" alt="pic5"></p>
+<p>真值表书写 <img src="/2024/03/29/%E9%97%AE%E6%B1%824/pic6.png" alt="pic6"></p>
 <p>相邻变量：所有变量均相同，只有一个变量取反</p>
-<h2 id="数论初步："><a href="#数论初步：" class="headerlink" title="数论初步："></a>数论初步：</h2><p><strong>第一数学归纳法</strong><br><img src="/2024/03/29/%E9%97%AE%E6%B1%824/pic7.png" alt="pic7"></p>
-<p><strong>第二数学归纳法&amp;良序</strong><br><img src="/2024/03/29/%E9%97%AE%E6%B1%824/pic8.png" alt="pic8"></p>
-<p><strong>最大公约数</strong><br><img src="/2024/03/29/%E9%97%AE%E6%B1%824/pic9.png" alt="pic9"></p>
-<p><strong>欧几里得算法求最大公约数</strong><br><img src="/2024/03/29/%E9%97%AE%E6%B1%824/pic10.png" alt="pic10"></p>
-<p><strong>乘法逆</strong><br>Suppose there is a b in Zn such that the equation<br>a * x &#x3D; b<br>does not have a solution. Then a does not have a multiplicative inverse<br>in Zn.</p>
-<p>Given a and n, if there exist integers x and y such that ax + ny &#x3D; 1, then<br>gcd(a, n) &#x3D; 1—that is, a and n are relatively prime.<br>a n互质，gcd(a,n)&#x3D;1,x是a模n意义下的乘法逆，乘法逆唯一</p>
-<p>Two positive integers j and k have greatest common divisor 1 (and thus are relatively prime) if and only if there are integers x and y such that jx + ky &#x3D; 1.</p>
-<p>For any positive integer n, an element a of Zn has a multiplicative inverse if and only if gcd(a, n) &#x3D; 1.</p>
+<h2 id="数论初步">数论初步：</h2>
+<p><strong>第一数学归纳法</strong> <img src="/2024/03/29/%E9%97%AE%E6%B1%824/pic7.png" alt="pic7"></p>
+<p><strong>第二数学归纳法&amp;良序</strong> <img src="/2024/03/29/%E9%97%AE%E6%B1%824/pic8.png" alt="pic8"></p>
+<p><strong>最大公约数</strong> <img src="/2024/03/29/%E9%97%AE%E6%B1%824/pic9.png" alt="pic9"></p>
+<p><strong>欧几里得算法求最大公约数</strong> <img src="/2024/03/29/%E9%97%AE%E6%B1%824/pic10.png" alt="pic10"></p>
+<p><strong>乘法逆</strong> Suppose there is a b in Zn such that the
+equation a * x = b does not have a solution. Then a does not have a
+multiplicative inverse in Zn.</p>
+<p>Given a and n, if there exist integers x and y such that ax + ny = 1,
+then gcd(a, n) = 1—that is, a and n are relatively prime. a
+n互质，gcd(a,n)=1,x是a模n意义下的乘法逆，乘法逆唯一</p>
+<p>Two positive integers j and k have greatest common divisor 1 (and
+thus are relatively prime) if and only if there are integers x and y
+such that jx + ky = 1.</p>
+<p>For any positive integer n, an element a of Zn has a multiplicative
+inverse if and only if gcd(a, n) = 1.</p>
 <p>For any prime p, every nonzero element a of Zp has an inverse.</p>
-<h2 id="数论算法"><a href="#数论算法" class="headerlink" title="数论算法"></a>数论算法</h2><h5 id="TC-31-1"><a href="#TC-31-1" class="headerlink" title="TC 31.1"></a>TC 31.1</h5><p>如果任意整数a和b 不都为0, 则 gcd(a, b)是a 与 b 的线性组合集{ax+by: x, y∈Z} 中的最小正元素。</p>
-<p><strong>欧几里得算法：</strong>对任意非负整数a和任意正整数b,gcd(a,b) &#x3D; gcd(b,a mod b) </p>
-<p>如果a&gt;b&gt;&#x3D;l 并且EUCLID(a, b)执行了 k&gt;&#x3D;l 次递归调用，则a&gt;&#x3D;Fk+2,b&gt;&#x3D;Fk+1</p>
-<p>(Lame定理) 对任意整数k&gt;&#x3D;l, 如果a&gt;b&gt;&#x3D;l, 且b&lt; Fk+1 则 EUCLID(a, b)的递归调用次数少于K次。</p>
-<p>欧几里得算法的扩展形式<br><img src="/2024/03/29/%E9%97%AE%E6%B1%824/pic11.png" alt="pic11"></p>
-<p><img src="/2024/03/29/%E9%97%AE%E6%B1%824/pic12.png" alt="pic12"></p>
-<p>(拉格朗日定理） 如果(S, <em>))是一个有限群， (S’,</em>)是(S, *)的一个子群，<br>则|s’| 是|s| 的一个约数。</p>
-<p>如果 s’是有限群 S 的真子群，则 |S’|&lt;&#x3D; |S| &#x2F;2。</p>
-<h3 id="求解模线性方程"><a href="#求解模线性方程" class="headerlink" title="求解模线性方程"></a>求解模线性方程</h3><p><img src="/2024/03/29/%E9%97%AE%E6%B1%824/pic13.png" alt="pic13"></p>
-<p>对任意正整数 n, 如果 d&#x3D;gcd(a, n), 则在 Zn 中，<br>&lt; a &gt;&#x3D; &lt; d &gt;&#x3D; { 0, d, 2d, .. ·, ((n&#x2F; d) —l)d}.因此，|&lt; a &gt;|&#x3D; n&#x2F;d</p>
-<p>当且仅当 d|b 时，方程 ax&#x3D;b(modn) 对于未知量x有解，这里 d&#x3D;gcd(a, n)</p>
-<p>方程ax&#x3D;b(modn) 或者对模n有d个不同的解，或者无解，这里 d&#x3D;gcd(a, n)</p>
-<p>序列 ai mod n是周期性的，其周期为 |&lt; a &gt;| &#x3D;n&#x2F;d</p>
-<p> 令d&#x3D;gcd(a, n), 假设对某些整数 x’ y’有 d&#x3D;ax’+ny’。如果 d|b, 则方程 ax&#x3D;b(modn) 有一个解的值为 X0 这里x0&#x3D; x’(b&#x2F;d) mod n</p>
-<p>假设方程 ax&#x3D;b(mod n) 有解（即 d|b, 这里 d&#x3D; gcd(a, n), X0 是该方程的任意一个解。因此，该方程对模n恰有d个不同的解，分别为 x&#x3D;x0+i(n&#x2F;d)</p>
-<p>对任意 n&gt;1, 如果 gcd(a, n)&#x3D;l, 则方程 ax&#x3D;b(modn) 对模n有唯一解。如果 b&#x3D;1, 则要求的x是a对模n的乘法逆元，这是一种常见的重要有趣情形。</p>
-<p><img src="/2024/03/29/%E9%97%AE%E6%B1%824/pic15.png" alt="pic15"></p>
-<p><img src="/2024/03/29/%E9%97%AE%E6%B1%824/pic16.png" alt="pic16"></p>
-<p><img src="/2024/03/29/%E9%97%AE%E6%B1%824/pic17.png" alt="pic17"></p>
-<p><img src="/2024/03/29/%E9%97%AE%E6%B1%824/pic18.png" alt="pic18"></p>
-<p><img src="/2024/03/29/%E9%97%AE%E6%B1%824/pic19.png" alt="pic19"></p>
-<p>如果p是一个奇素数且 e&gt;&#x3D;l, 则方程x^2&#x3D;l(mod p^e)仅有两个解，即 x&#x3D;l x&#x3D;-1<br>如果对模n存在1的非平凡平方根，则n是合数。</p>
-<h3 id="密码学"><a href="#密码学" class="headerlink" title="密码学"></a>密码学</h3><p>凯撒密码：简单的密码移位<br>仿射密码：f(p)&#x3D;ap+b mod 26,gcd(a,26)&#x3D;1<br>多字母密码系统：<img src="/2024/03/29/%E9%97%AE%E6%B1%824/pic20.png" alt="20"><br>RSA加密系统：<br>利用大数分解的复杂性，找两个大质数p，q，n&#x3D;pq，m&#x3D;(p-1)(q-1),找到一个e，使得gcd(e,m)&#x3D;1,我们可以找到D,$De&#x3D;1(mod \phi n)$,n和e是公开的<br>发送人将$x^e$发送过去，接收者用$y^D$来解密(mod n).<br>M&#x3D; SA(PA(M))<br>M&#x3D; PA(SA(M))<br>发送者可以查看接收者的公钥，将信息M通过公钥进行加密，而接收者可以使用自己的私钥来解密被加密的消息<br>接收者想要回复信息，但不希望被伪造，因此可以在信息后面加上自己的签名，通过私钥对签名进行加密，发给发送者<br>发送者通过查看接受者的公钥，对消息进行解密，若签名能够通过核验，则非伪造（公开的，任何知道公钥的人均可解密）<br>若想要回复的信息是私密的，那么只需要对信息和签名分开加密，用对方的公钥对信息加密，用自己的私钥对签名进行加密。</p>
-<h3 id="编码学"><a href="#编码学" class="headerlink" title="编码学"></a>编码学</h3><p>奇偶校验位-只能检验单个错误，无纠错能力<br>最大似然解码<br>块代码<br>把m位二进制数编码成n位二进制数<br>哈密顿距离：所有位数值不同的个数之和<br>权：n位中数值为1的个数<br><img src="/2024/03/29/%E9%97%AE%E6%B1%824/pic21.png" alt="21"></p>
-<p>Let C be a code with dmin &#x3D; 2n + 1. Then C can correct any n or fewer errors. Furthermore, any 2n or fewer errors can be detected in C.</p>
-<p> A group code is acode that is also a subgroup of [Z_{2}^{n}]</p>
-<p> Let x and y be binary n-tuples. Then w(x + y) &#x3D; d(x, y).</p>
-<p> Let dmin be the minimum distance for a group code C. Then dmin is the minimum of all the nonzero weights of the nonzero codewords in C. That is, dmin &#x3D; min{w(x) : x !&#x3D; 0}.</p>
-<h5 id="Linear-Codes"><a href="#Linear-Codes" class="headerlink" title="Linear Codes"></a>Linear Codes</h5><p> Define the null space of a matrix H ∈ Mm×n(Z2) to be the set of all binary n-tuples x such that Hx &#x3D; 0. We denote the null space of a matrix H by Null(H).</p>
-<p> Let H be in [Mm×n(Z_2)]. Then the null space of H is a group code.</p>
-<p> A code is a linear code if it is determined by the null space of some matrix[H ∈Mm×n(Z_2)] .</p>
-<h5 id="Parity-Check-and-Generator-Matrices奇偶校验和发生器矩阵"><a href="#Parity-Check-and-Generator-Matrices奇偶校验和发生器矩阵" class="headerlink" title="Parity-Check and Generator Matrices奇偶校验和发生器矩阵"></a>Parity-Check and Generator Matrices奇偶校验和发生器矩阵</h5><p>一个m行n列的矩阵，如果最后m列是一个单位矩阵，那么这个矩阵是一个典型的奇偶校验矩阵</p>
-<p><img src="/2024/03/29/%E9%97%AE%E6%B1%824/pic22.png" alt="22"><br><img src="/2024/03/29/%E9%97%AE%E6%B1%824/pic23.png" alt="23"><br><img src="/2024/03/29/%E9%97%AE%E6%B1%824/pic24.png" alt="24"></p>
-<p>Let C be the code generated by G. Then y is in C if and only if Hy &#x3D; 0. In particular, C is a linear code with canonical parity-check matrix H.</p>
-<p>Let H be an m × n binary matrix. Then the null space of H is a single error-detecting code if and only if no column of H consists entirely of zeros.</p>
-<p>Let H be a binary matrix. The null space of H is a single error-correcting code if and only if H does not contain any zero columns and no two columns of H are identical.</p>
-<p>Let the m × n binary matrix H determine a linear code and let x be the received n-tuple. Write x as x &#x3D; c + e, where c is the transmitted codeword and e is the transmission error. Then the syndrome Hx of the received codeword x is also the syndrome of the error e.</p>
+<h2 id="数论算法">数论算法</h2>
+<h5 id="tc-31.1">TC 31.1</h5>
+<p>如果任意整数a和b 不都为0, 则 gcd(a, b)是a 与 b 的线性组合集{ax+by: x,
+y∈Z} 中的最小正元素。</p>
+<p><strong>欧几里得算法：</strong>对任意非负整数a和任意正整数b,gcd(a,b)
+= gcd(b,a mod b)</p>
+<p>如果a&gt;b&gt;=l 并且EUCLID(a, b)执行了 k&gt;=l
+次递归调用，则a&gt;=Fk+2,b&gt;=Fk+1</p>
+<p>(Lame定理) 对任意整数k&gt;=l, 如果a&gt;b&gt;=l, 且b&lt; Fk+1 则
+EUCLID(a, b)的递归调用次数少于K次。</p>
+<p>欧几里得算法的扩展形式 <img src="/2024/03/29/%E9%97%AE%E6%B1%824/pic11.png" alt="pic11"></p>
+<figure>
+<img src="/2024/03/29/%E9%97%AE%E6%B1%824/pic12.png" alt="pic12">
+<figcaption aria-hidden="true">pic12</figcaption>
+</figure>
+<p>(拉格朗日定理） 如果(S, <em>))是一个有限群， (S',</em>)是(S,
+*)的一个子群， 则|s'| 是|s| 的一个约数。</p>
+<p>如果 s'是有限群 S 的真子群，则 |S'|&lt;= |S| /2。</p>
+<h3 id="求解模线性方程">求解模线性方程</h3>
+<figure>
+<img src="/2024/03/29/%E9%97%AE%E6%B1%824/pic13.png" alt="pic13">
+<figcaption aria-hidden="true">pic13</figcaption>
+</figure>
+<p>对任意正整数 n, 如果 d=gcd(a, n), 则在 Zn 中， &lt; a &gt;= &lt; d
+&gt;= { 0, d, 2d, .. ·, ((n/ d) —l)d}.因此，|&lt; a &gt;|= n/d</p>
+<p>当且仅当 d|b 时，方程 ax=b(modn) 对于未知量x有解，这里 d=gcd(a,
+n)</p>
+<p>方程ax=b(modn) 或者对模n有d个不同的解，或者无解，这里 d=gcd(a, n)</p>
+<p>序列 ai mod n是周期性的，其周期为 |&lt; a &gt;| =n/d</p>
+<p>令d=gcd(a, n), 假设对某些整数 x' y'有 d=ax'+ny'。如果 d|b, 则方程
+ax=b(modn) 有一个解的值为 X0 这里x0= x'(b/d) mod n</p>
+<p>假设方程 ax=b(mod n) 有解（即 d|b, 这里 d= gcd(a, n), X0
+是该方程的任意一个解。因此，该方程对模n恰有d个不同的解，分别为
+x=x0+i(n/d)</p>
+<p>对任意 n&gt;1, 如果 gcd(a, n)=l, 则方程 ax=b(modn)
+对模n有唯一解。如果 b=1,
+则要求的x是a对模n的乘法逆元，这是一种常见的重要有趣情形。</p>
+<figure>
+<img src="/2024/03/29/%E9%97%AE%E6%B1%824/pic15.png" alt="pic15">
+<figcaption aria-hidden="true">pic15</figcaption>
+</figure>
+<figure>
+<img src="/2024/03/29/%E9%97%AE%E6%B1%824/pic16.png" alt="pic16">
+<figcaption aria-hidden="true">pic16</figcaption>
+</figure>
+<figure>
+<img src="/2024/03/29/%E9%97%AE%E6%B1%824/pic17.png" alt="pic17">
+<figcaption aria-hidden="true">pic17</figcaption>
+</figure>
+<figure>
+<img src="/2024/03/29/%E9%97%AE%E6%B1%824/pic18.png" alt="pic18">
+<figcaption aria-hidden="true">pic18</figcaption>
+</figure>
+<figure>
+<img src="/2024/03/29/%E9%97%AE%E6%B1%824/pic19.png" alt="pic19">
+<figcaption aria-hidden="true">pic19</figcaption>
+</figure>
+<p>如果p是一个奇素数且 e&gt;=l, 则方程x^2=l(mod p^e)仅有两个解，即 x=l
+x=-1 如果对模n存在1的非平凡平方根，则n是合数。</p>
+<h3 id="密码学">密码学</h3>
+<p>凯撒密码：简单的密码移位 仿射密码：f(p)=ap+b mod 26,gcd(a,26)=1
+多字母密码系统：<img src="/2024/03/29/%E9%97%AE%E6%B1%824/pic20.png" alt="20"> RSA加密系统：
+利用大数分解的复杂性，找两个大质数p，q，n=pq，m=(p-1)(q-1),找到一个e，使得gcd(e,m)=1,我们可以找到D,<span class="math inline">\(De=1(mod \phi n)\)</span>,n和e是公开的
+发送人将<span class="math inline">\(x^e\)</span>发送过去，接收者用<span class="math inline">\(y^D\)</span>来解密(mod n). M= SA(PA(M)) M=
+PA(SA(M))
+发送者可以查看接收者的公钥，将信息M通过公钥进行加密，而接收者可以使用自己的私钥来解密被加密的消息
+接收者想要回复信息，但不希望被伪造，因此可以在信息后面加上自己的签名，通过私钥对签名进行加密，发给发送者
+发送者通过查看接受者的公钥，对消息进行解密，若签名能够通过核验，则非伪造（公开的，任何知道公钥的人均可解密）
+若想要回复的信息是私密的，那么只需要对信息和签名分开加密，用对方的公钥对信息加密，用自己的私钥对签名进行加密。</p>
+<h3 id="编码学">编码学</h3>
+<p>奇偶校验位-只能检验单个错误，无纠错能力 最大似然解码 块代码
+把m位二进制数编码成n位二进制数 哈密顿距离：所有位数值不同的个数之和
+权：n位中数值为1的个数 <img src="/2024/03/29/%E9%97%AE%E6%B1%824/pic21.png" alt="21"></p>
+<p>Let C be a code with dmin = 2n + 1. Then C can correct any n or fewer
+errors. Furthermore, any 2n or fewer errors can be detected in C.</p>
+<p>A group code is acode that is also a subgroup of [Z_{2}^{n}]</p>
+<p>Let x and y be binary n-tuples. Then w(x + y) = d(x, y).</p>
+<p>Let dmin be the minimum distance for a group code C. Then dmin is the
+minimum of all the nonzero weights of the nonzero codewords in C. That
+is, dmin = min{w(x) : x != 0}.</p>
+<p>##### Linear Codes Define the null space of a matrix H ∈ Mm×n(Z2) to
+be the set of all binary n-tuples x such that Hx = 0. We denote the null
+space of a matrix H by Null(H).</p>
+<p>Let H be in [Mm×n(Z_2)]. Then the null space of H is a group
+code.</p>
+<p>A code is a linear code if it is determined by the null space of some
+matrix[H ∈Mm×n(Z_2)] .</p>
+<p>##### Parity-Check and Generator Matrices奇偶校验和发生器矩阵</p>
+<p>一个m行n列的矩阵，如果最后m列是一个单位矩阵，那么这个矩阵是一个典型的奇偶校验矩阵</p>
+<p><img src="/2024/03/29/%E9%97%AE%E6%B1%824/pic22.png" alt="22"> <img src="/2024/03/29/%E9%97%AE%E6%B1%824/pic23.png" alt="23"> <img src="/2024/03/29/%E9%97%AE%E6%B1%824/pic24.png" alt="24"></p>
+<p>Let C be the code generated by G. Then y is in C if and only if Hy =
+0. In particular, C is a linear code with canonical parity-check matrix
+H.</p>
+<p>Let H be an m × n binary matrix. Then the null space of H is a single
+error-detecting code if and only if no column of H consists entirely of
+zeros.</p>
+<p>Let H be a binary matrix. The null space of H is a single
+error-correcting code if and only if H does not contain any zero columns
+and no two columns of H are identical.</p>
+<p>Let the m × n binary matrix H determine a linear code and let x be
+the received n-tuple. Write x as x = c + e, where c is the transmitted
+codeword and e is the transmission error. Then the syndrome Hx of the
+received codeword x is also the syndrome of the error e.</p>
 <p><img src="/2024/03/29/%E9%97%AE%E6%B1%824/pic25.png"></p>
-<h2 id="随机算法设计策略"><a href="#随机算法设计策略" class="headerlink" title="随机算法设计策略"></a>随机算法设计策略</h2><p>1.挫败敌手：敌手通过设计输入使固定策略表现不佳，可以收集一组固定策略，随机选择其一，从而让对手无法通过一个输入来击溃策略。<br>2.足量的证人：检查x mod y&#x3D;0比证明在没有别的条件下x in L更加容易，难点在于搜索空间可能很大，证人不易找出。即我们通过足量的证据可以大概率推断x是否有某种性质。<br>3.指纹技术&#x2F;自由技术：用于等价问题的判定。判定两个表示是否展示的是同一个物体。工作原理分为下面三个步骤:<br>从类M中随机选择一个映射h，计算hR，检查两个hR是否相同。<br>工作原理是hR比R要短的多，但是hR只有对象O一部分的信息，无法保证准确性。因此我们要保证如果R1和R2不是一个的话，我们检测出的概率要超过1&#x2F;2，即用蒙特卡洛的单向误差。（是一种特殊版本的证人方法）<br>4.随机采样：从一个总体中抽取几个样本来代表整个整体。<br>5.松弛算法和随机舍入</p>
-<p>随机算法的设计<br>1.找一个非二次剩余：<br>基于两个事实<br>  1.可以在多项式时间内计算a的b次方 快速幂<br>  2.在1-p-1之间有正好一半是非二次剩余。<br><img src="/2024/03/29/%E9%97%AE%E6%B1%824/pic26.png"></p>
-<p>2.质数检验：<br><img src="/2024/03/29/%E9%97%AE%E6%B1%824/pic27.png"><br><img src="/2024/03/29/%E9%97%AE%E6%B1%824/pic28.png"></p>
+<h2 id="随机算法设计策略">随机算法设计策略</h2>
+<p>1.挫败敌手：敌手通过设计输入使固定策略表现不佳，可以收集一组固定策略，随机选择其一，从而让对手无法通过一个输入来击溃策略。
+2.足量的证人：检查x mod y=0比证明在没有别的条件下x in
+L更加容易，难点在于搜索空间可能很大，证人不易找出。即我们通过足量的证据可以大概率推断x是否有某种性质。
+3.指纹技术/自由技术：用于等价问题的判定。判定两个表示是否展示的是同一个物体。工作原理分为下面三个步骤:
+从类M中随机选择一个映射h，计算hR，检查两个hR是否相同。
+工作原理是hR比R要短的多，但是hR只有对象O一部分的信息，无法保证准确性。因此我们要保证如果R1和R2不是一个的话，我们检测出的概率要超过1/2，即用蒙特卡洛的单向误差。（是一种特殊版本的证人方法）
+4.随机采样：从一个总体中抽取几个样本来代表整个整体。
+5.松弛算法和随机舍入</p>
+<p>随机算法的设计 1.找一个非二次剩余： 基于两个事实
+1.可以在多项式时间内计算a的b次方 快速幂
+2.在1-p-1之间有正好一半是非二次剩余。 <img src="/2024/03/29/%E9%97%AE%E6%B1%824/pic26.png"></p>
+<p>2.质数检验： <img src="/2024/03/29/%E9%97%AE%E6%B1%824/pic27.png"> <img src="/2024/03/29/%E9%97%AE%E6%B1%824/pic28.png"></p>
  
       <!-- reward -->
       
@@ -283,7 +419,7 @@
     <ul>
       <li>
         Copyrights &copy;
-        2024
+        2023-2024
         <i class="ri-heart-fill heart_icon"></i> MorningStar
       </li>
     </ul>
@@ -542,6 +678,30 @@
     viewer_init()
 </script> 
 <!-- MathJax -->
+ <script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+      tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+  });
+
+  MathJax.Hub.Queue(function() {
+      var all = MathJax.Hub.getAllJax(), i;
+      for(i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+      }
+  });
+</script>
+
+<script src="https://cdn.staticfile.org/mathjax/2.7.7/MathJax.js"></script>
+<script src="https://cdn.staticfile.org/mathjax/2.7.7/config/TeX-AMS-MML_HTMLorMML-full.js"></script>
+<script>
+  var ayerConfig = {
+    mathjax: true,
+  };
+</script>
 
 <!-- Katex -->
 

@@ -88,7 +88,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-quill-pen-line"></i>
             <span class="post-meta-item-text"> 字数统计:</span>
-            <span class="post-count">1.3k</span>
+            <span class="post-count">1.2k</span>
         </span>
     </span>
 
@@ -112,13 +112,49 @@
   
     <div class="article-entry" itemprop="articleBody">
        
-  <h3 id="模仿学习"><a href="#模仿学习" class="headerlink" title="模仿学习"></a>模仿学习</h3><p>模仿学习与强化学习有相同的目的：两者的目的都是学习策略网络，从而控制智能体。模仿学习与强化学习有不同的原理：模仿学习向人类专家学习，目标是让策略网络做出的决策与人类专家相同；而强化学习利用环境反馈的奖励改进策略，目标是让累计奖励（即回报）最大化。<br>行为克隆：本质就是一个监督学习，根据给出的数据集来进行训练，而不与环境进行交互。<br>离线学习，可以避免与真实环境交互，用于初始化策略网络而不是随机初始化，然后再进行强化学习，减少对物理世界的伤害。</p>
-<p>逆向强化学习<br><img src="/2024/05/11/%E6%A8%A1%E4%BB%BF%E5%AD%A6%E4%B9%A0/pic1.png"><br>我们通过人类专家的策略函数来学习出奖励函数，应用在本地无奖励的策略训练中，如无人车的控制中</p>
-<p>生成判别模仿学习 (GAIL)<br>生成判别模仿学习 (Generative Adversarial Imitation Learning，缩写 GAIL) 需要让智能体与环境交互，但是无法从环境获得奖励。GAIL 还需要收集人类专家的决策记录（即很多条轨迹）。GAIL 的目标是学习一个策略网络，使得判别器无法区分一条轨迹是策略网络的决策还是人类专家的决策。<br>实现基于生成判别网络，其中生成器和判别器分别是一个神经网络<br>训练生成器：交叉熵做损失函数<br>$E(s;\Theta)&#x3D;ln[1-D(x;\phi)],其中D(x;\phi)越大越好$<br>训练判别器：同样用交叉熵做损失函数<br>$F(x^{real},x^{fake},\phi)&#x3D;ln[1-D(x^{real};\phi)+lnD(x^{fake};\phi)],其中前者越大越好，后者越小越好$</p>
-<h3 id="第十八章-蒙特卡洛树搜索"><a href="#第十八章-蒙特卡洛树搜索" class="headerlink" title="第十八章 蒙特卡洛树搜索"></a>第十八章 蒙特卡洛树搜索</h3><p>假设此时我们已经训练好了策略网络和价值网络，做决策的不是策略网络和价值网络，而是蒙特卡洛树搜索，他不需要训练，可以直接做决策。<br>训练策略网络和价值网络的目的是辅助MCTS。<br>MCTS的基本原理是向前看，模拟未来可能的情况，找出最优的一种。做成千上万次模拟。<br>每次模拟分为四步：选择，扩展，求值，回溯<br><strong>选择</strong>：从所有空位中找出符合规则的，再挑选出胜算高的动作，只搜索这些好的动作。<br>评价动作的标准：1，动作的胜率，2，策略网络给动作的评分<br>score&#x3D;Q(a)+\frac{\eta}{1+N(a)}*\pi(a|s,\Theta),其中N(a)为a访问过的次数，Q(a)是N(a)次模拟算出的动作价值，由胜率和价值函数决定。每选中一次a，就更新一次Q。<br>也就是：<br>如果a没被选过，那么score取决于策略网络<br>如果a被选过多次，那么score几乎取决于价值函数Q。<br>找出分数最多的一个动作进行模拟。<br><strong>扩展</strong>：站在对手的角度，用自己训练出来的策略网络来代替对手的策略，进行随机抽样来作为模拟器的状态转移函数。<br><strong>求值</strong>：交替落子，直至结束，可以观测到奖励r。奖励随机性太大，AlphaGo把奖励r和价值网络输出v取平均，作为对状态s_{t+1}的评价。<br>在第三步可以用一个小的神经网络来加速MCTS。<br><img src="/2024/05/11/%E6%A8%A1%E4%BB%BF%E5%AD%A6%E4%B9%A0/pic2.png"><br><strong>回溯</strong>：把at下所有记录取平均，记成价值Qt。评价动作a的好坏。回溯到第一步，根据得分选择得分高的动作a。</p>
-<h4 id="MCTS决策："><a href="#MCTS决策：" class="headerlink" title="MCTS决策："></a>MCTS决策：</h4><p>进行成千上万次模拟，取N(a)最大的动作a做出真正的决策。(暴力计算)</p>
-<h4 id="训练策略网络和价值网络："><a href="#训练策略网络和价值网络：" class="headerlink" title="训练策略网络和价值网络："></a>训练策略网络和价值网络：</h4><p>第一，随机初始化策略网络 π(a|s; θ) 之后，用行为克隆 (Behavior Cloning) 从人类棋谱中学习策略网络；第二，让两个策略网络自我博弈，用 REINFORCE 算法改进策略网络；第三，基于已经训练好的策略网络，训练价值网络v(s; w)。<br>获得高段玩家的数据集，用行为克隆来训练策略网络，通过随机梯度下降算法来降低交叉熵，再通过强化学习来改进策略网络。<br><img src="/2024/05/11/%E6%A8%A1%E4%BB%BF%E5%AD%A6%E4%B9%A0/pic3.png"><br>完成一局游戏，如果最后输了，那所有走的都是烂棋，否则都是好棋，用观测到的回报来近似Q<br>最后训练状态价值函数，用v来拟合回报ut</p>
-<p>AlphaGo Zero训练\pi用的模仿学习模仿对象不再是人类棋谱，而是MCTS。<br>先进行自我博弈，进行成千上万次模拟并记录下数据，用数据更新策略网络和价值网络。<br>策略网络要让策略和MCTS做出策略的交叉熵最小化，价值网络要让价值函数拟合回报ut，进行回归即可</p>
+  <h3 id="模仿学习">模仿学习</h3>
+<p>模仿学习与强化学习有相同的目的：两者的目的都是学习策略网络，从而控制智能体。模仿学习与强化学习有不同的原理：模仿学习向人类专家学习，目标是让策略网络做出的决策与人类专家相同；而强化学习利用环境反馈的奖励改进策略，目标是让累计奖励（即回报）最大化。
+行为克隆：本质就是一个监督学习，根据给出的数据集来进行训练，而不与环境进行交互。
+离线学习，可以避免与真实环境交互，用于初始化策略网络而不是随机初始化，然后再进行强化学习，减少对物理世界的伤害。</p>
+<p>逆向强化学习 <img src="/2024/05/11/%E6%A8%A1%E4%BB%BF%E5%AD%A6%E4%B9%A0/pic1.png">
+我们通过人类专家的策略函数来学习出奖励函数，应用在本地无奖励的策略训练中，如无人车的控制中</p>
+<p>生成判别模仿学习 (GAIL) 生成判别模仿学习 (Generative Adversarial
+Imitation Learning，缩写 GAIL)
+需要让智能体与环境交互，但是无法从环境获得奖励。GAIL
+还需要收集人类专家的决策记录（即很多条轨迹）。GAIL
+的目标是学习一个策略网络，使得判别器无法区分一条轨迹是策略网络的决策还是人类专家的决策。
+实现基于生成判别网络，其中生成器和判别器分别是一个神经网络
+训练生成器：交叉熵做损失函数 <span class="math inline">\(E(s;\Theta)=ln[1-D(x;\phi)],其中D(x;\phi)越大越好\)</span>
+训练判别器：同样用交叉熵做损失函数 <span class="math inline">\(F(x^{real},x^{fake},\phi)=ln[1-D(x^{real};\phi)+lnD(x^{fake};\phi)],其中前者越大越好，后者越小越好\)</span></p>
+<h3 id="第十八章-蒙特卡洛树搜索">第十八章 蒙特卡洛树搜索</h3>
+<p>假设此时我们已经训练好了策略网络和价值网络，做决策的不是策略网络和价值网络，而是蒙特卡洛树搜索，他不需要训练，可以直接做决策。
+训练策略网络和价值网络的目的是辅助MCTS。
+MCTS的基本原理是向前看，模拟未来可能的情况，找出最优的一种。做成千上万次模拟。
+每次模拟分为四步：选择，扩展，求值，回溯
+<strong>选择</strong>：从所有空位中找出符合规则的，再挑选出胜算高的动作，只搜索这些好的动作。
+评价动作的标准：1，动作的胜率，2，策略网络给动作的评分
+score=Q(a)+*(a|s,),其中N(a)为a访问过的次数，Q(a)是N(a)次模拟算出的动作价值，由胜率和价值函数决定。每选中一次a，就更新一次Q。
+也就是： 如果a没被选过，那么score取决于策略网络
+如果a被选过多次，那么score几乎取决于价值函数Q。
+找出分数最多的一个动作进行模拟。
+<strong>扩展</strong>：站在对手的角度，用自己训练出来的策略网络来代替对手的策略，进行随机抽样来作为模拟器的状态转移函数。
+<strong>求值</strong>：交替落子，直至结束，可以观测到奖励r。奖励随机性太大，AlphaGo把奖励r和价值网络输出v取平均，作为对状态s_{t+1}的评价。
+在第三步可以用一个小的神经网络来加速MCTS。 <img src="/2024/05/11/%E6%A8%A1%E4%BB%BF%E5%AD%A6%E4%B9%A0/pic2.png">
+<strong>回溯</strong>：把at下所有记录取平均，记成价值Qt。评价动作a的好坏。回溯到第一步，根据得分选择得分高的动作a。</p>
+<h4 id="mcts决策">MCTS决策：</h4>
+<p>进行成千上万次模拟，取N(a)最大的动作a做出真正的决策。(暴力计算)</p>
+<h4 id="训练策略网络和价值网络">训练策略网络和价值网络：</h4>
+<p>第一，随机初始化策略网络 π(a|s; θ) 之后，用行为克隆 (Behavior
+Cloning) 从人类棋谱中学习策略网络；第二，让两个策略网络自我博弈，用
+REINFORCE
+算法改进策略网络；第三，基于已经训练好的策略网络，训练价值网络v(s; w)。
+获得高段玩家的数据集，用行为克隆来训练策略网络，通过随机梯度下降算法来降低交叉熵，再通过强化学习来改进策略网络。
+<img src="/2024/05/11/%E6%A8%A1%E4%BB%BF%E5%AD%A6%E4%B9%A0/pic3.png">
+完成一局游戏，如果最后输了，那所有走的都是烂棋，否则都是好棋，用观测到的回报来近似Q
+最后训练状态价值函数，用v来拟合回报ut</p>
+<p>AlphaGo Zero训练，而是MCTS。
+先进行自我博弈，进行成千上万次模拟并记录下数据，用数据更新策略网络和价值网络。
+策略网络要让策略和MCTS做出策略的交叉熵最小化，价值网络要让价值函数拟合回报ut，进行回归即可</p>
  
       <!-- reward -->
       
@@ -213,7 +249,7 @@
     <ul>
       <li>
         Copyrights &copy;
-        2024
+        2023-2024
         <i class="ri-heart-fill heart_icon"></i> MorningStar
       </li>
     </ul>
@@ -472,6 +508,30 @@
     viewer_init()
 </script> 
 <!-- MathJax -->
+ <script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+      tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+  });
+
+  MathJax.Hub.Queue(function() {
+      var all = MathJax.Hub.getAllJax(), i;
+      for(i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+      }
+  });
+</script>
+
+<script src="https://cdn.staticfile.org/mathjax/2.7.7/MathJax.js"></script>
+<script src="https://cdn.staticfile.org/mathjax/2.7.7/config/TeX-AMS-MML_HTMLorMML-full.js"></script>
+<script>
+  var ayerConfig = {
+    mathjax: true,
+  };
+</script>
 
 <!-- Katex -->
 

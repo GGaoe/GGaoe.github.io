@@ -88,7 +88,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-quill-pen-line"></i>
             <span class="post-meta-item-text"> 字数统计:</span>
-            <span class="post-count">719</span>
+            <span class="post-count">720</span>
         </span>
     </span>
 
@@ -112,19 +112,29 @@
   
     <div class="article-entry" itemprop="articleBody">
        
-  <h3 id="神经网络-深度学习-机器学习"><a href="#神经网络-深度学习-机器学习" class="headerlink" title="神经网络 深度学习 机器学习"></a>神经网络 深度学习 机器学习</h3><h5 id="第一章"><a href="#第一章" class="headerlink" title="第一章"></a>第一章</h5><p>深度学习是机器学习的一个分支，神经网络是深度学习常用的模型</p>
+  <h3 id="神经网络-深度学习-机器学习">神经网络 深度学习 机器学习</h3>
+<h5 id="第一章">第一章</h5>
+<p>深度学习是机器学习的一个分支，神经网络是深度学习常用的模型</p>
 <p>深度学习问题是一个机器学习问题，指从有限样例中通过算法总结出一般性的规律，并可以应用到新的未知数据上．</p>
 <p>神经网络可以看作信息从输入到输出的信息处理系统．如果我们把神经网络看作由一组参数控制的复杂函数，并用来处理一些模式识别任务（比如语音识别、人脸识别等），神经网络的参数可以通过机器学习的方式来从数据中学习．因为神经网络模型一般比较复杂，从输入到输出的信息传递路径一般比较长，所以复杂神经网络的学习可以看成是一种深度的机器学习，即深度学习．</p>
 <p>传统机器学习数据处理流程：预处理、特征提取、特征转化、预测</p>
 <p>自动地学习出有效的特征，并提高最终机器学习模型的性能，那么这种学习就可以叫作表示学习</p>
-<p><strong>局部表示</strong>，也称为离散表示或符号表示．局部表示通常可以表示为one-hot 向量的形式．假设所有颜色的名字构成一个词表 𝒱，词表大小为 |𝒱|．我们可以用一个|𝒱|维的one-hot向量来表示每一种颜色．在第𝑖 种颜色对应的one-hot向量中，第𝑖 维的值为1，其他都为0．缺点：维数很高，且不能扩展，相似度为0</p>
+<p><strong>局部表示</strong>，也称为离散表示或符号表示．局部表示通常可以表示为one-hot
+向量的形式．假设所有颜色的名字构成一个词表 𝒱，词表大小为
+|𝒱|．我们可以用一个|𝒱|维的one-hot向量来表示每一种颜色．在第𝑖
+种颜色对应的one-hot向量中，第𝑖
+维的值为1，其他都为0．缺点：维数很高，且不能扩展，相似度为0</p>
 <p>不同颜色对应到R、G、B三维空间中一个点，这种表示方式叫作<strong>分布式表示</strong>．</p>
 <p>深度学习数据处理流程：底层特征-中层特征-高层特征-预测，前三者为表示学习</p>
 <p><strong>端到端学习</strong>是指在学习过程中不进行分模块或分阶段训练，直接优化任务的总体目标</p>
-<p><strong>神经网络</strong>是指由很多人工神经元构成的网络结构模型，这些人工神经元之间的连接强度是可学习的参数。<br>用来对数据之间的复杂关系进行建模．不同节点之间的连接被赋予了不同的权重，每个权重代表了一个节点对另一个节点的影响大小．每个节点代表一种特定函数，来自其他节点的信息经过其相应的权重综合计算，输入到一个激活函数中并得到一个新的活性值（兴奋或抑制）</p>
+<p><strong>神经网络</strong>是指由很多人工神经元构成的网络结构模型，这些人工神经元之间的连接强度是可学习的参数。
+用来对数据之间的复杂关系进行建模．不同节点之间的连接被赋予了不同的权重，每个权重代表了一个节点对另一个节点的影响大小．每个节点代表一种特定函数，来自其他节点的信息经过其相应的权重综合计算，输入到一个激活函数中并得到一个新的活性值（兴奋或抑制）</p>
 <p><strong>反向传播算法</strong></p>
 <p><strong>全书知识体系</strong></p>
-<p><img src="/2024/03/24/%E7%AC%AC%E4%B8%80%E7%AB%A0%E7%BB%AA%E8%AE%BA/pic1.png" alt="pic1"></p>
+<figure>
+<img src="/2024/03/24/%E7%AC%AC%E4%B8%80%E7%AB%A0%E7%BB%AA%E8%AE%BA/pic1.png" alt="pic1">
+<figcaption aria-hidden="true">pic1</figcaption>
+</figure>
 <p>比较有代表性的深度学习框架：Theano、Caffe、TensorFlow、Pytorch、飞桨（PaddlePaddle）、Chainer和MXNet</p>
  
       <!-- reward -->
@@ -220,7 +230,7 @@
     <ul>
       <li>
         Copyrights &copy;
-        2024
+        2023-2024
         <i class="ri-heart-fill heart_icon"></i> MorningStar
       </li>
     </ul>
@@ -479,6 +489,30 @@
     viewer_init()
 </script> 
 <!-- MathJax -->
+ <script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+      tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+  });
+
+  MathJax.Hub.Queue(function() {
+      var all = MathJax.Hub.getAllJax(), i;
+      for(i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+      }
+  });
+</script>
+
+<script src="https://cdn.staticfile.org/mathjax/2.7.7/MathJax.js"></script>
+<script src="https://cdn.staticfile.org/mathjax/2.7.7/config/TeX-AMS-MML_HTMLorMML-full.js"></script>
+<script>
+  var ayerConfig = {
+    mathjax: true,
+  };
+</script>
 
 <!-- Katex -->
 

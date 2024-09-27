@@ -88,7 +88,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-quill-pen-line"></i>
             <span class="post-meta-item-text"> 字数统计:</span>
-            <span class="post-count">117</span>
+            <span class="post-count">118</span>
         </span>
     </span>
 
@@ -112,10 +112,20 @@
   
     <div class="article-entry" itemprop="articleBody">
        
-  <h5 id="多分类"><a href="#多分类" class="headerlink" title="多分类"></a>多分类</h5><p>一对其余式<br>一对一式<br>argmax式</p>
-<h6 id="Logistic回归"><a href="#Logistic回归" class="headerlink" title="Logistic回归"></a>Logistic回归</h6><p><img src="/2024/04/07/%E7%AC%AC%E4%B8%89%E7%AB%A0%E7%BA%BF%E6%80%A7%E6%A8%A1%E5%9E%8B/pic1.png" alt="pic1"><br>采用交叉熵作为损失函数，并使用梯度下降法来对参数进行优化<br><img src="/2024/04/07/%E7%AC%AC%E4%B8%89%E7%AB%A0%E7%BA%BF%E6%80%A7%E6%A8%A1%E5%9E%8B/pic2.png" alt="pic2"></p>
-<h6 id="Softmax回归"><a href="#Softmax回归" class="headerlink" title="Softmax回归"></a>Softmax回归</h6><p><img src="/2024/04/07/%E7%AC%AC%E4%B8%89%E7%AB%A0%E7%BA%BF%E6%80%A7%E6%A8%A1%E5%9E%8B/pic3.png" alt="pic3"></p>
-<h6 id="感知学习"><a href="#感知学习" class="headerlink" title="感知学习"></a>感知学习</h6><p>感知器的学习算法是一种错误驱动的在线学习算法．先初始化一个权重向量 𝒘 ← 0（通常是全零向量），然后每次分错一个样本 (𝒙, 𝑦)时，即𝑦𝒘T𝒙 &lt; 0，就用这个样本来更新权重．<br>𝒘 ← 𝒘 + 𝑦𝒙.</p>
+  <h5 id="多分类">多分类</h5>
+<p>一对其余式 一对一式 argmax式</p>
+<h6 id="logistic回归">Logistic回归</h6>
+<p><img src="/2024/04/07/%E7%AC%AC%E4%B8%89%E7%AB%A0%E7%BA%BF%E6%80%A7%E6%A8%A1%E5%9E%8B/pic1.png" alt="pic1">
+采用交叉熵作为损失函数，并使用梯度下降法来对参数进行优化 <img src="/2024/04/07/%E7%AC%AC%E4%B8%89%E7%AB%A0%E7%BA%BF%E6%80%A7%E6%A8%A1%E5%9E%8B/pic2.png" alt="pic2"></p>
+<h6 id="softmax回归">Softmax回归</h6>
+<figure>
+<img src="/2024/04/07/%E7%AC%AC%E4%B8%89%E7%AB%A0%E7%BA%BF%E6%80%A7%E6%A8%A1%E5%9E%8B/pic3.png" alt="pic3">
+<figcaption aria-hidden="true">pic3</figcaption>
+</figure>
+<h6 id="感知学习">感知学习</h6>
+<p>感知器的学习算法是一种错误驱动的在线学习算法．先初始化一个权重向量 𝒘
+← 0（通常是全零向量），然后每次分错一个样本 (𝒙, 𝑦)时，即𝑦𝒘T𝒙 &lt;
+0，就用这个样本来更新权重． 𝒘 ← 𝒘 + 𝑦𝒙.</p>
  
       <!-- reward -->
       
@@ -210,7 +220,7 @@
     <ul>
       <li>
         Copyrights &copy;
-        2024
+        2023-2024
         <i class="ri-heart-fill heart_icon"></i> MorningStar
       </li>
     </ul>
@@ -469,6 +479,30 @@
     viewer_init()
 </script> 
 <!-- MathJax -->
+ <script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+      tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+  });
+
+  MathJax.Hub.Queue(function() {
+      var all = MathJax.Hub.getAllJax(), i;
+      for(i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+      }
+  });
+</script>
+
+<script src="https://cdn.staticfile.org/mathjax/2.7.7/MathJax.js"></script>
+<script src="https://cdn.staticfile.org/mathjax/2.7.7/config/TeX-AMS-MML_HTMLorMML-full.js"></script>
+<script>
+  var ayerConfig = {
+    mathjax: true,
+  };
+</script>
 
 <!-- Katex -->
 

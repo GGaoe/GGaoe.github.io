@@ -112,20 +112,56 @@
   
     <div class="article-entry" itemprop="articleBody">
        
-  <h4 id="基础概念"><a href="#基础概念" class="headerlink" title="基础概念"></a>基础概念</h4><p>Rt代表当前时间的奖励<br>折扣回报价值函数Ut是t时刻后所有奖励的加权和<br>Ut的随机性完全来自t+1时刻后的动作和状态<br>对其求条件期望即可得到当前的动作价值函数Qt<br>最优动作价值函数去除了策略函数的影响Q*t<br>控制智能体与环境交互的策略被称作行为策略。行为策略的作用是收集经验 (Experience)，即观测的环境、动作、奖励<br>训练的目的是得到一个策略函数，在结束训练之后，用这个策略函数来控制智能体；这个策略函数就叫做目标策略。在本章中，目标策略是一个确定性的策略，即用 DQN 控制智能体：</p>
-<h4 id="时间差分算法（TD）"><a href="#时间差分算法（TD）" class="headerlink" title="时间差分算法（TD）"></a>时间差分算法（TD）</h4><p>常见的TD算法有Q学习和SARSA</p>
-<h4 id="用Q算法训练DQN：（目标是学习到最优动作价值函数Q-）"><a href="#用Q算法训练DQN：（目标是学习到最优动作价值函数Q-）" class="headerlink" title="用Q算法训练DQN：（目标是学习到最优动作价值函数Q*）"></a>用Q算法训练DQN：（目标是学习到最优动作价值函数Q*）</h4><p><img src="/2024/04/21/Q%E5%AD%A6%E4%B9%A0%E7%AE%97%E6%B3%95/pic1.png"><br><img src="/2024/04/21/Q%E5%AD%A6%E4%B9%A0%E7%AE%97%E6%B3%95/pic2.png"><br>训练流程：<br>先用$\epsilon$ -greedy 策略收集数据<br>即以1-$\epsilon$的概率选择当前环境Q最大的动作，以$\epsilon$的概率选择A中任意一个动作<br>先对DQN进行正向传播，得到Q值<br><img src="/2024/04/21/Q%E5%AD%A6%E4%B9%A0%E7%AE%97%E6%B3%95/pic3.png"><br>计算TD目标和TD误差<br>对DQN进行反向传播，做梯度下降更新参数</p>
-<h4 id="SARSA算法"><a href="#SARSA算法" class="headerlink" title="SARSA算法"></a>SARSA算法</h4><p>训练目的是来学习表格q作为动作价值函数$Q_{\pi}$的近似，评价策略的好坏，不同的策略$\pi$对应的Q就会不同<br>根据当前策略进行随机抽样，从而得到TD误差和TD目标，从而更新表格中的$Q_{\pi}$</p>
-<p><strong>神经网络的SARSA</strong><br><img src="/2024/04/21/Q%E5%AD%A6%E4%B9%A0%E7%AE%97%E6%B3%95/pic4.png"></p>
-<p>多步TD目标：获得m个回合的奖励，然后通过基于这m局的事实和后面t-m+1回合的估计，获得当前的TD目标<br>如果令m&#x3D;n-t+1，则多步TD目标就变成了对ut的实际观测</p>
-<p><strong>蒙特卡洛</strong><br>我们鼓励价值网络$q(s_t,a_t,W)$接近ut<br>蒙特卡洛是无偏的，但是方差大，收敛速度慢<br>自举则是用自己来估计自己，Q算法和SARSA都是自举，方差小但是有偏差</p>
-<h4 id="价值学习高级技巧"><a href="#价值学习高级技巧" class="headerlink" title="价值学习高级技巧"></a>价值学习高级技巧</h4><p><strong>经验回放</strong>：打破了序列的相关性，可以重复利用收集到的经验，而不是使用一次就丢弃，用更少的样本可以达到相同的表现，经验回放适用于异策略，不适用于同策略，同策略要求经验必须是当前目标策略收集到的<br>优先经验回放<br>如果预测模型和真实值的四元组差距较大，则在经验回放中这个四元组应该有比较大的权重，是非均匀抽样，通过修改学习率来调整预测偏差</p>
-<p><strong>高估问题</strong>：<br>Q算法训练出的DQN会高估真实价值<br>1.子举导致的偏差传播<br>2.最大化导致TD目标高估真实价值<br>想要避免 DQN 的高估，要么切断“自举”，要么避免最大化造成高估<br>想要切断自举，可以用另一个神经网络计算 TD 目标，而不是用 DQN 自己计算 TD 目标。另一个神经网络就被称作目标网络.即在中间设置中间变量，防止DQN直接更新自己</p>
-<p>双Q学习算法<br>在目标网络的基础上提出的算法<br>用两个Q函数分开进行学习，我们使用其中一个 Q 值函数来选择最优动作，然后使用另一个 Q 值函数来评估这个最优动作的价值。这样做的好处在于，即使一个 Q 值函数高估了某个动作的价值，另一个 Q 值函数可能会提供更为准确的估计。因此，通过取两者之间的最小值，我们可以更加稳健地估计动作值函数，从而缓解了高估问题。<br><img src="/2024/04/21/Q%E5%AD%A6%E4%B9%A0%E7%AE%97%E6%B3%95/pic5.png"></p>
-<p><strong>对决网络</strong>：对 DQN 的神经网络的结构的改进<br>将最优动作价值 Q* 分解成最优状态价值 V* 与最优优势 D* 。<br><img src="/2024/04/21/Q%E5%AD%A6%E4%B9%A0%E7%AE%97%E6%B3%95/pic6.png"></p>
+  <h4 id="基础概念">基础概念</h4>
+<p>Rt代表当前时间的奖励 折扣回报价值函数Ut是t时刻后所有奖励的加权和
+Ut的随机性完全来自t+1时刻后的动作和状态
+对其求条件期望即可得到当前的动作价值函数Qt
+最优动作价值函数去除了策略函数的影响Q*t
+控制智能体与环境交互的策略被称作行为策略。行为策略的作用是收集经验
+(Experience)，即观测的环境、动作、奖励
+训练的目的是得到一个策略函数，在结束训练之后，用这个策略函数来控制智能体；这个策略函数就叫做目标策略。在本章中，目标策略是一个确定性的策略，即用
+DQN 控制智能体：</p>
+<h4 id="时间差分算法td">时间差分算法（TD）</h4>
+<p>常见的TD算法有Q学习和SARSA</p>
+<h4 id="用q算法训练dqn目标是学习到最优动作价值函数q">用Q算法训练DQN：（目标是学习到最优动作价值函数Q*）</h4>
+<p><img src="/2024/04/21/Q%E5%AD%A6%E4%B9%A0%E7%AE%97%E6%B3%95/pic1.png"> <img src="/2024/04/21/Q%E5%AD%A6%E4%B9%A0%E7%AE%97%E6%B3%95/pic2.png">
+训练流程： 先用<span class="math inline">\(\epsilon\)</span> -greedy
+策略收集数据 即以1-<span class="math inline">\(\epsilon\)</span>的概率选择当前环境Q最大的动作，以<span class="math inline">\(\epsilon\)</span>的概率选择A中任意一个动作
+先对DQN进行正向传播，得到Q值 <img src="/2024/04/21/Q%E5%AD%A6%E4%B9%A0%E7%AE%97%E6%B3%95/pic3.png">
+计算TD目标和TD误差 对DQN进行反向传播，做梯度下降更新参数</p>
+<h4 id="sarsa算法">SARSA算法</h4>
+<p>训练目的是来学习表格q作为动作价值函数<span class="math inline">\(Q_{\pi}\)</span>的近似，评价策略的好坏，不同的策略<span class="math inline">\(\pi\)</span>对应的Q就会不同
+根据当前策略进行随机抽样，从而得到TD误差和TD目标，从而更新表格中的<span class="math inline">\(Q_{\pi}\)</span></p>
+<p><strong>神经网络的SARSA</strong> <img src="/2024/04/21/Q%E5%AD%A6%E4%B9%A0%E7%AE%97%E6%B3%95/pic4.png"></p>
+<p>多步TD目标：获得m个回合的奖励，然后通过基于这m局的事实和后面t-m+1回合的估计，获得当前的TD目标
+如果令m=n-t+1，则多步TD目标就变成了对ut的实际观测</p>
+<p><strong>蒙特卡洛</strong> 我们鼓励价值网络<span class="math inline">\(q(s_t,a_t,W)\)</span>接近ut
+蒙特卡洛是无偏的，但是方差大，收敛速度慢
+自举则是用自己来估计自己，Q算法和SARSA都是自举，方差小但是有偏差</p>
+<h4 id="价值学习高级技巧">价值学习高级技巧</h4>
+<p><strong>经验回放</strong>：打破了序列的相关性，可以重复利用收集到的经验，而不是使用一次就丢弃，用更少的样本可以达到相同的表现，经验回放适用于异策略，不适用于同策略，同策略要求经验必须是当前目标策略收集到的
+优先经验回放
+如果预测模型和真实值的四元组差距较大，则在经验回放中这个四元组应该有比较大的权重，是非均匀抽样，通过修改学习率来调整预测偏差</p>
+<p><strong>高估问题</strong>： Q算法训练出的DQN会高估真实价值
+1.子举导致的偏差传播 2.最大化导致TD目标高估真实价值 想要避免 DQN
+的高估，要么切断“自举”，要么避免最大化造成高估
+想要切断自举，可以用另一个神经网络计算 TD 目标，而不是用 DQN 自己计算 TD
+目标。另一个神经网络就被称作目标网络.即在中间设置中间变量，防止DQN直接更新自己</p>
+<p>双Q学习算法 在目标网络的基础上提出的算法
+用两个Q函数分开进行学习，我们使用其中一个 Q
+值函数来选择最优动作，然后使用另一个 Q
+值函数来评估这个最优动作的价值。这样做的好处在于，即使一个 Q
+值函数高估了某个动作的价值，另一个 Q
+值函数可能会提供更为准确的估计。因此，通过取两者之间的最小值，我们可以更加稳健地估计动作值函数，从而缓解了高估问题。
+<img src="/2024/04/21/Q%E5%AD%A6%E4%B9%A0%E7%AE%97%E6%B3%95/pic5.png"></p>
+<p><strong>对决网络</strong>：对 DQN 的神经网络的结构的改进
+将最优动作价值 Q* 分解成最优状态价值 V* 与最优优势 D* 。 <img src="/2024/04/21/Q%E5%AD%A6%E4%B9%A0%E7%AE%97%E6%B3%95/pic6.png"></p>
 <p><strong>噪声网络</strong></p>
-<h4 id="策略梯度方法"><a href="#策略梯度方法" class="headerlink" title="策略梯度方法"></a>策略梯度方法</h4><p><img src="/2024/04/21/Q%E5%AD%A6%E4%B9%A0%E7%AE%97%E6%B3%95/pic7.png"><br><img src="/2024/04/21/Q%E5%AD%A6%E4%B9%A0%E7%AE%97%E6%B3%95/pic8.png"><br><img src="/2024/04/21/Q%E5%AD%A6%E4%B9%A0%E7%AE%97%E6%B3%95/pic9.png"></p>
-<p><strong>REINFORCE:</strong> 用ut来近似代替Q*每次收集一组四元组，计算回报，进行反向传播，做随机梯度上升来更新策略网络参数</p>
+<h4 id="策略梯度方法">策略梯度方法</h4>
+<p><img src="/2024/04/21/Q%E5%AD%A6%E4%B9%A0%E7%AE%97%E6%B3%95/pic7.png"> <img src="/2024/04/21/Q%E5%AD%A6%E4%B9%A0%E7%AE%97%E6%B3%95/pic8.png">
+<img src="/2024/04/21/Q%E5%AD%A6%E4%B9%A0%E7%AE%97%E6%B3%95/pic9.png"></p>
+<p><strong>REINFORCE:</strong>
+用ut来近似代替Q*每次收集一组四元组，计算回报，进行反向传播，做随机梯度上升来更新策略网络参数</p>
 <p><strong>Actor-Critic</strong> 方法用神经网络近似 Qπ。</p>
  
       <!-- reward -->
@@ -221,7 +257,7 @@
     <ul>
       <li>
         Copyrights &copy;
-        2024
+        2023-2024
         <i class="ri-heart-fill heart_icon"></i> MorningStar
       </li>
     </ul>
@@ -480,6 +516,30 @@
     viewer_init()
 </script> 
 <!-- MathJax -->
+ <script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+      tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+  });
+
+  MathJax.Hub.Queue(function() {
+      var all = MathJax.Hub.getAllJax(), i;
+      for(i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+      }
+  });
+</script>
+
+<script src="https://cdn.staticfile.org/mathjax/2.7.7/MathJax.js"></script>
+<script src="https://cdn.staticfile.org/mathjax/2.7.7/config/TeX-AMS-MML_HTMLorMML-full.js"></script>
+<script>
+  var ayerConfig = {
+    mathjax: true,
+  };
+</script>
 
 <!-- Katex -->
 

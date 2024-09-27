@@ -88,7 +88,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-quill-pen-line"></i>
             <span class="post-meta-item-text"> 字数统计:</span>
-            <span class="post-count">279</span>
+            <span class="post-count">360</span>
         </span>
     </span>
 
@@ -112,8 +112,23 @@
   
     <div class="article-entry" itemprop="articleBody">
        
-  <h3 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h3><p>凯撒移位密码：key space太小<br>单字母替代密码：一个字母的加密方式总是一样的，统计攻击破解，如果我们知道一个字母在明文中出现的频率，就可以极大缩小明文的搜索空间<br>替代方法：多字母替换<br>維吉尼亞密碼 or 多字母移位密碼：是多密码替换的特殊情况<br>破解方式：先确定加密密钥的长度m，然后break出m个加密密钥（统计攻击破解）</p>
-<h3 id="Perfect-Secrecy（完美保密性）"><a href="#Perfect-Secrecy（完美保密性）" class="headerlink" title="Perfect Secrecy（完美保密性）"></a>Perfect Secrecy（完美保密性）</h3><h4 id="Defining-an-encryption-scheme"><a href="#Defining-an-encryption-scheme" class="headerlink" title="Defining an encryption scheme"></a>Defining an encryption scheme</h4><p><img src="/2024/09/20/Crypto/pic1.png"><br>An encryption scheme (Gen,Enc,Dec) over a massage space M is perfect secret if for every possible distribution over M,Pr[M&#x3D;m|C&#x3D;c]&#x3D;Pr[M&#x3D;m] holds for every m ∈ M and every c ∈ C that Pr[C &#x3D; c] &gt; 0.<br>可以用贝叶斯公式等完成证明；<br>一个等效的完美保密性的定义<br>An encryption scheme (Gen, Enc, Dec) over message space M is perfectly secret if and only if for every m, m′ ∈ M, and every c ∈ C:<br>Pr[C &#x3D; c|M &#x3D; m] &#x3D; Pr[C &#x3D; c|M &#x3D; m′]<br><img src="/2024/09/20/Crypto/pic2.png"><br>有完美保密性当且仅当有完美不可分辨性</p>
+  <h3 id="introduction">Introduction</h3>
+<p>凯撒移位密码：key space太小
+单字母替代密码：一个字母的加密方式总是一样的，统计攻击破解，如果我们知道一个字母在明文中出现的频率，就可以极大缩小明文的搜索空间
+替代方法：多字母替换 維吉尼亞密碼 or
+多字母移位密碼：是多密码替换的特殊情况
+破解方式：先确定加密密钥的长度m，然后break出m个加密密钥（统计攻击破解）</p>
+<h3 id="perfect-secrecy完美保密性">Perfect Secrecy（完美保密性）</h3>
+<h4 id="defining-an-encryption-scheme">Defining an encryption
+scheme</h4>
+<p><img src="/2024/09/20/Crypto/pic1.png"> An encryption scheme (Gen,Enc,Dec)
+over a massage space M is perfect secret if for every possible
+distribution over M,Pr[M=m|C=c]=Pr[M=m] holds for every m ∈ M and every
+c ∈ C that Pr[C = c] &gt; 0. 可以用贝叶斯公式等完成证明；
+一个等效的完美保密性的定义 An encryption scheme (Gen, Enc, Dec) over
+message space M is perfectly secret if and only if for every m, m′ ∈ M,
+and every c ∈ C: Pr[C = c|M = m] = Pr[C = c|M = m′]</p>
+<p>完美不可分辨性： A向B发送两组明文<span class="math inline">\(m_1,m_2\)</span>,B通过Gen获取一个密钥k，并均匀随机的抽取明文中的其中一个n进行加密，将加密后的密文传给A。通过获取到的密文c，A猜测n是第一位还是第二位。如果猜对了，则<span class="math inline">\(PrivK^{eav}_{A,\Pi}=1\)</span> <img src="/2024/09/20/Crypto/pic2.png"> 有完美保密性当且仅当有完美不可分辨性</p>
  
       <!-- reward -->
       
@@ -197,7 +212,7 @@
     <ul>
       <li>
         Copyrights &copy;
-        2024
+        2023-2024
         <i class="ri-heart-fill heart_icon"></i> MorningStar
       </li>
     </ul>
@@ -456,6 +471,30 @@
     viewer_init()
 </script> 
 <!-- MathJax -->
+ <script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+      tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+  });
+
+  MathJax.Hub.Queue(function() {
+      var all = MathJax.Hub.getAllJax(), i;
+      for(i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+      }
+  });
+</script>
+
+<script src="https://cdn.staticfile.org/mathjax/2.7.7/MathJax.js"></script>
+<script src="https://cdn.staticfile.org/mathjax/2.7.7/config/TeX-AMS-MML_HTMLorMML-full.js"></script>
+<script>
+  var ayerConfig = {
+    mathjax: true,
+  };
+</script>
 
 <!-- Katex -->
 

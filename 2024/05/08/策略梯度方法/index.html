@@ -45,7 +45,119 @@
           font-size: 1.6rem;
         }
       </style>
-    </head>
+    <style>mjx-container[jax="SVG"] {
+  direction: ltr;
+}
+
+mjx-container[jax="SVG"] > svg {
+  overflow: visible;
+}
+
+mjx-container[jax="SVG"][display="true"] {
+  display: block;
+  text-align: center;
+  margin: 1em 0;
+}
+
+mjx-container[jax="SVG"][justify="left"] {
+  text-align: left;
+}
+
+mjx-container[jax="SVG"][justify="right"] {
+  text-align: right;
+}
+
+g[data-mml-node="merror"] > g {
+  fill: red;
+  stroke: red;
+}
+
+g[data-mml-node="merror"] > rect[data-background] {
+  fill: yellow;
+  stroke: none;
+}
+
+g[data-mml-node="mtable"] > line[data-line] {
+  stroke-width: 70px;
+  fill: none;
+}
+
+g[data-mml-node="mtable"] > rect[data-frame] {
+  stroke-width: 70px;
+  fill: none;
+}
+
+g[data-mml-node="mtable"] > .mjx-dashed {
+  stroke-dasharray: 140;
+}
+
+g[data-mml-node="mtable"] > .mjx-dotted {
+  stroke-linecap: round;
+  stroke-dasharray: 0,140;
+}
+
+g[data-mml-node="mtable"] > svg {
+  overflow: visible;
+}
+
+[jax="SVG"] mjx-tool {
+  display: inline-block;
+  position: relative;
+  width: 0;
+  height: 0;
+}
+
+[jax="SVG"] mjx-tool > mjx-tip {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+mjx-tool > mjx-tip {
+  display: inline-block;
+  padding: .2em;
+  border: 1px solid #888;
+  font-size: 70%;
+  background-color: #F8F8F8;
+  color: black;
+  box-shadow: 2px 2px 5px #AAAAAA;
+}
+
+g[data-mml-node="maction"][data-toggle] {
+  cursor: pointer;
+}
+
+mjx-status {
+  display: block;
+  position: fixed;
+  left: 1em;
+  bottom: 1em;
+  min-width: 25%;
+  padding: .2em .4em;
+  border: 1px solid #888;
+  font-size: 90%;
+  background-color: #F8F8F8;
+  color: black;
+}
+
+foreignObject[data-mjx-xml] {
+  font-family: initial;
+  line-height: normal;
+  overflow: visible;
+}
+
+.MathJax path {
+  stroke-width: 3;
+}
+
+mjx-container[display="true"] {
+  overflow: auto hidden;
+}
+
+mjx-container[display="true"] + br {
+  display: none;
+}
+</style></head>
   </html>
 </html>
 
@@ -112,11 +224,30 @@
   
     <div class="article-entry" itemprop="articleBody">
        
-  <h3 id="策略梯度方法"><a href="#策略梯度方法" class="headerlink" title="策略梯度方法"></a>策略梯度方法</h3><p>用神经网络 π(a|s; θ) 近似策略函数 π(a|s)。神经网络 π(a|s; θ) 被称为策略网络。θ 表示神经网络的参数；一开始随机初始化 θ，随后利用收集的状态、动作、奖励去更新 θ。<br><img src="/2024/05/08/%E7%AD%96%E7%95%A5%E6%A2%AF%E5%BA%A6%E6%96%B9%E6%B3%95/pic1.png"><br><img src="/2024/05/08/%E7%AD%96%E7%95%A5%E6%A2%AF%E5%BA%A6%E6%96%B9%E6%B3%95/pic3.png"><br><img src="/2024/05/08/%E7%AD%96%E7%95%A5%E6%A2%AF%E5%BA%A6%E6%96%B9%E6%B3%95/pic2.png"><br>之后用两种方法来近似动作价值函数Qπ：一种方法是 REINFORCE，用实际观测的回报 u 近似 Qπ(s, a)；另一种方法是Actor-Critic，用神经网络 q(s, a; w) 近似 Qπ(s, a)。<br>REINFORCE让智能体完成一局游戏，然后利用这局游戏的数据来反向传播计算，做随机梯度上升来更新参数。<br>同策略，不适用于经验回放</p>
-<p>Actor-Critic：<br>用SARSA算法更新价值网络Qπ<br><img src="/2024/05/08/%E7%AD%96%E7%95%A5%E6%A2%AF%E5%BA%A6%E6%96%B9%E6%B3%95/pic4.png"></p>
-<h3 id="带基线的策略梯度方法"><a href="#带基线的策略梯度方法" class="headerlink" title="带基线的策略梯度方法"></a>带基线的策略梯度方法</h3><p>把 b 作为动作价值函数 Qπ(S, A) 的基线 (Baseline)，用 Qπ(S, A) − b 替换掉 Qπ。设 b 是任意的函数，只要不依赖于动作 A 就可以；例如，b 可以是状态价值函数 Vπ(S)。<br>带基线可以帮助减少方差并加速学习过程。</p>
-<h3 id="策略学习高级算法"><a href="#策略学习高级算法" class="headerlink" title="策略学习高级算法"></a>策略学习高级算法</h3><h4 id="置信域策略优化-Trust-Region-Policy-Optimization-TRPO"><a href="#置信域策略优化-Trust-Region-Policy-Optimization-TRPO" class="headerlink" title="置信域策略优化 (Trust Region Policy Optimization, TRPO)"></a>置信域策略优化 (Trust Region Policy Optimization, TRPO)</h4><p>有两个优势：第一，TRPO表现更稳定，收敛曲线不会剧烈波动，而且对学习率不敏感；第二，TRPO 用更少的经验（即智能体收集到的状态、动作、奖励）就能达到与策略梯度方法相同的表现。</p>
-<h4 id="熵正则-Entropy-Regularization"><a href="#熵正则-Entropy-Regularization" class="headerlink" title="熵正则 (Entropy Regularization):"></a>熵正则 (Entropy Regularization):</h4><p>我们希望策略网络输出的概率分布的熵不要太小。我们不妨把熵作为正则项，放到策略学习的目标函数中。策略网络的输出是维度等于 |A| 的向量，它表示定义在动作空间上的离散概率分布。</p>
+  <h3 id="策略梯度方法">策略梯度方法</h3>
+<p>用神经网络 π(a|s; θ) 近似策略函数 π(a|s)。神经网络 π(a|s; θ)
+被称为策略网络。θ 表示神经网络的参数；一开始随机初始化
+θ，随后利用收集的状态、动作、奖励去更新 θ。 <img src="/2024/05/08/%E7%AD%96%E7%95%A5%E6%A2%AF%E5%BA%A6%E6%96%B9%E6%B3%95/pic1.png"> <img src="/2024/05/08/%E7%AD%96%E7%95%A5%E6%A2%AF%E5%BA%A6%E6%96%B9%E6%B3%95/pic3.png">
+<img src="/2024/05/08/%E7%AD%96%E7%95%A5%E6%A2%AF%E5%BA%A6%E6%96%B9%E6%B3%95/pic2.png">
+之后用两种方法来近似动作价值函数Qπ：一种方法是
+REINFORCE，用实际观测的回报 u 近似 Qπ(s,
+a)；另一种方法是Actor-Critic，用神经网络 q(s, a; w) 近似 Qπ(s, a)。
+REINFORCE让智能体完成一局游戏，然后利用这局游戏的数据来反向传播计算，做随机梯度上升来更新参数。
+同策略，不适用于经验回放</p>
+<p>Actor-Critic： 用SARSA算法更新价值网络Qπ <img src="/2024/05/08/%E7%AD%96%E7%95%A5%E6%A2%AF%E5%BA%A6%E6%96%B9%E6%B3%95/pic4.png"></p>
+<h3 id="带基线的策略梯度方法">带基线的策略梯度方法</h3>
+<p>把 b 作为动作价值函数 Qπ(S, A) 的基线 (Baseline)，用 Qπ(S, A) − b
+替换掉 Qπ。设 b 是任意的函数，只要不依赖于动作 A 就可以；例如，b
+可以是状态价值函数 Vπ(S)。 带基线可以帮助减少方差并加速学习过程。</p>
+<h3 id="策略学习高级算法">策略学习高级算法</h3>
+<h4 id="置信域策略优化-trust-region-policy-optimization-trpo">置信域策略优化
+(Trust Region Policy Optimization, TRPO)</h4>
+<p>有两个优势：第一，TRPO表现更稳定，收敛曲线不会剧烈波动，而且对学习率不敏感；第二，TRPO
+用更少的经验（即智能体收集到的状态、动作、奖励）就能达到与策略梯度方法相同的表现。</p>
+<h4 id="熵正则-entropy-regularization">熵正则 (Entropy
+Regularization):</h4>
+<p>我们希望策略网络输出的概率分布的熵不要太小。我们不妨把熵作为正则项，放到策略学习的目标函数中。策略网络的输出是维度等于
+|A| 的向量，它表示定义在动作空间上的离散概率分布。</p>
  
       <!-- reward -->
       
@@ -211,7 +342,7 @@
     <ul>
       <li>
         Copyrights &copy;
-        2024
+        2023-2024
         <i class="ri-heart-fill heart_icon"></i> MorningStar
       </li>
     </ul>
@@ -470,6 +601,30 @@
     viewer_init()
 </script> 
 <!-- MathJax -->
+ <script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+      tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+  });
+
+  MathJax.Hub.Queue(function() {
+      var all = MathJax.Hub.getAllJax(), i;
+      for(i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+      }
+  });
+</script>
+
+<script src="https://cdn.staticfile.org/mathjax/2.7.7/MathJax.js"></script>
+<script src="https://cdn.staticfile.org/mathjax/2.7.7/config/TeX-AMS-MML_HTMLorMML-full.js"></script>
+<script>
+  var ayerConfig = {
+    mathjax: true,
+  };
+</script>
 
 <!-- Katex -->
 
