@@ -113,23 +113,24 @@
     <div class="article-entry" itemprop="articleBody">
        
   <h3 id="introduction">Introduction</h3>
-<p>凯撒移位密码：key space太小
-单字母替代密码：一个字母的加密方式总是一样的，统计攻击破解，如果我们知道一个字母在明文中出现的频率，就可以极大缩小明文的搜索空间
-替代方法：多字母替换 維吉尼亞密碼 or
-多字母移位密碼：是多密码替换的特殊情况
+<p>凯撒移位密码：key space太小</p>
+<p>单字母替代密码：一个字母的加密方式总是一样的，统计攻击破解，如果我们知道一个字母在明文中出现的频率，就可以极大缩小明文的搜索空间</p>
+<p>替代方法：多字母替换</p>
+<p>維吉尼亞密碼 or 多字母移位密碼：是多密码替换的特殊情况
 破解方式：先确定加密密钥的长度m，然后break出m个加密密钥（统计攻击破解）</p>
 <h3 id="perfect-secrecy完美保密性">Perfect Secrecy（完美保密性）</h3>
 <h4 id="defining-an-encryption-scheme">Defining an encryption
 scheme</h4>
 <p><img src="/2024/09/20/Crypto/pic1.png"></p>
 <p>密文空间 M 上的一个加密算法 (Gen, Enc, Dec) 是完美保密的，如果对于 M
-上的每个分布都有 <span class="math inline">\(Pr[M=m|C=c]=Pr[M=m]\)</span>，对于每个 <span class="math inline">\(m \in M\)</span> 和每个 <span class="math inline">\(c \in C\)</span>，且 <span class="math inline">\(Pr[C = c] &gt; 0\)</span>。
-可以用贝叶斯公式等完成证明；
-完美保密性含义：不会因为知道密文而获取到明文的任何信息。
-一个等效的完美保密性的定义 一种加密方案 (Gen, Enc, Dec) 在消息空间 M
-上是完全保密的，当且仅当对于每个 m, m′ ∈ M 和每个 c ∈ C： <span class="math inline">\(Pr[C = c|M = m] = Pr[C = c|M = m′]\)</span>
-密文的分布相对于明文是独立的</p>
-<p>完美不可分辨性： A向B发送两组明文<span class="math inline">\(m_1,m_2\)</span>,B通过Gen获取一个密钥k，并均匀随机的抽取明文中的其中一个n进行加密，将加密后的密文传给A。通过获取到的密文c，A猜测n是第一位还是第二位。如果猜对了，则<span class="math inline">\(PrivK^{eav}_{A,\Pi}=1\)</span> <img src="/2024/09/20/Crypto/pic2.png"> 有完美保密性当且仅当有完美不可分辨性</p>
+上的每个分布都有 <span class="math inline">\(Pr[M=m|C=c]=Pr[M=m]\)</span>，对于每个 <span class="math inline">\(m \in M\)</span> 和每个 <span class="math inline">\(c \in C\)</span>，且 <span class="math inline">\(Pr[C = c] &gt; 0\)</span>。</p>
+<p>可以用贝叶斯公式等完成证明；</p>
+<p>完美保密性含义：不会因为知道密文而获取到明文的任何信息。</p>
+<p>一个等效的完美保密性的定义: 一种加密方案 (Gen, Enc, Dec) 在消息空间 M
+上是完全保密的，当且仅当对于每个 m, m′ ∈ M 和每个 c ∈ C：<span class="math inline">\(Pr[C = c|M = m] = Pr[C = c|M = m′]\)</span></p>
+<p>密文的分布相对于明文是独立的</p>
+<p>完美不可分辨性：</p>
+<p>A向B发送两组明文<span class="math inline">\(m_1,m_2\)</span>,B通过Gen获取一个密钥k，并均匀随机的抽取明文中的其中一个n进行加密，将加密后的密文传给A。通过获取到的密文c，A猜测n是第一位还是第二位。如果猜对了，则<span class="math inline">\(PrivK^{eav}_{A,\Pi}=1\)</span> <img src="/2024/09/20/Crypto/pic2.png"> 有完美保密性当且仅当有完美不可分辨性</p>
 <p>一次一密： 只有密码只使用一次和只知密文时有保密性</p>
 <p>完美保密性的限制： 必须要求|K|&gt;=|M|</p>
 <p>香农定理：
