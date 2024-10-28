@@ -88,7 +88,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-quill-pen-line"></i>
             <span class="post-meta-item-text"> 字数统计:</span>
-            <span class="post-count">360</span>
+            <span class="post-count">554</span>
         </span>
     </span>
 
@@ -97,7 +97,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-book-open-line"></i>
             <span class="post-meta-item-text"> 阅读时长≈</span>
-            <span class="post-count">1 分钟</span>
+            <span class="post-count">2 分钟</span>
         </span>
     </span>
 </div>
@@ -121,14 +121,21 @@
 <h3 id="perfect-secrecy完美保密性">Perfect Secrecy（完美保密性）</h3>
 <h4 id="defining-an-encryption-scheme">Defining an encryption
 scheme</h4>
-<p><img src="/2024/09/20/Crypto/pic1.png"> An encryption scheme (Gen,Enc,Dec)
-over a massage space M is perfect secret if for every possible
-distribution over M,Pr[M=m|C=c]=Pr[M=m] holds for every m ∈ M and every
-c ∈ C that Pr[C = c] &gt; 0. 可以用贝叶斯公式等完成证明；
-一个等效的完美保密性的定义 An encryption scheme (Gen, Enc, Dec) over
-message space M is perfectly secret if and only if for every m, m′ ∈ M,
-and every c ∈ C: Pr[C = c|M = m] = Pr[C = c|M = m′]</p>
+<p><img src="/2024/09/20/Crypto/pic1.png"></p>
+<p>密文空间 M 上的一个加密算法 (Gen, Enc, Dec) 是完美保密的，如果对于 M
+上的每个分布都有 <span class="math inline">\(Pr[M=m|C=c]=Pr[M=m]\)</span>，对于每个 <span class="math inline">\(m \in M\)</span> 和每个 <span class="math inline">\(c \in C\)</span>，且 <span class="math inline">\(Pr[C = c] &gt; 0\)</span>。
+可以用贝叶斯公式等完成证明；
+完美保密性含义：不会因为知道密文而获取到明文的任何信息。
+一个等效的完美保密性的定义 一种加密方案 (Gen, Enc, Dec) 在消息空间 M
+上是完全保密的，当且仅当对于每个 m, m′ ∈ M 和每个 c ∈ C： <span class="math inline">\(Pr[C = c|M = m] = Pr[C = c|M = m′]\)</span>
+密文的分布相对于明文是独立的</p>
 <p>完美不可分辨性： A向B发送两组明文<span class="math inline">\(m_1,m_2\)</span>,B通过Gen获取一个密钥k，并均匀随机的抽取明文中的其中一个n进行加密，将加密后的密文传给A。通过获取到的密文c，A猜测n是第一位还是第二位。如果猜对了，则<span class="math inline">\(PrivK^{eav}_{A,\Pi}=1\)</span> <img src="/2024/09/20/Crypto/pic2.png"> 有完美保密性当且仅当有完美不可分辨性</p>
+<p>一次一密： 只有密码只使用一次和只知密文时有保密性</p>
+<p>完美保密性的限制： 必须要求|K|&gt;=|M|</p>
+<p>香农定理：
+一个加密算法，有|M|=|K|=|C|,当且仅当满足下列性质时，算法是完美保密的：
+Gen选取密钥是对于每一个密钥k，都以相同的概率<span class="math inline">\(\frac{1}{|K|}\)</span>获取
+对于每一个明文m和密文c，存在一个唯一的密钥k，使得<span class="math inline">\(Enc_k(m)\)</span> 输出c</p>
  
       <!-- reward -->
       
