@@ -88,7 +88,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-quill-pen-line"></i>
             <span class="post-meta-item-text"> 字数统计:</span>
-            <span class="post-count">554</span>
+            <span class="post-count">985</span>
         </span>
     </span>
 
@@ -97,7 +97,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-book-open-line"></i>
             <span class="post-meta-item-text"> 阅读时长≈</span>
-            <span class="post-count">2 分钟</span>
+            <span class="post-count">3 分钟</span>
         </span>
     </span>
 </div>
@@ -126,17 +126,48 @@ scheme</h4>
 上的每个分布都有 <span class="math inline">\(Pr[M=m|C=c]=Pr[M=m]\)</span>，对于每个 <span class="math inline">\(m \in M\)</span> 和每个 <span class="math inline">\(c \in C\)</span>，且 <span class="math inline">\(Pr[C = c] &gt; 0\)</span>。</p>
 <p>可以用贝叶斯公式等完成证明；</p>
 <p>完美保密性含义：不会因为知道密文而获取到明文的任何信息。</p>
-<p>一个等效的完美保密性的定义: 一种加密方案 (Gen, Enc, Dec) 在消息空间 M
+<h4 id="一个等效的完美保密性的定义">一个等效的完美保密性的定义:</h4>
+<p>一种加密方案 (Gen, Enc, Dec) 在消息空间 M
 上是完全保密的，当且仅当对于每个 m, m′ ∈ M 和每个 c ∈ C：<span class="math inline">\(Pr[C = c|M = m] = Pr[C = c|M = m′]\)</span></p>
 <p>密文的分布相对于明文是独立的</p>
-<p>完美不可分辨性：</p>
+<h4 id="完美不可分辨性">完美不可分辨性：</h4>
 <p>A向B发送两组明文<span class="math inline">\(m_1,m_2\)</span>,B通过Gen获取一个密钥k，并均匀随机的抽取明文中的其中一个n进行加密，将加密后的密文传给A。通过获取到的密文c，A猜测n是第一位还是第二位。如果猜对了，则<span class="math inline">\(PrivK^{eav}_{A,\Pi}=1\)</span> <img src="/2024/09/20/Crypto/pic2.png"> 有完美保密性当且仅当有完美不可分辨性</p>
-<p>一次一密： 只有密码只使用一次和只知密文时有保密性</p>
-<p>完美保密性的限制： 必须要求|K|&gt;=|M|</p>
-<p>香农定理：
-一个加密算法，有|M|=|K|=|C|,当且仅当满足下列性质时，算法是完美保密的：
+<h4 id="一次一密">一次一密：</h4>
+<p>只有密码只使用一次和只知密文时有保密性</p>
+<h4 id="完美保密性的限制">完美保密性的限制：</h4>
+<p>必须要求|K|&gt;=|M|</p>
+<h4 id="香农定理">香农定理：</h4>
+<p>一个加密算法，有|M|=|K|=|C|,当且仅当满足下列性质时，算法是完美保密的：
 Gen选取密钥是对于每一个密钥k，都以相同的概率<span class="math inline">\(\frac{1}{|K|}\)</span>获取
 对于每一个明文m和密文c，存在一个唯一的密钥k，使得<span class="math inline">\(Enc_k(m)\)</span> 输出c</p>
+<h3 id="计算安全理论">计算安全理论</h3>
+<p>计算安全性的渐进方法 有效的对手 = 随机算法 + 多项式时间 有界 =
+概率多项式时间Probabilistic Polynomial-Time（有界）算法= PPT 算法</p>
+<p>一个从自然数到非负实数的函数 negl(·)
+是可忽略的，如果对于每一个正多项式 p，都存在一个 N，使得对于所有整数
+<span class="math inline">\(n &gt; N，negl(n) &lt; 1/p(n)\)</span>。
+一个从自然数到非负实数的函数 negl(·) 是可忽略的，如果对于每一个正整数
+c，都存在一个 <span class="math inline">\(N_c\)</span>，使得对于所有整数
+<span class="math inline">\(n &gt; N_c，negl(n) &lt;
+1/n^c\)</span>。</p>
+<p>设<span class="math inline">\(negl_1\)</span> 和 <span class="math inline">\(negl_2\)</span>是可忽略函数。那么， 1.
+如果存在一个整数 <span class="math inline">\(N_c\)</span> 使得对于所有
+<span class="math inline">\(n ≥ N_c，f(n) &lt; negl_1(n)\)</span>
+成立，则 f(n) 是可忽略的。</p>
+<ol start="2" type="1">
+<li><p>函数 <span class="math inline">\(negl_3(n) = negl_1(n) +
+negl_2(n)\)</span> 也是可忽略的。</p></li>
+<li><p>对于任何正多项式 p，定义函数 <span class="math inline">\(negl_4\)</span> 为 <span class="math inline">\(negl4(n) = p(n) · negl_1(n)\)</span>，则 <span class="math inline">\(negl_4\)</span> 也是可忽略的。</p></li>
+</ol>
+<p>一个方案是安全的，如果对于每一个多项式时间有界对手 A
+进行某种形式上指定类型的攻击，A 成功攻击的概率是可忽略的。</p>
+<p>等价定义：一个方案是安全的，如果对于每一个多项式时间有界对手 A
+进行某种形式上指定类型的攻击，并且对于每一个正多项式 p，存在一个整数
+N，使得当 n &gt; N 时，A 成功攻击的概率小于 <span class="math inline">\(\frac{1}{p(n)}\)</span>。</p>
+<h4 id="indistinguishable-encryptions-in-the-presence-of-an-eavesdropper-or-eav-secure">indistinguishable
+encryptions in the presence of an eavesdropper or EAV-secure</h4>
+<p>对于任意n，存在一个可以忽略的函数negl，使得 <span class="math display">\[Pr[PrivK^{env}_{A,\Pi}=1]\leq
+\frac{1}{2}+negl(n)\]</span> 一个等效的定义：</p>
  
       <!-- reward -->
       
