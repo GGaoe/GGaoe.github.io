@@ -88,7 +88,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-quill-pen-line"></i>
             <span class="post-meta-item-text"> 字数统计:</span>
-            <span class="post-count">1k</span>
+            <span class="post-count">1.2k</span>
         </span>
     </span>
 
@@ -169,6 +169,12 @@ encryptions in the presence of an eavesdropper or EAV-secure</h4>
 <p>对于任意n，存在一个可以忽略的函数negl，使得 <span class="math display">\[Pr[PrivK^{env}_{A,\Pi}=1]\leq
 \frac{1}{2}+negl(n)\]</span> 一个等效的定义： <span class="math display">\[Pr[out_A(PrivK^{env}_{A,\Pi}(n,0))=1]-Pr[out_A(PrivK^{env}_{A,\Pi}(n,1))=1]\leq
 negl(n)\]</span> 其中<span class="math inline">\(PrivK^{env}_{A,\Pi}(n,b)\)</span>表示在不可区分性实验中使用一个固定的b，并且out代表A的输出。</p>
+<h4 id="伪随机数发生器">伪随机数发生器</h4>
+<p>令l(·)是一个多项式，令G是一个确定多项式时间算法，该算法满足：对于任意输入<span class="math inline">\(s=\{0,1\}^n\)</span>,算法输出一个长度为l(n)的字符串，如果满足下列两个条件，则称G是一个伪随机发生器：
+1.扩展性：对于每个n来说，l(n)&gt;n
+2.伪随机性：对于所有的概率随机性多项式时间的区分器D来说，存在一个可忽略函数negl，满足
+<span class="math display">\[|Pr[D(r)=1]-Pr[D(G(s))=1]|\leq
+negl(n)\]</span> 其中r是从<span class="math inline">\(\{0,1\}^l(n)\)</span>中均匀随机选择的，种子s是从<span class="math inline">\(\{0,1\}^n\)</span>中选择的。</p>
  
       <!-- reward -->
       
