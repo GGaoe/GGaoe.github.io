@@ -88,7 +88,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-quill-pen-line"></i>
             <span class="post-meta-item-text"> 字数统计:</span>
-            <span class="post-count">2.1k</span>
+            <span class="post-count">2.4k</span>
         </span>
     </span>
 
@@ -97,7 +97,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-book-open-line"></i>
             <span class="post-meta-item-text"> 阅读时长≈</span>
-            <span class="post-count">8 分钟</span>
+            <span class="post-count">9 分钟</span>
         </span>
     </span>
 </div>
@@ -112,107 +112,67 @@
   
     <div class="article-entry" itemprop="articleBody">
        
-  <h3 id="introduction">Introduction</h3>
-<p>凯撒移位密码：key space太小</p>
+  <h3 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h3><p>凯撒移位密码：key space太小</p>
 <p>单字母替代密码：一个字母的加密方式总是一样的，统计攻击破解，如果我们知道一个字母在明文中出现的频率，就可以极大缩小明文的搜索空间</p>
 <p>替代方法：多字母替换</p>
-<p>維吉尼亞密碼 or 多字母移位密碼：是多密码替换的特殊情况
-破解方式：先确定加密密钥的长度m，然后break出m个加密密钥（统计攻击破解）</p>
-<h3 id="perfect-secrecy完美保密性">Perfect Secrecy（完美保密性）</h3>
-<h4 id="defining-an-encryption-scheme">Defining an encryption
-scheme</h4>
-<p><img src="/2024/09/20/Crypto/pic1.png"></p>
-<p>密文空间 M 上的一个加密算法 (Gen, Enc, Dec) 是完美保密的，如果对于 M
-上的每个分布都有 <span class="math inline">\(Pr[M=m|C=c]=Pr[M=m]\)</span>，对于每个 <span class="math inline">\(m \in M\)</span> 和每个 <span class="math inline">\(c \in C\)</span>，且 <span class="math inline">\(Pr[C = c] &gt; 0\)</span>。</p>
+<p>維吉尼亞密碼 or 多字母移位密碼：是多密码替换的特殊情况<br>破解方式：先确定加密密钥的长度m，然后break出m个加密密钥（统计攻击破解）</p>
+<h3 id="Perfect-Secrecy（完美保密性）"><a href="#Perfect-Secrecy（完美保密性）" class="headerlink" title="Perfect Secrecy（完美保密性）"></a>Perfect Secrecy（完美保密性）</h3><h4 id="Defining-an-encryption-scheme"><a href="#Defining-an-encryption-scheme" class="headerlink" title="Defining an encryption scheme"></a>Defining an encryption scheme</h4><p><img src="/2024/09/20/Crypto/pic1.png" alt></p>
+<p>密文空间 M 上的一个加密算法 (Gen, Enc, Dec) 是完美保密的，如果对于 M 上的每个分布都有 $Pr[M=m|C=c]=Pr[M=m]$，对于每个 $m \in M$ 和每个 $c \in C$，且 $Pr[C = c] &gt; 0$。</p>
 <p>可以用贝叶斯公式等完成证明；</p>
 <p>完美保密性含义：不会因为知道密文而获取到明文的任何信息。</p>
-<h4 id="一个等效的完美保密性的定义">一个等效的完美保密性的定义:</h4>
-<p>一种加密方案 (Gen, Enc, Dec) 在消息空间 M
-上是完全保密的，当且仅当对于每个 m, m′ ∈ M 和每个 c ∈ C：<span class="math inline">\(Pr[C = c|M = m] = Pr[C = c|M = m′]\)</span></p>
+<h4 id="一个等效的完美保密性的定义"><a href="#一个等效的完美保密性的定义" class="headerlink" title="一个等效的完美保密性的定义:"></a>一个等效的完美保密性的定义:</h4><p>一种加密方案 (Gen, Enc, Dec) 在消息空间 M 上是完全保密的，当且仅当对于每个 m, m′ ∈ M 和每个 c ∈ C：$Pr[C = c|M = m] = Pr[C = c|M = m′]$</p>
 <p>密文的分布相对于明文是独立的</p>
-<h4 id="完美不可分辨性">完美不可分辨性：</h4>
-<p>A向B发送两组明文<span class="math inline">\(m_1,m_2\)</span>,B通过Gen获取一个密钥k，并均匀随机的抽取明文中的其中一个n进行加密，将加密后的密文传给A。通过获取到的密文c，A猜测n是第一位还是第二位。如果猜对了，则<span class="math inline">\(PrivK^{eav}_{A,\Pi}=1\)</span> <img src="/2024/09/20/Crypto/pic2.png"> 有完美保密性当且仅当有完美不可分辨性</p>
-<h4 id="一次一密">一次一密：</h4>
-<p>只有密码只使用一次和只知密文时有保密性</p>
-<h4 id="完美保密性的限制">完美保密性的限制：</h4>
-<p>必须要求|K|&gt;=|M|</p>
-<h4 id="香农定理">香农定理：</h4>
-<p>一个加密算法，有|M|=|K|=|C|,当且仅当满足下列性质时，算法是完美保密的：
-Gen选取密钥是对于每一个密钥k，都以相同的概率<span class="math inline">\(\frac{1}{|K|}\)</span>获取
-对于每一个明文m和密文c，存在一个唯一的密钥k，使得<span class="math inline">\(Enc_k(m)\)</span> 输出c</p>
-<h3 id="计算安全理论">计算安全理论</h3>
-<p>计算安全性的渐进方法 有效的对手 = 随机算法 + 多项式时间 有界 =
-概率多项式时间Probabilistic Polynomial-Time（有界）算法= PPT 算法</p>
-<p>一个从自然数到非负实数的函数 negl(·)
-是可忽略的，如果对于每一个正多项式 p，都存在一个 N，使得对于所有整数
-<span class="math inline">\(n &gt; N，negl(n) &lt; 1/p(n)\)</span>。
-一个从自然数到非负实数的函数 negl(·) 是可忽略的，如果对于每一个正整数
-c，都存在一个 <span class="math inline">\(N_c\)</span>，使得对于所有整数
-<span class="math inline">\(n &gt; N_c，negl(n) &lt;
-1/n^c\)</span>。</p>
-<p>设<span class="math inline">\(negl_1\)</span> 和 <span class="math inline">\(negl_2\)</span>是可忽略函数。那么， 1.
-如果存在一个整数 <span class="math inline">\(N_c\)</span> 使得对于所有
-<span class="math inline">\(n ≥ N_c，f(n) &lt; negl_1(n)\)</span>
-成立，则 f(n) 是可忽略的。</p>
-<ol start="2" type="1">
-<li><p>函数 <span class="math inline">\(negl_3(n) = negl_1(n) +
-negl_2(n)\)</span> 也是可忽略的。</p></li>
-<li><p>对于任何正多项式 p，定义函数 <span class="math inline">\(negl_4\)</span> 为 <span class="math inline">\(negl4(n) = p(n) · negl_1(n)\)</span>，则 <span class="math inline">\(negl_4\)</span> 也是可忽略的。</p></li>
+<h4 id="完美不可分辨性："><a href="#完美不可分辨性：" class="headerlink" title="完美不可分辨性："></a>完美不可分辨性：</h4><p>A向B发送两组明文$m<em>1,m_2$,B通过Gen获取一个密钥k，并均匀随机的抽取明文中的其中一个n进行加密，将加密后的密文传给A。通过获取到的密文c，A猜测n是第一位还是第二位。如果猜对了，则$PrivK^{eav}</em>{A,\Pi}=1$<br><img src="/2024/09/20/Crypto/pic2.png" alt><br>有完美保密性当且仅当有完美不可分辨性</p>
+<h4 id="一次一密："><a href="#一次一密：" class="headerlink" title="一次一密："></a>一次一密：</h4><p>只有密码只使用一次和只知密文时有保密性</p>
+<h4 id="完美保密性的限制："><a href="#完美保密性的限制：" class="headerlink" title="完美保密性的限制："></a>完美保密性的限制：</h4><p>必须要求|K|&gt;=|M|</p>
+<h4 id="香农定理："><a href="#香农定理：" class="headerlink" title="香农定理："></a>香农定理：</h4><p>一个加密算法，有|M|=|K|=|C|,当且仅当满足下列性质时，算法是完美保密的：<br>Gen选取密钥是对于每一个密钥k，都以相同的概率$\frac{1}{|K|}$获取<br>对于每一个明文m和密文c，存在一个唯一的密钥k，使得$Enc_k(m)$ 输出c</p>
+<h3 id="计算安全理论"><a href="#计算安全理论" class="headerlink" title="计算安全理论"></a>计算安全理论</h3><p>计算安全性的渐进方法<br>有效的对手 = 随机算法 + 多项式时间<br>有界 = 概率多项式时间Probabilistic Polynomial-Time（有界）算法= PPT 算法</p>
+<p>一个从自然数到非负实数的函数 negl(·) 是可忽略的，如果对于每一个正多项式 p，都存在一个 N，使得对于所有整数 $n &gt; N，negl(n) &lt; 1/p(n)$。<br>一个从自然数到非负实数的函数 negl(·) 是可忽略的，如果对于每一个正整数 c，都存在一个 $N_c$，使得对于所有整数 $n &gt; N_c，negl(n) &lt; 1/n^c$。</p>
+<p>设$negl_1$ 和 $negl_2$是可忽略函数。那么，</p>
+<ol>
+<li><p>如果存在一个整数 $N_c$ 使得对于所有 $n ≥ N_c，f(n) &lt; negl_1(n)$ 成立，则 f(n) 是可忽略的。</p>
+</li>
+<li><p>函数 $negl_3(n) = negl_1(n) + negl_2(n)$ 也是可忽略的。</p>
+</li>
+<li><p>对于任何正多项式 p，定义函数 $negl_4$ 为 $negl4(n) = p(n) · negl_1(n)$，则 $negl_4$ 也是可忽略的。</p>
+</li>
 </ol>
-<p>一个方案是安全的，如果对于每一个多项式时间有界对手 A
-进行某种形式上指定类型的攻击，A 成功攻击的概率是可忽略的。</p>
-<p>等价定义：一个方案是安全的，如果对于每一个多项式时间有界对手 A
-进行某种形式上指定类型的攻击，并且对于每一个正多项式 p，存在一个整数
-N，使得当 n &gt; N 时，A 成功攻击的概率小于 <span class="math inline">\(\frac{1}{p(n)}\)</span>。</p>
-<h4 id="indistinguishable-encryptions-in-the-presence-of-an-eavesdropper-or-eav-secure">indistinguishable
-encryptions in the presence of an eavesdropper or EAV-secure</h4>
-<p>对于任意n，存在一个可以忽略的函数negl，使得 <span class="math display">\[Pr[PrivK^{env}_{A,\Pi}=1]\leq
-\frac{1}{2}+negl(n)\]</span> 一个等效的定义： <span class="math display">\[Pr[out_A(PrivK^{env}_{A,\Pi}(n,0))=1]-Pr[out_A(PrivK^{env}_{A,\Pi}(n,1))=1]\leq
-negl(n)\]</span> 其中<span class="math inline">\(PrivK^{env}_{A,\Pi}(n,b)\)</span>表示在不可区分性实验中使用一个固定的b，并且out代表A的输出。</p>
-<h3 id="构建在计算上安全的加密">构建在计算上安全的加密</h3>
-<h4 id="伪随机数发生器">伪随机数发生器</h4>
-<p>令l(·)是一个多项式，令G是一个确定多项式时间算法，该算法满足：对于任意输入<span class="math inline">\(s=\{0,1\}^n\)</span>,算法输出一个长度为l(n)的字符串，如果满足下列两个条件，则称G是一个伪随机发生器：
-1.扩展性：对于每个n来说，l(n)&gt;n
-2.伪随机性：对于所有的概率随机性多项式时间的区分器D来说，存在一个可忽略函数negl，满足
-<span class="math display">\[|Pr[D(r)=1]-Pr[D(G(s))=1]|\leq
-negl(n)\]</span> 其中r是从<span class="math inline">\(\{0,1\}^l(n)\)</span>中均匀随机选择的，种子s是从<span class="math inline">\(\{0,1\}^n\)</span>中选择的。</p>
-<h4 id="用伪随机数发生器构造的一次一密是eav安全的">用伪随机数发生器构造的一次一密是EAV安全的</h4>
-<p>证明方法是用规约，已知伪随机数发生器和真随机之间是eav安全的，无法用PPT算法来分辨，那么：</p>
-<p>假设构造的一次一密<span class="math inline">\(Pr[Privk^{eav}_{A,\pi}=1]=\frac{1}{2}+\epsilon(n)\)</span></p>
-<p>我们要证<span class="math inline">\(\epsilon(n)\leq
-negl(n)\)</span>,否则存在一个算法可以区分伪随机数和真随机</p>
+<p>一个方案是安全的，如果对于每一个多项式时间有界对手 A 进行某种形式上指定类型的攻击，A 成功攻击的概率是可忽略的。</p>
+<p>等价定义：一个方案是安全的，如果对于每一个多项式时间有界对手 A 进行某种形式上指定类型的攻击，并且对于每一个正多项式 p，存在一个整数 N，使得当 n &gt; N 时，A 成功攻击的概率小于 $\frac{1}{p(n)}$。</p>
+<h4 id="indistinguishable-encryptions-in-the-presence-of-an-eavesdropper-or-EAV-secure"><a href="#indistinguishable-encryptions-in-the-presence-of-an-eavesdropper-or-EAV-secure" class="headerlink" title="indistinguishable encryptions in the presence of an eavesdropper or EAV-secure"></a>indistinguishable encryptions in the presence of an eavesdropper or EAV-secure</h4><p>对于任意n，存在一个可以忽略的函数negl，使得</p>
+<script type="math/tex; mode=display">Pr[PrivK^{env}_{A,\Pi}=1]\leq \frac{1}{2}+negl(n)</script><p>一个等效的定义：</p>
+<script type="math/tex; mode=display">Pr[out_A(PrivK^{env}_{A,\Pi}(n,0))=1]-Pr[out_A(PrivK^{env}_{A,\Pi}(n,1))=1]\leq negl(n)</script><p>其中$PrivK^{env}_{A,\Pi}(n,b)$表示在不可区分性实验中使用一个固定的b，并且out代表A的输出。</p>
+<h3 id="构建在计算上安全的加密"><a href="#构建在计算上安全的加密" class="headerlink" title="构建在计算上安全的加密"></a>构建在计算上安全的加密</h3><h4 id="伪随机数发生器"><a href="#伪随机数发生器" class="headerlink" title="伪随机数发生器"></a>伪随机数发生器</h4><p>令l(·)是一个多项式，令G是一个确定多项式时间算法，该算法满足：对于任意输入$s={0,1}^n$,算法输出一个长度为l(n)的字符串，如果满足下列两个条件，则称G是一个伪随机发生器：<br>1.扩展性：对于每个n来说，l(n)&gt;n<br>2.伪随机性：对于所有的概率随机性多项式时间的区分器D来说，存在一个可忽略函数negl，满足</p>
+<script type="math/tex; mode=display">|Pr[D(r)=1]-Pr[D(G(s))=1]|\leq negl(n)</script><p>其中r是从${0,1}^l(n)$中均匀随机选择的，种子s是从${0,1}^n$中选择的。</p>
+<h4 id="用伪随机数发生器构造的一次一密是EAV安全的"><a href="#用伪随机数发生器构造的一次一密是EAV安全的" class="headerlink" title="用伪随机数发生器构造的一次一密是EAV安全的"></a>用伪随机数发生器构造的一次一密是EAV安全的</h4><p>证明方法是用规约，已知伪随机数发生器和真随机之间是eav安全的，无法用PPT算法来分辨，那么：</p>
+<p>假设构造的一次一密$Pr[Privk^{eav}_{A,\pi}=1]=\frac{1}{2}+\epsilon(n)$</p>
+<p>我们要证$\epsilon(n)\leq negl(n)$,否则存在一个算法可以区分伪随机数和真随机</p>
 <p>于是通过这两种一次一密构建了一个区分器D</p>
-<p>当w=r时，<span class="math inline">\(Pr[D[w]=1]=Pr[D[r]]=Pr[Privk^{eav}_{A,\hat{\pi}}=1]=\frac{1}{2}\)</span></p>
-<p>当w=G(n)时，<span class="math inline">\(Pr[D[w]=1]=Pr[D[G[n]]=1]=Pr[Privk^{eav}_{A,\pi}=1]=\frac{1}{2}+\epsilon(n)\)</span></p>
+<p>当w=r时，$Pr[D[w]=1]=Pr[D[r]]=Pr[Privk^{eav}_{A,\hat{\pi}}=1]=\frac{1}{2}$</p>
+<p>当w=G(n)时，$Pr[D[w]=1]=Pr[D[G[n]]=1]=Pr[Privk^{eav}_{A,\pi}=1]=\frac{1}{2}+\epsilon(n)$</p>
 <p>其中第二个等号成立，是由于D就是由A构造出来的函数，通过A的输出来充当D的输出，所以两个函数的输出其实是相同的。</p>
-<p>所以<span class="math inline">\(|Pr[D[r]]-Pr[D[G[n]]]|=\epsilon(n)\)</span></p>
-<p>由伪随机数发生器的定义，<span class="math inline">\(\epsilon(n)\leq
-negl(n)\)</span></p>
-<p>所以构造出来的一次一密<span class="math inline">\(Pr[Privk^{eav}_{A,\pi}=1]=\frac{1}{2}+\epsilon(n)\leq
-\frac{1}{2} + negl(n)\)</span></p>
-<h3 id="流密码">流密码</h3>
-<p>流密码是一种确定性的算法，分为两步：</p>
-<p>初始化Init：输入一个随机种子s和一个可选的初始化向量IV，输出一个初始化状态<span class="math inline">\(St_0\)</span></p>
-<p>获取密码Getbits：输入前一个状态<span class="math inline">\(St_{i-1}\)</span>,输出当前状态<span class="math inline">\(St_t\)</span>和获取到的密钥流<span class="math inline">\(y_i\)</span></p>
+<p>所以$|Pr[D[r]]-Pr[D[G[n]]]|=\epsilon(n)$</p>
+<p>由伪随机数发生器的定义，$\epsilon(n)\leq negl(n)$</p>
+<p>所以构造出来的一次一密$Pr[Privk^{eav}_{A,\pi}=1]=\frac{1}{2}+\epsilon(n)\leq \frac{1}{2} + negl(n)$</p>
+<h3 id="流密码"><a href="#流密码" class="headerlink" title="流密码"></a>流密码</h3><p>流密码是一种确定性的算法，分为两步：</p>
+<p>初始化Init：输入一个随机种子s和一个可选的初始化向量IV，输出一个初始化状态$St_0$</p>
+<p>获取密码Getbits：输入前一个状态$St_{i-1}$,输出当前状态$St_t$和获取到的密钥流$y_i$</p>
 <p>优点：简单高效，可以加密任意长度的明文</p>
 <p>缺点：不能用相同的密钥流加密明文，否则容易发现明文之间的相关性，容易受到字节翻转攻击</p>
-<p><strong>同步模式:</strong>
-双方使用密钥流的不同部分来加密每个信息。在这个模式下，双方必须同步通讯，来得知流的多少位已经被使用。这个算法虽然是确定性的，但在每一次加密过程中，密钥是互不重复的，因此对于每次加密来说，相同的明文也会被加密成不同的密文。</p>
-<p><strong>非同步模式：</strong>
-双方可以独立进行加密，无需维护状态。但是，这里需要 PRG
-有两个输入：一个种子k以及一个初始向量IV. 如果两个初始向量不一样，那么
-PRG 的生成结果也不一样。</p>
-<p>在非同步模式下，加密方法为<span class="math inline">\(Enc_k(m)=&lt;IV,G(k,IV)\oplus m&gt;\)</span>
-其中IV是随机选择的，与异或结果一同输出，攻击者能得到IV，但是由于没有种子k，所以依然没法解密。</p>
-<h4 id="线性反馈移位寄存器lfsr">线性反馈移位寄存器（LFSR）</h4>
-<p>一个n位的寄存器有n个寄存器<span class="math inline">\(s_{n-1}...s_{0}\)</span>和n个反馈常数<span class="math inline">\(c_{n-1}...c_0\)</span></p>
-<p>当前状态即为n个寄存器里面值的集合，下一个状态为：
-对于低n-1位，直接把上面一位向右移一位，对于最高位，是将原先所有的n位寄存器中的值和反馈常数相乘之后进行异或操作。</p>
-<p>输出是字节序列<span class="math inline">\(s_0^{(0)},s_0^{(1)}...\)</span></p>
-<p>缺点：一个n位的线性反馈移位寄存器，在最多<span class="math inline">\(2^n\)</span>次移位后就会重复原先的序列。由于线性，一个4位的寄存器在接受到前八位输出后就能破解刚开始的状态和反馈常数。</p>
-<h4 id="增加非线性">增加非线性</h4>
-<p>为了防止上面的破解方法，可以在GetBits函数中生成状态或者获得bit时引入非线性
-<img src="/2024/09/20/Crypto/pic3.png"> 在私钥加密中，块密码比流密码更加安全</p>
+<p><strong>同步模式:</strong> 双方使用密钥流的不同部分来加密每个信息。在这个模式下，双方必须同步通讯，来得知流的多少位已经被使用。这个算法虽然是确定性的，但在每一次加密过程中，密钥是互不重复的，因此对于每次加密来说，相同的明文也会被加密成不同的密文。</p>
+<p><strong>非同步模式：</strong> 双方可以独立进行加密，无需维护状态。但是，这里需要 PRG 有两个输入：一个种子k以及一个初始向量IV. 如果两个初始向量不一样，那么 PRG 的生成结果也不一样。</p>
+<p>在非同步模式下，加密方法为$Enc_k(m)=<IV,G(k,IV)\oplus m>$<br>其中IV是随机选择的，与异或结果一同输出，攻击者能得到IV，但是由于没有种子k，所以依然没法解密。</IV,G(k,IV)\oplus></p>
+<h4 id="线性反馈移位寄存器（LFSR）"><a href="#线性反馈移位寄存器（LFSR）" class="headerlink" title="线性反馈移位寄存器（LFSR）"></a>线性反馈移位寄存器（LFSR）</h4><p>一个n位的寄存器有n个寄存器$s<em>{n-1}…s</em>{0}$和n个反馈常数$c_{n-1}…c_0$</p>
+<p>当前状态即为n个寄存器里面值的集合，下一个状态为：<br>对于低n-1位，直接把上面一位向右移一位，对于最高位，是将原先所有的n位寄存器中的值和反馈常数相乘之后进行异或操作。</p>
+<p>输出是字节序列$s_0^{(0)},s_0^{(1)}…$</p>
+<p>缺点：一个n位的线性反馈移位寄存器，在最多$2^n$次移位后就会重复原先的序列。由于线性，一个4位的寄存器在接受到前八位输出后就能破解刚开始的状态和反馈常数。</p>
+<h4 id="增加非线性"><a href="#增加非线性" class="headerlink" title="增加非线性"></a>增加非线性</h4><p>为了防止上面的破解方法，可以在GetBits函数中生成状态或者获得bit时引入非线性<br><img src="/2024/09/20/Crypto/pic3.png" alt><br>在私钥加密中，块密码比流密码更加安全</p>
+<h3 id="CPA安全和伪随机函数"><a href="#CPA安全和伪随机函数" class="headerlink" title="CPA安全和伪随机函数"></a>CPA安全和伪随机函数</h3><h4 id="多消息窃听者实验：-Privk-mult-A-Pi-n"><a href="#多消息窃听者实验：-Privk-mult-A-Pi-n" class="headerlink" title="多消息窃听者实验：$Privk^{mult}_{A,\Pi}(n)$"></a>多消息窃听者实验：$Privk^{mult}_{A,\Pi}(n)$</h4><p>敌手A被给定一个输入$1^n$,输出一对消息向量$\vec{M}_0=(m_0^1…m_0^t)$以及$\vec{M}_1=(m_1^1…m_1^t)$</p>
+<p>通过运行$Gen(1^n)$生成一个密钥k和选择一个随机比特b，对所有i，计算密文$c^i\gets Enc_k(m_b^i)$,并且把密文向量$\vec{C}=(c^1…c^t)$给A</p>
+<p>A输出一个比特b’进行比较。</p>
+<h4 id="窃听者存在的情况下不可区分多次加密"><a href="#窃听者存在的情况下不可区分多次加密" class="headerlink" title="窃听者存在的情况下不可区分多次加密"></a>窃听者存在的情况下不可区分多次加密</h4><p>一个对称密钥加密方案$\Pi$,如果对所有的概率多项式时间敌手A，存在一个可忽略函数negl,满足<br>$Pr[Privk^{mult}_{A,\Pi}=1]\leq \frac{1}{2}+negl$</p>
+<p>则称其具有窃听者存在的情况下不可区分多次加密</p>
+<h5 id="命题：存在这样的对称加密方案，满足窃听者存在情况下不可区分的加密，但不满足窃听者存在情况下不可区分的多次加密。"><a href="#命题：存在这样的对称加密方案，满足窃听者存在情况下不可区分的加密，但不满足窃听者存在情况下不可区分的多次加密。" class="headerlink" title="命题：存在这样的对称加密方案，满足窃听者存在情况下不可区分的加密，但不满足窃听者存在情况下不可区分的多次加密。"></a>命题：存在这样的对称加密方案，满足窃听者存在情况下不可区分的加密，但不满足窃听者存在情况下不可区分的多次加密。</h5><p>需要概率加密。</p>
  
       <!-- reward -->
       
