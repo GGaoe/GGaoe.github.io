@@ -88,7 +88,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-quill-pen-line"></i>
             <span class="post-meta-item-text"> 字数统计:</span>
-            <span class="post-count">4k</span>
+            <span class="post-count">4.1k</span>
         </span>
     </span>
 
@@ -97,7 +97,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-book-open-line"></i>
             <span class="post-meta-item-text"> 阅读时长≈</span>
-            <span class="post-count">15 分钟</span>
+            <span class="post-count">16 分钟</span>
         </span>
     </span>
 </div>
@@ -309,6 +309,10 @@ c_{i-1}\)</span></p>
 <p>密文是<span class="math inline">\(&lt;IV,c_1,c_2...c_l&gt;\)</span></p>
 <p>分析：<span class="math inline">\(F_k\)</span>不需要逆运算，如果F是伪随机函数，那么OFB模式是CPA安全的，同时支持预先操作，把要用的随机密码提前生成出来</p>
 <h5 id="ctr模式">CTR模式</h5>
+<p>在加密时生成一个随机数ctr，以如下方式为每一个块产生随机密码：</p>
+<p><span class="math inline">\(y_i=F_k(ctr+i),c_i=y_i\oplus
+m_i\)</span>,生成的密文是<span class="math inline">\(&lt;ctr,c_1,...c_l&gt;\)</span></p>
+<p>分析：如果F是伪随机函数，那么是CPA的，并且支持并行计算。</p>
  
       <!-- reward -->
       
