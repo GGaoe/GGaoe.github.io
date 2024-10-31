@@ -88,7 +88,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-quill-pen-line"></i>
             <span class="post-meta-item-text"> 字数统计:</span>
-            <span class="post-count">2.5k</span>
+            <span class="post-count">3.2k</span>
         </span>
     </span>
 
@@ -97,7 +97,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-book-open-line"></i>
             <span class="post-meta-item-text"> 阅读时长≈</span>
-            <span class="post-count">9 分钟</span>
+            <span class="post-count">12 分钟</span>
         </span>
     </span>
 </div>
@@ -229,6 +229,35 @@ PRG 的生成结果也不一样。</p>
 <p>CPA的想法是增强了敌手的能力，原先敌手只能被动的接受信息，现在敌手可以主动的访问加密机。</p>
 <p>CPA不可区分实验<span class="math inline">\(Privk^{CPA}_{A,\Pi}(n)\)</span>,敌手可以要求语言机加密消息<span class="math inline">\(m_0、m_1\)</span>,从而获得<span class="math inline">\(c_0 \gets Enc_k(m_0)\)</span>和<span class="math inline">\(c_1 \gets Enc_k(m_1)\)</span></p>
 <p>必须要把随机性作为加密过程的一部分，确保相同消息加密后密文是不同的。</p>
+<h4 id="伪随机函数">伪随机函数</h4>
+<p>如果一个函数<span class="math inline">\(F_k\)</span>(对于一个均匀随机密钥k)，与一个均匀随机函数是不可区分的，那么我们称这个函数是伪随机函数。</p>
+<p>正式定义：对于一个长度保持的密钥函数<span class="math inline">\(F:(0,1)^{l_{key}(n)}\times(0,1)^{l_{in}(n)}\to
+(0,1)^{l_{out}(n)},l_{key}(n)=l_{in}(n)=l_{out}(n)=n\)</span>,f是一个均匀随机函数，F是一个伪随机函数如果对于所有的PPT
+区分器D，都有一个可忽略函数negl使得 <span class="math display">\[|Pr[D^{F_k(\dot)}(1^n)=1]-Pr[D^{f(\dot)}(1^n)=1]|\leq
+negl(n)\]</span></p>
+<p>随机函数接受两个输入，一个是密钥k，另一个是输入x，对于n位长的真随机函数，其规模是<span class="math inline">\(2^{n2^n}\)</span>,而对于密钥长度为n的伪随机函数，其规模是<span class="math inline">\(2^n\)</span>.如果</p>
+<h4 id="基于伪随机函数构造cpa安全加密">基于伪随机函数构造CPA安全加密</h4>
+<p>令F是伪随机函数，定义一个消息长度为n的对称密钥加密方案如下：</p>
+<p>Gen：输入<span class="math inline">\(1^n\)</span>,均匀随机选择<span class="math inline">\(k \gets
+\{0,1\}^n\)</span>,并将其作为密钥输出。</p>
+<p>Enc:输入密钥k，以及一个消息<span class="math inline">\(m\in
+\{0,1\}^n\)</span>,均匀随机选择随机数<span class="math inline">\(r\gets\{0,1\}^n\)</span>,输出密文 <span class="math inline">\(c:=&lt;r,F_k(r)\oplus m&gt;\)</span></p>
+<p>Dec:输入一个密钥<span class="math inline">\(k\in
+\{0,1\}^n\)</span>,以及一个密文c=&lt;r,s&gt;,输出明文消息 <span class="math inline">\(m:=F_k(r)\oplus s\)</span></p>
+<h4 id="如果f是伪随机函数则构造方案如上的消息长度为n的定长对称密钥加密方案在cpa下具备不可区分加密">如果F是伪随机函数，则构造方案如上的消息长度为n的定长对称密钥加密方案在CPA下具备不可区分加密。</h4>
+<p>令<span class="math inline">\(\hat{\Pi}\)</span>为用真随机函数f取代Fk的构造方法。
+敌手A对他的加密预言机问询q(n)次，有<span class="math inline">\(Pr[Privk^{cpa}_{A,\hat{\Pi}=1}]\leq
+\frac{1}{2}+\frac{q(n)}{2^n}\)</span></p>
+<p>同样构造区分器D D被指定了输入<span class="math inline">\(1^n\)</span>以及可以访问预言机<span class="math inline">\(O:\{0,1\}^n \to \{0,1\}^n\)</span>
+运行A(1^n),用下面方式回答问询： 1.均匀随机选择<span class="math inline">\(r\gets \{0,1\}^n\)</span> 2.问询O(r),获得s'
+3.返回密文<span class="math inline">\(&lt;r,s&#39;\oplus
+m_b&gt;\)</span> 当A输出两个消息m，随机选择一个比特b 1.均匀随机选择r
+2.问询O(r),获得相应s' 3.返回挑战密文<span class="math inline">\(&lt;r,s&#39;\oplus m_b&gt;\)</span>
+最后A输出一个b'</p>
+<p>有<span class="math inline">\(Pr[D^{F_k(\dot)}(1^n)=1]=Pr[Privk^{cpa}_{A,\Pi}(n)=1]=\frac{1}{2}+\epsilon(n)\)</span></p>
+<p><span class="math inline">\(Pr[D^{f(\dot)}(1^n)=1]=Pr[Privk^{cpa}_{A,\hat{\Pi}}(n)=1]=\frac{1}{2}+\frac{q(n)}{2^n}\)</span></p>
+<p><span class="math inline">\(|Pr[D^{F_k(\dot)}(1^n)=1]-Pr[D^{f(\dot)}(1^n)=1]|=\epsilon(n)-\frac{q(n)}{2^n}\)</span>
+证毕</p>
  
       <!-- reward -->
       
