@@ -245,19 +245,27 @@ negl(n)\]</span></p>
 <p>Dec:输入一个密钥<span class="math inline">\(k\in
 \{0,1\}^n\)</span>,以及一个密文c=&lt;r,s&gt;,输出明文消息 <span class="math inline">\(m:=F_k(r)\oplus s\)</span></p>
 <h4 id="如果f是伪随机函数则构造方案如上的消息长度为n的定长对称密钥加密方案在cpa下具备不可区分加密">如果F是伪随机函数，则构造方案如上的消息长度为n的定长对称密钥加密方案在CPA下具备不可区分加密。</h4>
-<p>令<span class="math inline">\(\hat{\Pi}\)</span>为用真随机函数f取代Fk的构造方法。
-敌手A对他的加密预言机问询q(n)次，有<span class="math inline">\(Pr[Privk^{cpa}_{A,\hat{\Pi}=1}]\leq
+<p>令<span class="math inline">\(\hat{\Pi}\)</span>为用真随机函数f取代Fk的构造方法。</p>
+<p>敌手A对他的加密预言机问询q(n)次，有<span class="math inline">\(Pr[Privk^{cpa}_{A,\hat{\Pi}=1}]\leq
 \frac{1}{2}+\frac{q(n)}{2^n}\)</span></p>
-<p>同样构造区分器D D被指定了输入<span class="math inline">\(1^n\)</span>以及可以访问预言机<span class="math inline">\(O:\{0,1\}^n \to \{0,1\}^n\)</span>
-运行A(1^n),用下面方式回答问询： 1.均匀随机选择<span class="math inline">\(r\gets \{0,1\}^n\)</span> 2.问询O(r),获得s'
-3.返回密文<span class="math inline">\(&lt;r,s&#39;\oplus
-m_b&gt;\)</span> 当A输出两个消息m，随机选择一个比特b 1.均匀随机选择r
-2.问询O(r),获得相应s' 3.返回挑战密文<span class="math inline">\(&lt;r,s&#39;\oplus m_b&gt;\)</span>
-最后A输出一个b'</p>
+<p>同样构造区分器D</p>
+<p>D被指定了输入<span class="math inline">\(1^n\)</span>以及可以访问预言机<span class="math inline">\(O:\{0,1\}^n \to \{0,1\}^n\)</span></p>
+<p>运行A(1^n),用下面方式回答问询：</p>
+<p>1.均匀随机选择<span class="math inline">\(r\gets \{0,1\}^n\)</span>
+2.问询O(r),获得s'</p>
+<p>3.返回密文<span class="math inline">\(&lt;r,s&#39;\oplus
+m_b&gt;\)</span></p>
+<p>当A输出两个消息m，随机选择一个比特b</p>
+<p>1.均匀随机选择r</p>
+<p>2.问询O(r),获得相应s'</p>
+<p>3.返回挑战密文<span class="math inline">\(&lt;r,s&#39;\oplus
+m_b&gt;\)</span></p>
+<p>最后A输出一个b'</p>
 <p>有<span class="math inline">\(Pr[D^{F_k(\dot)}(1^n)=1]=Pr[Privk^{cpa}_{A,\Pi}(n)=1]=\frac{1}{2}+\epsilon(n)\)</span></p>
 <p><span class="math inline">\(Pr[D^{f(\dot)}(1^n)=1]=Pr[Privk^{cpa}_{A,\hat{\Pi}}(n)=1]=\frac{1}{2}+\frac{q(n)}{2^n}\)</span></p>
 <p><span class="math inline">\(|Pr[D^{F_k(\dot)}(1^n)=1]-Pr[D^{f(\dot)}(1^n)=1]|=\epsilon(n)-\frac{q(n)}{2^n}\)</span>
 证毕</p>
+<h4 id="任意cpa安全的加密方案对多次加密也是安全的">任意CPA安全的加密方案对多次加密也是安全的</h4>
  
       <!-- reward -->
       
