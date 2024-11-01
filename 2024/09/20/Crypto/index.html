@@ -233,7 +233,7 @@ PRG 的生成结果也不一样。</p>
 <p>如果一个函数<span class="math inline">\(F_k\)</span>(对于一个均匀随机密钥k)，与一个均匀随机函数是不可区分的，那么我们称这个函数是伪随机函数。</p>
 <p>正式定义：对于一个长度保持的密钥函数<span class="math inline">\(F:(0,1)^{l_{key}(n)}\times(0,1)^{l_{in}(n)}\to
 (0,1)^{l_{out}(n)},l_{key}(n)=l_{in}(n)=l_{out}(n)=n\)</span>,f是一个均匀随机函数，F是一个伪随机函数如果对于所有的PPT
-区分器D，都有一个可忽略函数negl使得 <span class="math display">\[|Pr[D^{F_k(\dot)}(1^n)=1]-Pr[D^{f(\dot)}(1^n)=1]|\leq
+区分器D，都有一个可忽略函数negl使得 <span class="math display">\[|Pr[D^{F_k(\cdot)}(1^n)=1]-Pr[D^{f(\cdot)}(1^n)=1]|\leq
 negl(n)\]</span></p>
 <p>随机函数接受两个输入，一个是密钥k，另一个是输入x，对于n位长的真随机函数，其规模是<span class="math inline">\(2^{n2^n}\)</span>,而对于密钥长度为n的伪随机函数，其规模是<span class="math inline">\(2^n\)</span>.如果</p>
 <h4 id="基于伪随机函数构造cpa安全加密">基于伪随机函数构造CPA安全加密</h4>
@@ -261,9 +261,9 @@ m_b&gt;\)</span></p>
 <p>3.返回挑战密文<span class="math inline">\(&lt;r,s&#39;\oplus
 m_b&gt;\)</span></p>
 <p>最后A输出一个b'</p>
-<p>有<span class="math inline">\(Pr[D^{F_k(\dot)}(1^n)=1]=Pr[Privk^{cpa}_{A,\Pi}(n)=1]=\frac{1}{2}+\epsilon(n)\)</span></p>
-<p><span class="math inline">\(Pr[D^{f(\dot)}(1^n)=1]=Pr[Privk^{cpa}_{A,\hat{\Pi}}(n)=1]=\frac{1}{2}+\frac{q(n)}{2^n}\)</span></p>
-<p><span class="math inline">\(|Pr[D^{F_k(\dot)}(1^n)=1]-Pr[D^{f(\dot)}(1^n)=1]|=\epsilon(n)-\frac{q(n)}{2^n}\)</span>
+<p>有<span class="math inline">\(Pr[D^{F_k(\cdot)}(1^n)=1]=Pr[Privk^{cpa}_{A,\Pi}(n)=1]=\frac{1}{2}+\epsilon(n)\)</span></p>
+<p><span class="math inline">\(Pr[D^{f(\cdot)}(1^n)=1]=Pr[Privk^{cpa}_{A,\hat{\Pi}}(n)=1]=\frac{1}{2}+\frac{q(n)}{2^n}\)</span></p>
+<p><span class="math inline">\(|Pr[D^{F_k(\cdot)}(1^n)=1]-Pr[D^{f(\cdot)}(1^n)=1]|=\epsilon(n)-\frac{q(n)}{2^n}\)</span>
 证毕</p>
 <h4 id="任意cpa安全的加密方案对多次加密也是安全的">任意CPA安全的加密方案对多次加密也是安全的</h4>
 <h4 id="排序和伪随机排序">排序和伪随机排序</h4>
@@ -274,7 +274,7 @@ m_b&gt;\)</span></p>
 <p>如果给区分器使用逆排序预言机的能力，其依然无法区分<span class="math inline">\(F_k\)</span>和一个随机置换，则称F是强伪随机置换。</p>
 <p><span class="math inline">\(F:\{0,1\}^*\times \{0,1\}^*\to
 \{0,1\}^*\)</span>是一个有效的带密钥的置换，如果对于所有多项式时间区分器D，存在一个可忽略函数negl,使得
-<span class="math display">\[|Pr[D^{F_k(\dot)F_k^{-1}(\dot)(1^n)}=1]-Pr[D^{f(\dot)f^{-1}(\dot)(1^n)}=1]|\leq
+<span class="math display">\[|Pr[D^{F_k(\cdot)F_k^{-1}(\cdot)(1^n)}=1]-Pr[D^{f(\cdot)f^{-1}(\cdot)(1^n)}=1]|\leq
 negl(n)\]</span> 则称F是强伪随机置换</p>
 <h4 id="prfs-and-prgs相互构造">PRFs and PRGs相互构造</h4>
 <h3 id="分组密码block-cipher">分组密码Block Cipher</h3>
