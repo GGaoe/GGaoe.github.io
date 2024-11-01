@@ -88,7 +88,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-quill-pen-line"></i>
             <span class="post-meta-item-text"> 字数统计:</span>
-            <span class="post-count">4.1k</span>
+            <span class="post-count">4.5k</span>
         </span>
     </span>
 
@@ -97,7 +97,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-book-open-line"></i>
             <span class="post-meta-item-text"> 阅读时长≈</span>
-            <span class="post-count">16 分钟</span>
+            <span class="post-count">17 分钟</span>
         </span>
     </span>
 </div>
@@ -313,6 +313,37 @@ c_{i-1}\)</span></p>
 <p><span class="math inline">\(y_i=F_k(ctr+i),c_i=y_i\oplus
 m_i\)</span>,生成的密文是<span class="math inline">\(&lt;ctr,c_1,...c_l&gt;\)</span></p>
 <p>分析：如果F是伪随机函数，那么是CPA的，并且支持并行计算。</p>
+<h4 id="设计分组密码">设计分组密码</h4>
+<h5 id="the-avalanche-effect一个好的分组密码应该有雪崩效应">The
+avalanche effect一个好的分组密码应该有雪崩效应</h5>
+<p>输入改变一点点必须要影响输出的每一位</p>
+<h5 id="spn-substitution-permutation-networks替换排列网络">SPN:
+Substitution-Permutation Networks替换排列网络</h5>
+<p>SPN满足confusion-diffusion paradigm(混淆扩散范式)</p>
+<p>重复多次混淆步骤和扩散步骤：</p>
+<p>分组密码的输入被分成了若干小块，每一轮，先把每一个小块输入到一个随机排列中，再使用一个混合排列把所有小块混合到一起</p>
+<p>SPN是基于上面范式的变体来运行的：</p>
+<p>1.key mixing：在每一回合中，先将输入和子密钥(sub-key or
+round-key)进行异或操作</p>
+<p>2.substitution:在进行key
+mixing后，每一个子块i被输入到一个固定的，可逆的替换函数<span class="math inline">\(S_i\)</span>(S盒)中</p>
+<p>3.Permutation：S盒的所有输出进行排列</p>
+<p>替换步骤和排列步骤的细节都是公开的，任何攻击者都可以知道。只有钥匙被保密。（这种设置被称为克霍夫原理）</p>
+<p>输出是最后一次进行key
+mixing后的结果，即先进行上面三步r次，最后再进行一次key mixing。</p>
+<h5 id="feistel-network">Feistel network</h5>
+<p>与SPN的区别是不需要函数可逆</p>
+<p>第i次round function <span class="math inline">\(\hat{f_i}\)</span>有两个输入，一个是子密钥<span class="math inline">\(k_i\)</span>，另一个是一个<span class="math inline">\(\frac{l}{2}\)</span>长的字串，输出一个同样长度的字串。定义<span class="math inline">\(f_i(R)=\hat{f_i(k_i,R)}\)</span></p>
+<p>加密流程：</p>
+<p><span class="math inline">\(L_i=R_{i-1}\)</span></p>
+<p><span class="math inline">\(R_i=L_{i-1}\oplus
+f_i(R_{i-1})\)</span></p>
+<p>解密流程：</p>
+<p><span class="math inline">\(R_{i-1}=L_i\)</span></p>
+<p><span class="math inline">\(L_{i-1}=R_i\oplus
+f_i(R_{i-1})\)</span></p>
+<p><span class="math inline">\(\hat{f_i}\)</span>是固定的，并且是公开的，但是<span class="math inline">\(f_i\)</span>不是。</p>
+<h4 id="分组密码样例">分组密码样例</h4>
  
       <!-- reward -->
       
