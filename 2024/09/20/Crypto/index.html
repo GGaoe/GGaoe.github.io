@@ -88,7 +88,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-quill-pen-line"></i>
             <span class="post-meta-item-text"> 字数统计:</span>
-            <span class="post-count">6.7k</span>
+            <span class="post-count">7k</span>
         </span>
     </span>
 
@@ -97,7 +97,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-book-open-line"></i>
             <span class="post-meta-item-text"> 阅读时长≈</span>
-            <span class="post-count">26 分钟</span>
+            <span class="post-count">27 分钟</span>
         </span>
     </span>
 </div>
@@ -472,6 +472,19 @@ Enc_{k_M}(c)\)</span></p>
 <p>如上构造的CCA安全降低到<span class="math inline">\(\Pi_E\)</span>CPA安全性。</p>
 <p>这是构造AE的最理想的方法。</p>
 <h3 id="哈希函数">哈希函数</h3>
+<p>有时候我们需要把一个长字符串压缩成一个短的字符串，这样我们就用到哈希函数（有时叫做消息摘要函数）</p>
+<p>我们使用哈希函数进行密码学的实际应用中，应该满足如下两个条件</p>
+<p><strong>1.抗碰撞：</strong> 我们应该难以找到<span class="math inline">\(m_0,m_1\)</span>,使得<span class="math inline">\(hash(m_0)=hash(m_1)\)</span></p>
+<p><strong>2.完全不可预测：</strong>
+应该和一个随机的映射是不可区分的</p>
+<p>哈希函数<span class="math inline">\(H^s(x)=H(s,x)\)</span>,一般s是不保密的</p>
+<p>哈希函数的形式化定义(Gen,H),其中Gen是一个概率算法，输入一个<span class="math inline">\(1^n\)</span>的安全密钥，输出一个密钥s</p>
+<p>H接受输入s和一个字符串x，输出一个对应的串<span class="math inline">\(H^s(x)\in \{0,1\}^{l(n)}\)</span></p>
+<h4 id="碰撞检测实验">碰撞检测实验</h4>
+<p><span class="math inline">\(Hash-coll_{A,\Pi}(n)\)</span></p>
+<p>随机产生一个密钥s，敌手A把密钥s和两个字符串x,x'发送过去，输出1当且仅当<span class="math inline">\(x\neq x&#39;\)</span> and <span class="math inline">\(H^s(x)=H^s(x&#39;)\)</span></p>
+<p>一个哈希函数是抗碰撞的如果对所有的PPT敌手都有<span class="math inline">\(Pr[Hash-coll_{A,\Pi}(n)=1]\leq
+negl(n)\)</span></p>
  
       <!-- reward -->
       
