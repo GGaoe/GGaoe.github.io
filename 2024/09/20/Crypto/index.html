@@ -88,7 +88,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-quill-pen-line"></i>
             <span class="post-meta-item-text"> 字数统计:</span>
-            <span class="post-count">5k</span>
+            <span class="post-count">6.2k</span>
         </span>
     </span>
 
@@ -97,7 +97,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-book-open-line"></i>
             <span class="post-meta-item-text"> 阅读时长≈</span>
-            <span class="post-count">19 分钟</span>
+            <span class="post-count">24 分钟</span>
         </span>
     </span>
 </div>
@@ -377,6 +377,68 @@ rounds)keys.</p>
 =(Gen，Mac，Vrfy)\)</span>在自适应选择消息攻击下是不可避免的或者安全的，如果对所有PPT敌手A，都有一个不可忽略函数negl使得<span class="math inline">\(Pr[Mac-forge_{A,\Pi}(n)=1]\leq
 negl(n)\)</span></p>
 <p>一个安全的MAC可以确保对手不能在任何以前从未进行过身份验证的新消息上生成有效的标记。</p>
+<p>然而上面的定义只能保证在面对新消息时敌手不能产生一个合法的标记，但是并不能保证在原先见过的消息中不能产生一个合法的新标记。一个强安全的MAC可以破解如上的弱点。</p>
+<h5 id="定义一个相似的实验叫做mac-sforge_apin">定义一个相似的实验叫做<span class="math inline">\(Mac-sforge_{A,\Pi}(n)\)</span></h5>
+<p>1.产生一个随机的k</p>
+<p>2.2.敌手获得输入值<span class="math inline">\(1^n\)</span>,并能够访问预言机<span class="math inline">\(Mac_k()\)</span>,最后输出一对(m,t)的值，并用<span class="math inline">\(Q\)</span>表示所有<span class="math inline">\(A\)</span>对预言机的询问的对的集合，这里的对指的是消息m和对应的标记t</p>
+<p>3.实验输出结果为1，当且仅当<span class="math inline">\(Vrfy_k(m,t)=1,(m,t)\notin Q\)</span>,写作<span class="math inline">\(Mac-sforge_{A,\Pi}(n)=1\)</span></p>
+<p>一个MAC是强的，如果对所有PPT敌手A，有<span class="math inline">\(Pr[Mac-sforge_{A,\Pi}(n)=1]\leq
+negl(n)\)</span></p>
+<p>如果有时候需要发相同的消息，但是该消息已经在原先被发送过了，这样接收者在收到这个消息时会拒绝这样的消息。解决方案有如下两种：</p>
+<p>第一种是在加密过程中加入序列号，对i||m进行加密</p>
+<p>第二种是加入一个时间戳，将时间戳给负在加密过程中</p>
+<h4 id="构造安全mac">构造安全MAC</h4>
+<p>构造一个定长的MAC：</p>
+<p>用Gen生成一个密钥k，存在一个函数l，Mac只对<span class="math inline">\(m \in
+\{0,1\}^{l(n)}\)</span>有定义，我们把这种加密称作对消息长度为l(n)的消息的定长MAC。</p>
+<p>如果MAC的标记t是通过一个PRF获得的，那么对于一个原先未经身份验证的消息伪造标记需要对手在一个新的输入上正确猜测PRF的输出，然而这对任何PPT的对手都是不可行的。</p>
+<p>于是可以进行以下构造：</p>
+<p>Mac：在输入key <span class="math inline">\(k\in
+\{0,1\}^n\)</span>,消息<span class="math inline">\(m
+\in\{0,1\}^n\)</span>,输出<span class="math inline">\(t:=F_k(m)\)</span></p>
+<p>Vrfy:在输入key <span class="math inline">\(k\in
+\{0,1\}^n\)</span>,消息<span class="math inline">\(m
+\in\{0,1\}^n\)</span>,标记t$ {0,1}^n$,输出1 iff <span class="math inline">\(t=F_k(m)\)</span></p>
+<h4 id="对长消息进行身份验证">对长消息进行身份验证</h4>
+<p>对长消息分块后分别进行MAC，在ppt中提到了三种方式，但都是不安全的，具体内容可以重新阅读ppt；通常用的方式是CBC-MAC，但在对不同长度的消息进行身份验证时可能也是不安全的，在这种情况下可以使用CBC-MAC的变体，具体内容在ppt没有提及。</p>
+<h4 id="cbc-mac">CBC-MAC</h4>
+<p>令F是一个PRF，固定长度函数l：</p>
+<p>Mac:k，m=l(n)·n</p>
+<p>把m分成等长的块：<span class="math inline">\(m=m_0m_1...m_l\)</span></p>
+<p>令<span class="math inline">\(t_0:=0^n\)</span>,然后从i=1到l:</p>
+<p><span class="math inline">\(t_i:=F_k(f_{i-1}\oplus m_i)\)</span></p>
+<p>输出<span class="math inline">\(t_l\)</span>作为标签</p>
+<p>Vrfy:输入是k，m，t 如果m的长度不是l(n)·n,输出0，否则当且仅当<span class="math inline">\(t=Mac_k(m)\)</span>时输出1.</p>
+<h4 id="cbc-mac-v.s.-cbc-mode-encryption">CBC-MAC v.s. CBC-mode
+encryption</h4>
+<p>MAC不适用一个随机的初始串IV，并且只输出最后一个块</p>
+<h4 id="身份验证的加密-authenticated-encryption">身份验证的加密
+Authenticated Encryption</h4>
+<p>目的是同时完成对消息的加密和对身份的验证</p>
+<p>A private-key encryption is an authenticated encryption scheme if it
+is CCA-secure and
+unforgeable.即一个私钥加密方案是身份验证加密如果他是CCA安全的并且是不可伪造的</p>
+<h4 id="cca安全">CCA安全</h4>
+<p>CCA不可分辨性实验：</p>
+<p><span class="math inline">\(Privk^{cca}_{A,\Pi}(n)\)</span>:</p>
+<p>1.通过Gen(<span class="math inline">\(1^n\)</span>)生成一个密钥k</p>
+<p>2.敌手给定输入<span class="math inline">\(1^n\)</span>,也可以访问神预机的加密和解密<span class="math inline">\(Enc_k,Dec_k\)</span>,输出一对等长消息<span class="math inline">\(m_0,m_1\)</span></p>
+<p>3.随机选择一个比特位，然后生成挑战密文<span class="math inline">\(c\gets Enc_k(m_b)\)</span>并发送给A</p>
+<p>4.敌手继续访问神预机，但是不允许对挑战密文本身进行询问。最终，敌手输出b'.如果b=b',则输出1，否则输出0.</p>
+<p>一个加密方法在选择明文攻击下有完美不可分辨性，或者CCA安全，如果对所有的PPT敌手都有一个可忽略函数negl，有</p>
+<p><span class="math inline">\(Pr[Privk^{cca}_{A,\Pi}(n)=1]\leq
+\frac{1}{2}+negl(n)\)</span></p>
+<p>到目前为止所有提到的加密方案都不是CCA安全的。CCA安全意味着不可延展性，如果敌手想去修改一个密文，要么这个密文是不合法的，要么是一个和原先的明文没有任何关系的明文所对应的密文。</p>
+<h4 id="消息完整性实验">消息完整性实验</h4>
+<p><span class="math inline">\(Enc-forge_{A,\Pi}(n)\)</span>:</p>
+<p>1.通过Gen(<span class="math inline">\(1^n\)</span>)生成一个密钥k</p>
+<p>2.敌手给定输入<span class="math inline">\(1^n\)</span>,也可以访问神预机的加密<span class="math inline">\(Enc_k\)</span>,输出一个密文c</p>
+<p>3.令<span class="math inline">\(m:=Dec_k(c)\)</span>,令Q是A所有询问结果的集合，这个实验输出1当且仅当1).$m<span class="math inline">\(,即解密失败 2).\)</span>m
+Q$(即m还没有被询问过)</p>
+<p>一个私钥加密方案是不可伪造的如果对所有的PPT敌手，都有一个可忽略函数negl使得</p>
+<p><span class="math inline">\(Pr[Enc-forge_{A,\Pi}(n)=1]\leq
+negl(n)\)</span></p>
+<h4 id="构造ae">构造AE</h4>
  
       <!-- reward -->
       
