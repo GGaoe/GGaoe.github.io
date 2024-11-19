@@ -461,7 +461,9 @@ Enc_{k_E}(m||t)\)</span></p>
 <p>缺点：密文完整性没有得到保护，因此敌手可以操纵密文，此外，接受者必须先解密密文，才能获知消息是否真实。这种方案不应该被使用</p>
 <h5 id="encrypt-then-authenticate">Encrypt-then-authenticate</h5>
 <p>Gen:<span class="math inline">\(k_E\gets^{\$}\{0,1\}^n\)</span>,<span class="math inline">\(k_M\gets^{\$}\{0,1\}^n\)</span></p>
-<p>Enc:对于消息m，发送者计算$cEnc_{k_E}(m)，tEnc_{k_M}(c) $</p>
+<p>Enc:对于消息m，发送者计算<span class="math inline">\(c\gets
+Enc_{k_E}(m)\)</span>，<span class="math inline">\(t\gets
+Enc_{k_M}(c)\)</span></p>
 <p>把<span class="math inline">\((c,t)\)</span>发送给接收者</p>
 <p>Dec:输出error如果<span class="math inline">\(Vrfy(c,t)\neq
 1\)</span>,否则输出<span class="math inline">\(Dec_{k_E}(c)\)</span>.</p>
@@ -469,6 +471,7 @@ Enc_{k_E}(m||t)\)</span></p>
 <p><span class="math inline">\(\Pi_M\)</span>直接说明了如上的加密方案是不可伪造的</p>
 <p>如上构造的CCA安全降低到<span class="math inline">\(\Pi_E\)</span>CPA安全性。</p>
 <p>这是构造AE的最理想的方法。</p>
+<h3 id="哈希函数">哈希函数</h3>
  
       <!-- reward -->
       
