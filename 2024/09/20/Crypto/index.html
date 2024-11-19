@@ -88,7 +88,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-quill-pen-line"></i>
             <span class="post-meta-item-text"> 字数统计:</span>
-            <span class="post-count">6.5k</span>
+            <span class="post-count">6.7k</span>
         </span>
     </span>
 
@@ -97,7 +97,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-book-open-line"></i>
             <span class="post-meta-item-text"> 阅读时长≈</span>
-            <span class="post-count">25 分钟</span>
+            <span class="post-count">26 分钟</span>
         </span>
     </span>
 </div>
@@ -451,7 +451,24 @@ Enc_{k_M}(m)\)</span></p>
 <p>接收者解密c获得m，假设没有错误，这时再验证标记t，如果<span class="math inline">\(Vrfy(m,t)=1\)</span>,则输出m，否则输出error。</p>
 <p>缺点：消息保密不一定受到保护（因为安全的MAC不保证任何保密）。具体来说，加密和身份验证方案对于选择明文攻击可能是不安全的（因为在实践中使用的大多数MAC都是确定性的）。</p>
 <h5 id="authenticate-then-encrypt">Authenticate-then-encrypt</h5>
+<p>发送方和接受方使用同样的密钥</p>
+<p><span class="math inline">\(k_E\gets^{\$}\{0,1\}^n\)</span>,<span class="math inline">\(k_M\gets^{\$}\{0,1\}^n\)</span></p>
+<p>对于消息m，发送者计算</p>
+<p><span class="math inline">\(t\gets Enc_{k_M}(m),c\gets
+Enc_{k_E}(m||t)\)</span></p>
+<p>把<span class="math inline">\((c,t)\)</span>发送给接收者</p>
+<p>接收者解密c获得m||t，假设没有错误，这时再验证标记t，如果<span class="math inline">\(Vrfy(m,t)=1\)</span>,则输出m，否则输出error。</p>
+<p>缺点：密文完整性没有得到保护，因此敌手可以操纵密文，此外，接受者必须先解密密文，才能获知消息是否真实。这种方案不应该被使用</p>
 <h5 id="encrypt-then-authenticate">Encrypt-then-authenticate</h5>
+<p>Gen:<span class="math inline">\(k_E\gets^{\$}\{0,1\}^n\)</span>,<span class="math inline">\(k_M\gets^{\$}\{0,1\}^n\)</span></p>
+<p>Enc:对于消息m，发送者计算$cEnc_{k_E}(m)，tEnc_{k_M}(c) $</p>
+<p>把<span class="math inline">\((c,t)\)</span>发送给接收者</p>
+<p>Dec:输出error如果<span class="math inline">\(Vrfy(c,t)\neq
+1\)</span>,否则输出<span class="math inline">\(Dec_{k_E}(c)\)</span>.</p>
+<p>如上构造是一种经过认证的加密方案</p>
+<p><span class="math inline">\(\Pi_M\)</span>直接说明了如上的加密方案是不可伪造的</p>
+<p>如上构造的CCA安全降低到<span class="math inline">\(\Pi_E\)</span>CPA安全性。</p>
+<p>这是构造AE的最理想的方法。</p>
  
       <!-- reward -->
       
