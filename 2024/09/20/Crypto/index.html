@@ -88,7 +88,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-quill-pen-line"></i>
             <span class="post-meta-item-text"> 字数统计:</span>
-            <span class="post-count">6.2k</span>
+            <span class="post-count">6.5k</span>
         </span>
     </span>
 
@@ -97,7 +97,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-book-open-line"></i>
             <span class="post-meta-item-text"> 阅读时长≈</span>
-            <span class="post-count">24 分钟</span>
+            <span class="post-count">25 分钟</span>
         </span>
     </span>
 </div>
@@ -439,6 +439,19 @@ Q$(即m还没有被询问过)</p>
 <p><span class="math inline">\(Pr[Enc-forge_{A,\Pi}(n)=1]\leq
 negl(n)\)</span></p>
 <h4 id="构造ae">构造AE</h4>
+<p>基础想法是结合一个CPA安全加密方案和一个MAC方案来构造AE。有三种方法来实现这个想法：
+令<span class="math inline">\(\Pi_E=(Enc,Dec)\)</span>是任意一个CPA安全的加密方案，<span class="math inline">\(\Pi_M=(Mac,Vrfy)\)</span>是任意一个强MAC的方案</p>
+<h5 id="encrypt-and-authenticate.">Encrypt-and-authenticate.</h5>
+<p>发送方和接受方使用同样的密钥</p>
+<p><span class="math inline">\(k_E\gets^{\$}\{0,1\}^n\)</span>,<span class="math inline">\(k_M\gets^{\$}\{0,1\}^n\)</span></p>
+<p>对于消息m，发送者计算</p>
+<p><span class="math inline">\(c\gets Enc_{k_E}(m),t\gets
+Enc_{k_M}(m)\)</span></p>
+<p>把<span class="math inline">\((c,t)\)</span>发送给接收者</p>
+<p>接收者解密c获得m，假设没有错误，这时再验证标记t，如果<span class="math inline">\(Vrfy(m,t)=1\)</span>,则输出m，否则输出error。</p>
+<p>缺点：消息保密不一定受到保护（因为安全的MAC不保证任何保密）。具体来说，加密和身份验证方案对于选择明文攻击可能是不安全的（因为在实践中使用的大多数MAC都是确定性的）。</p>
+<h5 id="authenticate-then-encrypt">Authenticate-then-encrypt</h5>
+<h5 id="encrypt-then-authenticate">Encrypt-then-authenticate</h5>
  
       <!-- reward -->
       
