@@ -88,7 +88,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-quill-pen-line"></i>
             <span class="post-meta-item-text"> 字数统计:</span>
-            <span class="post-count">7.4k</span>
+            <span class="post-count">7.5k</span>
         </span>
     </span>
 
@@ -506,6 +506,12 @@ p.r.\)</span></p>
 <p>计算<span class="math inline">\(z_i:=h^s(z_{i-1}||x_i)\)</span>,最终输出<span class="math inline">\(H^s(x)=z_{B+1}\)</span></p>
 <p><img src="/2024/09/20/Crypto/pic7.png"></p>
 <p>如果原哈希函数是抗碰撞的，那么新的哈希函数也是抗碰撞的</p>
+<h4 id="mac-and-hash">MAC and HASH</h4>
+<p>用哈希函数来扩展MAC域</p>
+<p>给定一个定长的MAC和一个任意长度的消息，如何用这个MAC来进行身份验证？</p>
+<p>先把这个消息给哈希到一个定长的消息，再对这个消息计算MAC生成标签。</p>
+<p>这个MAC是安全MAC如果使用MAC是一个安全MAC且哈希是抗碰撞哈希。</p>
+<p><img src="/2024/09/20/Crypto/pic8.png"></p>
  
       <!-- reward -->
       
