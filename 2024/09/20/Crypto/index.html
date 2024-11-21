@@ -88,7 +88,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-quill-pen-line"></i>
             <span class="post-meta-item-text"> 字数统计:</span>
-            <span class="post-count">7k</span>
+            <span class="post-count">7.4k</span>
         </span>
     </span>
 
@@ -97,7 +97,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-book-open-line"></i>
             <span class="post-meta-item-text"> 阅读时长≈</span>
-            <span class="post-count">27 分钟</span>
+            <span class="post-count">29 分钟</span>
         </span>
     </span>
 </div>
@@ -485,6 +485,27 @@ Enc_{k_M}(c)\)</span></p>
 <p>随机产生一个密钥s，敌手A把密钥s和两个字符串x,x'发送过去，输出1当且仅当<span class="math inline">\(x\neq x&#39;\)</span> and <span class="math inline">\(H^s(x)=H^s(x&#39;)\)</span></p>
 <p>一个哈希函数是抗碰撞的如果对所有的PPT敌手都有<span class="math inline">\(Pr[Hash-coll_{A,\Pi}(n)=1]\leq
 negl(n)\)</span></p>
+<p>在实践中一般不需要这么高的安全性</p>
+<p><strong>Second-preimage or taget-collision resistance:</strong></p>
+<p>如果给定一个s和一个随机的x，对任何PPT敌手，都不可能找到一个x',使得<span class="math inline">\(x\neq x&#39;\)</span>且<span class="math inline">\(H^s(x)=H^{s}(x&#39;)\)</span></p>
+<p><strong>Preimage resistance:</strong></p>
+<p>给定一个s和一个随机的y，对任何PPT敌手，都不可能找到一个x，使得<span class="math inline">\(H^s(x)=y\)</span></p>
+<p>事实上有:<span class="math inline">\(c.r.\to 2nd p.r. \to
+p.r.\)</span></p>
+<h4 id="域扩展">域扩展</h4>
+<p>用定长的哈希来解决边长的输入：</p>
+<p>The Merkle-Damgard Transform</p>
+<p>假设一个哈希函数是将一个a+b位的输入压缩成一个a位的输出，构造如下哈希函数：</p>
+<p>Gen和原先的哈希函数相同</p>
+<p>H接受一个密钥s和一个任意长度字符串x的输入，实行下面两个步骤：</p>
+<p><strong>1.划分和填充：</strong></p>
+<p>设输入的x的长度是L，其中L的长度小于<span class="math inline">\(2^b\)</span>,把x用0进行若干次填充，使其长度是b的倍数,再将其划分成B+1块，其中$B=
+:x_1,x_2,...x_{B+1} $</p>
+<p><strong>2.连锁压缩:</strong></p>
+<p>选取初始随机向量IV，长度为a</p>
+<p>计算<span class="math inline">\(z_i:=h^s(z_{i-1}||x_i)\)</span>,最终输出<span class="math inline">\(H^s(x)=z_{B+1}\)</span></p>
+<p><img src="/2024/09/20/Crypto/pic7.png"></p>
+<p>如果原哈希函数是抗碰撞的，那么新的哈希函数也是抗碰撞的</p>
  
       <!-- reward -->
       
