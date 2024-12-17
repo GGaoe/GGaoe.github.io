@@ -88,7 +88,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-quill-pen-line"></i>
             <span class="post-meta-item-text"> 字数统计:</span>
-            <span class="post-count">8.9k</span>
+            <span class="post-count">9.5k</span>
         </span>
     </span>
 
@@ -97,7 +97,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-book-open-line"></i>
             <span class="post-meta-item-text"> 阅读时长≈</span>
-            <span class="post-count">35 分钟</span>
+            <span class="post-count">38 分钟</span>
         </span>
     </span>
 </div>
@@ -618,6 +618,42 @@ Z_{p_l}\)</span>,<span class="math inline">\(Z_n^*\simeq Z_{p_1}^*
 <h5 id="如何找原像">如何找原像</h5>
 <p><img src="/2024/09/20/Crypto/pic13.png"> <img src="/2024/09/20/Crypto/pic14.png">
 <img src="/2024/09/20/Crypto/pic15.png"></p>
+<h4 id="rsa假设">RSA假设</h4>
+<p>分解假设认为如下分解问题是困难的：</p>
+<p>这个问题通过运行一个多项式时间算法
+GenMoudulus来进行实例化，给定输入1^n,输出(N,p,q),其中N=pq，p和q是n位的质数</p>
+<p><span class="math inline">\(Factor_{A,GenModulus}(n):\)</span></p>
+<p>运行GenModulus<span class="math inline">\((1^n)\)</span>获得(N,p,q)</p>
+<p>A给定N输出p' q'</p>
+<p>输出1 如果 p'·q'=N</p>
+<p>分解问题是困难的如果对于所有PPT敌手都有一个可忽略函数negl使得<span class="math inline">\(Pr[Factor_{A,GenModulus}(n)=1]\leq
+negl(n)\)</span></p>
+<p>RSA问题是和分解问题及其相关的</p>
+<p>The RSA experiment <span class="math inline">\(RSA_{invA,GenRSA}(n)\)</span></p>
+<p>运行GenRSA<span class="math inline">\((1^n)\)</span>获得(N,e,d),N是两个n位的质数的乘积，<span class="math inline">\(gcd(e,\phi(N))=1\)</span> 且<span class="math inline">\(ed=1\)</span> mod <span class="math inline">\(\phi(N)\)</span></p>
+<p>均匀随机选取一个<span class="math inline">\(y \in Z^*_N\)</span></p>
+<p>A给定N,e,y,输出<span class="math inline">\(x \in Z^*_N\)</span></p>
+<p>如果<span class="math inline">\(y=x^e\)</span> mod
+N,输出1，否则输出0</p>
+<p>RSA问题是困难的如果对所有PPT敌手都有一个可忽略函数negl使得<span class="math inline">\(Pr[RSA_{invA,GenRSA}(n)=1]\leq
+negl(n)\)</span></p>
+<h4 id="循环群中的密码学假设">循环群中的密码学假设</h4>
+<h5 id="循环群和生成元">循环群和生成元</h5>
+<p>设群的阶数是m，<g>={<span class="math inline">\(g^0,g^1,g^2...g^{i-1}\)</span>}是一个循环群，g是一个生成元,i是最小的正整数，使得<span class="math inline">\(g^i=1\)</span>，i称为g的阶数</g></p>
+<p>i总是存在而且小于等于m</p>
+<p>如果g的阶数是m，那么g是一个循环群的生成元</p>
+<h4 id="离散对数问题和diffie-hellman假设">离散对数问题和diffie-hellman假设</h4>
+<p>设G是一个生成元为g，阶数为q的循环群</p>
+<p>对群中的任意一个元素h，都存在一个x，使得<span class="math inline">\(g^x=h\)</span></p>
+<p>我们把x称为h相对于g的离散对数，写作<span class="math inline">\(x=log_g(h)\)</span></p>
+<p>The discrete-logarithm experiment <span class="math inline">\(DLog_{A,\mathcal{G} }\)</span></p>
+<p>运行<span class="math inline">\(\mathcal{G}(1^n)\)</span>来获得(G,q,g),其中G是一个生成元为g，阶数为q的循环群</p>
+<p>选取随机G中一个元素h</p>
+<p>A给定(G,q,g,h),输出x</p>
+<p>实验的结果是1，当且仅当<span class="math inline">\(g^x=h\)</span></p>
+<p>我们称离散对数问题是困难的，如果对所有PPT敌手都有一个可忽略函数negl使得<span class="math inline">\(Pr[DLog_{A,\mathcal{G} }=1]\leq
+negl(n)\)</span></p>
+<p>离散对数假设是假设存在一个G，而离散对数问题是困难的。</p>
  
       <!-- reward -->
       
