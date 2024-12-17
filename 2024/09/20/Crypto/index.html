@@ -88,7 +88,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-quill-pen-line"></i>
             <span class="post-meta-item-text"> 字数统计:</span>
-            <span class="post-count">8.6k</span>
+            <span class="post-count">8.8k</span>
         </span>
     </span>
 
@@ -97,7 +97,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-book-open-line"></i>
             <span class="post-meta-item-text"> 阅读时长≈</span>
-            <span class="post-count">34 分钟</span>
+            <span class="post-count">35 分钟</span>
         </span>
     </span>
 </div>
@@ -112,104 +112,178 @@
   
     <div class="article-entry" itemprop="articleBody">
        
-  <h3 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h3><p>凯撒移位密码：key space太小</p>
+  <h3 id="introduction">Introduction</h3>
+<p>凯撒移位密码：key space太小</p>
 <p>单字母替代密码：一个字母的加密方式总是一样的，统计攻击破解，如果我们知道一个字母在明文中出现的频率，就可以极大缩小明文的搜索空间</p>
 <p>替代方法：多字母替换</p>
-<p>維吉尼亞密碼 or 多字母移位密碼：是多密码替换的特殊情况<br>破解方式：先确定加密密钥的长度m，然后break出m个加密密钥（统计攻击破解）</p>
-<h3 id="Perfect-Secrecy（完美保密性）"><a href="#Perfect-Secrecy（完美保密性）" class="headerlink" title="Perfect Secrecy（完美保密性）"></a>Perfect Secrecy（完美保密性）</h3><h4 id="Defining-an-encryption-scheme"><a href="#Defining-an-encryption-scheme" class="headerlink" title="Defining an encryption scheme"></a>Defining an encryption scheme</h4><p><img src="/2024/09/20/Crypto/pic1.png" alt></p>
-<p>密文空间 M 上的一个加密算法 (Gen, Enc, Dec) 是完美保密的，如果对于 M 上的每个分布都有 $Pr[M=m|C=c]=Pr[M=m]$，对于每个 $m \in M$ 和每个 $c \in C$，且 $Pr[C = c] &gt; 0$。</p>
+<p>維吉尼亞密碼 or 多字母移位密碼：是多密码替换的特殊情况
+破解方式：先确定加密密钥的长度m，然后break出m个加密密钥（统计攻击破解）</p>
+<h3 id="perfect-secrecy完美保密性">Perfect Secrecy（完美保密性）</h3>
+<h4 id="defining-an-encryption-scheme">Defining an encryption
+scheme</h4>
+<p><img src="/2024/09/20/Crypto/pic1.png"></p>
+<p>密文空间 M 上的一个加密算法 (Gen, Enc, Dec) 是完美保密的，如果对于 M
+上的每个分布都有 <span class="math inline">\(Pr[M=m|C=c]=Pr[M=m]\)</span>，对于每个 <span class="math inline">\(m \in M\)</span> 和每个 <span class="math inline">\(c \in C\)</span>，且 <span class="math inline">\(Pr[C = c] &gt; 0\)</span>。</p>
 <p>可以用贝叶斯公式等完成证明；</p>
 <p>完美保密性含义：不会因为知道密文而获取到明文的任何信息。</p>
-<h4 id="一个等效的完美保密性的定义"><a href="#一个等效的完美保密性的定义" class="headerlink" title="一个等效的完美保密性的定义:"></a>一个等效的完美保密性的定义:</h4><p>一种加密方案 (Gen, Enc, Dec) 在消息空间 M 上是完全保密的，当且仅当对于每个 m, m′ ∈ M 和每个 c ∈ C：$Pr[C = c|M = m] = Pr[C = c|M = m′]$</p>
+<h4 id="一个等效的完美保密性的定义">一个等效的完美保密性的定义:</h4>
+<p>一种加密方案 (Gen, Enc, Dec) 在消息空间 M
+上是完全保密的，当且仅当对于每个 m, m′ ∈ M 和每个 c ∈ C：<span class="math inline">\(Pr[C = c|M = m] = Pr[C = c|M = m′]\)</span></p>
 <p>密文的分布相对于明文是独立的</p>
-<h4 id="完美不可分辨性："><a href="#完美不可分辨性：" class="headerlink" title="完美不可分辨性："></a>完美不可分辨性：</h4><p>A向B发送两组明文$m<em>1,m_2$,B通过Gen获取一个密钥k，并均匀随机的抽取明文中的其中一个n进行加密，将加密后的密文传给A。通过获取到的密文c，A猜测n是第一位还是第二位。如果猜对了，则$PrivK^{eav}</em>{A,\Pi}=1$<br><img src="/2024/09/20/Crypto/pic2.png" alt><br>有完美保密性当且仅当有完美不可分辨性</p>
-<h4 id="一次一密："><a href="#一次一密：" class="headerlink" title="一次一密："></a>一次一密：</h4><p>只有密码只使用一次和只知密文时有保密性</p>
-<h4 id="完美保密性的限制："><a href="#完美保密性的限制：" class="headerlink" title="完美保密性的限制："></a>完美保密性的限制：</h4><p>必须要求|K|&gt;=|M|</p>
-<h4 id="香农定理："><a href="#香农定理：" class="headerlink" title="香农定理："></a>香农定理：</h4><p>一个加密算法，有|M|=|K|=|C|,当且仅当满足下列性质时，算法是完美保密的：<br>Gen选取密钥是对于每一个密钥k，都以相同的概率$\frac{1}{|K|}$获取<br>对于每一个明文m和密文c，存在一个唯一的密钥k，使得$Enc_k(m)$ 输出c</p>
-<h3 id="计算安全理论"><a href="#计算安全理论" class="headerlink" title="计算安全理论"></a>计算安全理论</h3><p>计算安全性的渐进方法<br>有效的对手 = 随机算法 + 多项式时间<br>有界 = 概率多项式时间Probabilistic Polynomial-Time（有界）算法= PPT 算法</p>
-<p>一个从自然数到非负实数的函数 negl(·) 是可忽略的，如果对于每一个正多项式 p，都存在一个 N，使得对于所有整数 $n &gt; N，negl(n) &lt; 1/p(n)$。<br>一个从自然数到非负实数的函数 negl(·) 是可忽略的，如果对于每一个正整数 c，都存在一个 $N_c$，使得对于所有整数 $n &gt; N_c，negl(n) &lt; 1/n^c$。</p>
-<p>设$negl_1$ 和 $negl_2$是可忽略函数。那么，</p>
-<ol>
-<li><p>如果存在一个整数 $N_c$ 使得对于所有 $n ≥ N_c，f(n) &lt; negl_1(n)$ 成立，则 f(n) 是可忽略的。</p>
-</li>
-<li><p>函数 $negl_3(n) = negl_1(n) + negl_2(n)$ 也是可忽略的。</p>
-</li>
-<li><p>对于任何正多项式 p，定义函数 $negl_4$ 为 $negl4(n) = p(n) · negl_1(n)$，则 $negl_4$ 也是可忽略的。</p>
-</li>
+<h4 id="完美不可分辨性">完美不可分辨性：</h4>
+<p>A向B发送两组明文<span class="math inline">\(m_1,m_2\)</span>,B通过Gen获取一个密钥k，并均匀随机的抽取明文中的其中一个n进行加密，将加密后的密文传给A。通过获取到的密文c，A猜测n是第一位还是第二位。如果猜对了，则<span class="math inline">\(PrivK^{eav}_{A,\Pi}=1\)</span> <img src="/2024/09/20/Crypto/pic2.png"> 有完美保密性当且仅当有完美不可分辨性</p>
+<h4 id="一次一密">一次一密：</h4>
+<p>只有密码只使用一次和只知密文时有保密性</p>
+<h4 id="完美保密性的限制">完美保密性的限制：</h4>
+<p>必须要求|K|&gt;=|M|</p>
+<h4 id="香农定理">香农定理：</h4>
+<p>一个加密算法，有|M|=|K|=|C|,当且仅当满足下列性质时，算法是完美保密的：
+Gen选取密钥是对于每一个密钥k，都以相同的概率<span class="math inline">\(\frac{1}{|K|}\)</span>获取
+对于每一个明文m和密文c，存在一个唯一的密钥k，使得<span class="math inline">\(Enc_k(m)\)</span> 输出c</p>
+<h3 id="计算安全理论">计算安全理论</h3>
+<p>计算安全性的渐进方法 有效的对手 = 随机算法 + 多项式时间 有界 =
+概率多项式时间Probabilistic Polynomial-Time（有界）算法= PPT 算法</p>
+<p>一个从自然数到非负实数的函数 negl(·)
+是可忽略的，如果对于每一个正多项式 p，都存在一个 N，使得对于所有整数
+<span class="math inline">\(n &gt; N，negl(n) &lt; 1/p(n)\)</span>。
+一个从自然数到非负实数的函数 negl(·) 是可忽略的，如果对于每一个正整数
+c，都存在一个 <span class="math inline">\(N_c\)</span>，使得对于所有整数
+<span class="math inline">\(n &gt; N_c，negl(n) &lt;
+1/n^c\)</span>。</p>
+<p>设<span class="math inline">\(negl_1\)</span> 和 <span class="math inline">\(negl_2\)</span>是可忽略函数。那么， 1.
+如果存在一个整数 <span class="math inline">\(N_c\)</span> 使得对于所有
+<span class="math inline">\(n ≥ N_c，f(n) &lt; negl_1(n)\)</span>
+成立，则 f(n) 是可忽略的。</p>
+<ol start="2" type="1">
+<li><p>函数 <span class="math inline">\(negl_3(n) = negl_1(n) +
+negl_2(n)\)</span> 也是可忽略的。</p></li>
+<li><p>对于任何正多项式 p，定义函数 <span class="math inline">\(negl_4\)</span> 为 <span class="math inline">\(negl4(n) = p(n) · negl_1(n)\)</span>，则 <span class="math inline">\(negl_4\)</span> 也是可忽略的。</p></li>
 </ol>
-<h5 id="常见的可忽略函数"><a href="#常见的可忽略函数" class="headerlink" title="常见的可忽略函数"></a>常见的可忽略函数</h5><p>$2^{-n},2^{-\sqrt{n}},n^{-logn}$都是可以忽略的</p>
-<p>一个方案是安全的，如果对于每一个多项式时间有界对手 A 进行某种形式上指定类型的攻击，A 成功攻击的概率是可忽略的。</p>
-<p>等价定义：一个方案是安全的，如果对于每一个多项式时间有界对手 A 进行某种形式上指定类型的攻击，并且对于每一个正多项式 p，存在一个整数 N，使得当 n &gt; N 时，A 成功攻击的概率小于 $\frac{1}{p(n)}$。</p>
-<h4 id="indistinguishable-encryptions-in-the-presence-of-an-eavesdropper-or-EAV-secure"><a href="#indistinguishable-encryptions-in-the-presence-of-an-eavesdropper-or-EAV-secure" class="headerlink" title="indistinguishable encryptions in the presence of an eavesdropper or EAV-secure"></a>indistinguishable encryptions in the presence of an eavesdropper or EAV-secure</h4><p>对于任意n，存在一个可以忽略的函数negl，使得</p>
-<script type="math/tex; mode=display">Pr[PrivK^{env}_{A,\Pi}=1]\leq \frac{1}{2}+negl(n)</script><p>一个等效的定义：</p>
-<script type="math/tex; mode=display">Pr[out_A(PrivK^{env}_{A,\Pi}(n,0))=1]-Pr[out_A(PrivK^{env}_{A,\Pi}(n,1))=1]\leq negl(n)</script><p>其中$PrivK^{env}_{A,\Pi}(n,b)$表示在不可区分性实验中使用一个固定的b，并且out代表A的输出。</p>
-<h3 id="构建在计算上安全的加密"><a href="#构建在计算上安全的加密" class="headerlink" title="构建在计算上安全的加密"></a>构建在计算上安全的加密</h3><h4 id="伪随机数发生器"><a href="#伪随机数发生器" class="headerlink" title="伪随机数发生器"></a>伪随机数发生器</h4><p>令l(·)是一个多项式，令G是一个确定多项式时间算法，该算法满足：对于任意输入$s={0,1}^n$,算法输出一个长度为l(n)的字符串，如果满足下列两个条件，则称G是一个伪随机发生器：</p>
+<h5 id="常见的可忽略函数">常见的可忽略函数</h5>
+<p><span class="math inline">\(2^{-n},2^{-\sqrt{n}},n^{-logn}\)</span>都是可以忽略的</p>
+<p>一个方案是安全的，如果对于每一个多项式时间有界对手 A
+进行某种形式上指定类型的攻击，A 成功攻击的概率是可忽略的。</p>
+<p>等价定义：一个方案是安全的，如果对于每一个多项式时间有界对手 A
+进行某种形式上指定类型的攻击，并且对于每一个正多项式 p，存在一个整数
+N，使得当 n &gt; N 时，A 成功攻击的概率小于 <span class="math inline">\(\frac{1}{p(n)}\)</span>。</p>
+<h4 id="indistinguishable-encryptions-in-the-presence-of-an-eavesdropper-or-eav-secure">indistinguishable
+encryptions in the presence of an eavesdropper or EAV-secure</h4>
+<p>对于任意n，存在一个可以忽略的函数negl，使得 <span class="math display">\[Pr[PrivK^{env}_{A,\Pi}=1]\leq
+\frac{1}{2}+negl(n)\]</span> 一个等效的定义： <span class="math display">\[Pr[out_A(PrivK^{env}_{A,\Pi}(n,0))=1]-Pr[out_A(PrivK^{env}_{A,\Pi}(n,1))=1]\leq
+negl(n)\]</span> 其中<span class="math inline">\(PrivK^{env}_{A,\Pi}(n,b)\)</span>表示在不可区分性实验中使用一个固定的b，并且out代表A的输出。</p>
+<h3 id="构建在计算上安全的加密">构建在计算上安全的加密</h3>
+<h4 id="伪随机数发生器">伪随机数发生器</h4>
+<p>令l(·)是一个多项式，令G是一个确定多项式时间算法，该算法满足：对于任意输入<span class="math inline">\(s=\{0,1\}^n\)</span>,算法输出一个长度为l(n)的字符串，如果满足下列两个条件，则称G是一个伪随机发生器：</p>
 <p>1.扩展性：对于每个n来说，l(n)&gt;n</p>
-<p>2.伪随机性：对于所有的概率随机性多项式时间的区分器D来说，存在一个可忽略函数negl，满足</p>
-<script type="math/tex; mode=display">|Pr[D(r)=1]-Pr[D(G(s))=1]|\leq negl(n)</script><p>其中r是从${0,1}^l(n)$中均匀随机选择的，种子s是从${0,1}^n$中选择的。</p>
-<h4 id="用伪随机数发生器构造的一次一密是EAV安全的"><a href="#用伪随机数发生器构造的一次一密是EAV安全的" class="headerlink" title="用伪随机数发生器构造的一次一密是EAV安全的"></a>用伪随机数发生器构造的一次一密是EAV安全的</h4><p>证明方法是用规约，已知伪随机数发生器和真随机之间是eav安全的，无法用PPT算法来分辨，那么：</p>
-<p>假设构造的一次一密$Pr[Privk^{eav}_{A,\pi}=1]=\frac{1}{2}+\epsilon(n)$</p>
-<p>我们要证$\epsilon(n)\leq negl(n)$,否则存在一个算法可以区分伪随机数和真随机</p>
+<p>2.伪随机性：对于所有的概率随机性多项式时间的区分器D来说，存在一个可忽略函数negl，满足
+<span class="math display">\[|Pr[D(r)=1]-Pr[D(G(s))=1]|\leq
+negl(n)\]</span> 其中r是从<span class="math inline">\(\{0,1\}^l(n)\)</span>中均匀随机选择的，种子s是从<span class="math inline">\(\{0,1\}^n\)</span>中选择的。</p>
+<h4 id="用伪随机数发生器构造的一次一密是eav安全的">用伪随机数发生器构造的一次一密是EAV安全的</h4>
+<p>证明方法是用规约，已知伪随机数发生器和真随机之间是eav安全的，无法用PPT算法来分辨，那么：</p>
+<p>假设构造的一次一密<span class="math inline">\(Pr[Privk^{eav}_{A,\pi}=1]=\frac{1}{2}+\epsilon(n)\)</span></p>
+<p>我们要证<span class="math inline">\(\epsilon(n)\leq
+negl(n)\)</span>,否则存在一个算法可以区分伪随机数和真随机</p>
 <p>于是通过这两种一次一密构建了一个区分器D</p>
-<p>当w=r时，$Pr[D[w]=1]=Pr[D[r]]=Pr[Privk^{eav}_{A,\hat{\pi}}=1]=\frac{1}{2}$</p>
-<p>当w=G(n)时，$Pr[D[w]=1]=Pr[D[G[n]]=1]=Pr[Privk^{eav}_{A,\pi}=1]=\frac{1}{2}+\epsilon(n)$</p>
+<p>当w=r时，<span class="math inline">\(Pr[D[w]=1]=Pr[D[r]]=Pr[Privk^{eav}_{A,\hat{\pi}}=1]=\frac{1}{2}\)</span></p>
+<p>当w=G(n)时，<span class="math inline">\(Pr[D[w]=1]=Pr[D[G[n]]=1]=Pr[Privk^{eav}_{A,\pi}=1]=\frac{1}{2}+\epsilon(n)\)</span></p>
 <p>其中第二个等号成立，是由于D就是由A构造出来的函数，通过A的输出来充当D的输出，所以两个函数的输出其实是相同的。</p>
-<p>所以$|Pr[D[r]]-Pr[D[G[n]]]|=\epsilon(n)$</p>
-<p>由伪随机数发生器的定义，$\epsilon(n)\leq negl(n)$</p>
-<p>所以构造出来的一次一密$Pr[Privk^{eav}_{A,\pi}=1]=\frac{1}{2}+\epsilon(n)\leq \frac{1}{2} + negl(n)$</p>
-<h3 id="流密码"><a href="#流密码" class="headerlink" title="流密码"></a>流密码</h3><p>流密码是一种确定性的算法，分为两步：</p>
-<p>初始化Init：输入一个随机种子s和一个可选的初始化向量IV，输出一个初始化状态$St_0$</p>
-<p>获取密码Getbits：输入前一个状态$St_{i-1}$,输出当前状态$St_t$和获取到的密钥流$y_i$</p>
+<p>所以<span class="math inline">\(|Pr[D[r]]-Pr[D[G[n]]]|=\epsilon(n)\)</span></p>
+<p>由伪随机数发生器的定义，<span class="math inline">\(\epsilon(n)\leq
+negl(n)\)</span></p>
+<p>所以构造出来的一次一密<span class="math inline">\(Pr[Privk^{eav}_{A,\pi}=1]=\frac{1}{2}+\epsilon(n)\leq
+\frac{1}{2} + negl(n)\)</span></p>
+<h3 id="流密码">流密码</h3>
+<p>流密码是一种确定性的算法，分为两步：</p>
+<p>初始化Init：输入一个随机种子s和一个可选的初始化向量IV，输出一个初始化状态<span class="math inline">\(St_0\)</span></p>
+<p>获取密码Getbits：输入前一个状态<span class="math inline">\(St_{i-1}\)</span>,输出当前状态<span class="math inline">\(St_t\)</span>和获取到的密钥流<span class="math inline">\(y_i\)</span></p>
 <p>优点：简单高效，可以加密任意长度的明文</p>
 <p>缺点：不能用相同的密钥流加密明文，否则容易发现明文之间的相关性，容易受到字节翻转攻击</p>
-<p><strong>同步模式:</strong> 双方使用密钥流的不同部分来加密每个信息。在这个模式下，双方必须同步通讯，来得知流的多少位已经被使用。这个算法虽然是确定性的，但在每一次加密过程中，密钥是互不重复的，因此对于每次加密来说，相同的明文也会被加密成不同的密文。</p>
-<p><strong>非同步模式：</strong> 双方可以独立进行加密，无需维护状态。但是，这里需要 PRG 有两个输入：一个种子k以及一个初始向量IV. 如果两个初始向量不一样，那么 PRG 的生成结果也不一样。</p>
-<p>在非同步模式下，加密方法为$Enc_k(m)=<IV,G(k,IV)\oplus m>$<br>其中IV是随机选择的，与异或结果一同输出，攻击者能得到IV，但是由于没有种子k，所以依然没法解密。</IV,G(k,IV)\oplus></p>
-<h4 id="线性反馈移位寄存器（LFSR）"><a href="#线性反馈移位寄存器（LFSR）" class="headerlink" title="线性反馈移位寄存器（LFSR）"></a>线性反馈移位寄存器（LFSR）</h4><p>一个n位的寄存器有n个寄存器$s<em>{n-1}…s</em>{0}$和n个反馈常数$c_{n-1}…c_0$</p>
-<p>当前状态即为n个寄存器里面值的集合，下一个状态为：<br>对于低n-1位，直接把上面一位向右移一位，对于最高位，是将原先所有的n位寄存器中的值和反馈常数相乘之后进行异或操作。</p>
-<p>输出是字节序列$s_0^{(0)},s_0^{(1)}…$</p>
-<p>缺点：一个n位的线性反馈移位寄存器，在最多$2^n$次移位后就会重复原先的序列。由于线性，一个4位的寄存器在接受到前八位输出后就能破解刚开始的状态和反馈常数。</p>
-<h4 id="增加非线性"><a href="#增加非线性" class="headerlink" title="增加非线性"></a>增加非线性</h4><p>为了防止上面的破解方法，可以在GetBits函数中生成状态或者获得bit时引入非线性<br><img src="/2024/09/20/Crypto/pic3.png" alt><br>在私钥加密中，块密码比流密码更加安全</p>
-<h3 id="CPA安全和伪随机函数"><a href="#CPA安全和伪随机函数" class="headerlink" title="CPA安全和伪随机函数"></a>CPA安全和伪随机函数</h3><h4 id="多消息窃听者实验：-Privk-mult-A-Pi-n"><a href="#多消息窃听者实验：-Privk-mult-A-Pi-n" class="headerlink" title="多消息窃听者实验：$Privk^{mult}_{A,\Pi}(n)$"></a>多消息窃听者实验：$Privk^{mult}_{A,\Pi}(n)$</h4><p>敌手A被给定一个输入$1^n$,输出一对消息向量$\vec{M}_0=(m_0^1…m_0^t)$以及$\vec{M}_1=(m_1^1…m_1^t)$</p>
-<p>通过运行$Gen(1^n)$生成一个密钥k和选择一个随机比特b，对所有i，计算密文$c^i\gets Enc_k(m_b^i)$,并且把密文向量$\vec{C}=(c^1…c^t)$给A</p>
-<p>A输出一个比特b’进行比较。</p>
-<h4 id="窃听者存在的情况下不可区分多次加密"><a href="#窃听者存在的情况下不可区分多次加密" class="headerlink" title="窃听者存在的情况下不可区分多次加密"></a>窃听者存在的情况下不可区分多次加密</h4><p>一个对称密钥加密方案$\Pi$,如果对所有的概率多项式时间敌手A，存在一个可忽略函数negl,满足<br>$Pr[Privk^{mult}_{A,\Pi}=1]\leq \frac{1}{2}+negl$</p>
+<p><strong>同步模式:</strong>
+双方使用密钥流的不同部分来加密每个信息。在这个模式下，双方必须同步通讯，来得知流的多少位已经被使用。这个算法虽然是确定性的，但在每一次加密过程中，密钥是互不重复的，因此对于每次加密来说，相同的明文也会被加密成不同的密文。</p>
+<p><strong>非同步模式：</strong>
+双方可以独立进行加密，无需维护状态。但是，这里需要 PRG
+有两个输入：一个种子k以及一个初始向量IV. 如果两个初始向量不一样，那么
+PRG 的生成结果也不一样。</p>
+<p>在非同步模式下，加密方法为<span class="math inline">\(Enc_k(m)=&lt;IV,G(k,IV)\oplus m&gt;\)</span>
+其中IV是随机选择的，与异或结果一同输出，攻击者能得到IV，但是由于没有种子k，所以依然没法解密。</p>
+<h4 id="线性反馈移位寄存器lfsr">线性反馈移位寄存器（LFSR）</h4>
+<p>一个n位的寄存器有n个寄存器<span class="math inline">\(s_{n-1}...s_{0}\)</span>和n个反馈常数<span class="math inline">\(c_{n-1}...c_0\)</span></p>
+<p>当前状态即为n个寄存器里面值的集合，下一个状态为：
+对于低n-1位，直接把上面一位向右移一位，对于最高位，是将原先所有的n位寄存器中的值和反馈常数相乘之后进行异或操作。</p>
+<p>输出是字节序列<span class="math inline">\(s_0^{(0)},s_0^{(1)}...\)</span></p>
+<p>缺点：一个n位的线性反馈移位寄存器，在最多<span class="math inline">\(2^n\)</span>次移位后就会重复原先的序列。由于线性，一个4位的寄存器在接受到前八位输出后就能破解刚开始的状态和反馈常数。</p>
+<h4 id="增加非线性">增加非线性</h4>
+<p>为了防止上面的破解方法，可以在GetBits函数中生成状态或者获得bit时引入非线性
+<img src="/2024/09/20/Crypto/pic3.png"> 在私钥加密中，块密码比流密码更加安全</p>
+<h3 id="cpa安全和伪随机函数">CPA安全和伪随机函数</h3>
+<h4 id="多消息窃听者实验privkmult_apin">多消息窃听者实验：<span class="math inline">\(Privk^{mult}_{A,\Pi}(n)\)</span></h4>
+<p>敌手A被给定一个输入<span class="math inline">\(1^n\)</span>,输出一对消息向量<span class="math inline">\(\vec{M}_0=(m_0^1...m_0^t)\)</span>以及<span class="math inline">\(\vec{M}_1=(m_1^1...m_1^t)\)</span></p>
+<p>通过运行<span class="math inline">\(Gen(1^n)\)</span>生成一个密钥k和选择一个随机比特b，对所有i，计算密文<span class="math inline">\(c^i\gets Enc_k(m_b^i)\)</span>,并且把密文向量<span class="math inline">\(\vec{C}=(c^1...c^t)\)</span>给A</p>
+<p>A输出一个比特b'进行比较。</p>
+<h4 id="窃听者存在的情况下不可区分多次加密">窃听者存在的情况下不可区分多次加密</h4>
+<p>一个对称密钥加密方案<span class="math inline">\(\Pi\)</span>,如果对所有的概率多项式时间敌手A，存在一个可忽略函数negl,满足
+<span class="math inline">\(Pr[Privk^{mult}_{A,\Pi}=1]\leq
+\frac{1}{2}+negl\)</span></p>
 <p>则称其具有窃听者存在的情况下不可区分多次加密</p>
-<h5 id="命题：存在这样的对称加密方案，满足窃听者存在情况下不可区分的加密，但不满足窃听者存在情况下不可区分的多次加密。"><a href="#命题：存在这样的对称加密方案，满足窃听者存在情况下不可区分的加密，但不满足窃听者存在情况下不可区分的多次加密。" class="headerlink" title="命题：存在这样的对称加密方案，满足窃听者存在情况下不可区分的加密，但不满足窃听者存在情况下不可区分的多次加密。"></a>命题：存在这样的对称加密方案，满足窃听者存在情况下不可区分的加密，但不满足窃听者存在情况下不可区分的多次加密。</h5><p>需要概率加密。</p>
-<h4 id="选择明文攻击-CPA-的安全性"><a href="#选择明文攻击-CPA-的安全性" class="headerlink" title="选择明文攻击(CPA)的安全性"></a>选择明文攻击(CPA)的安全性</h4><p>CPA的想法是增强了敌手的能力，原先敌手只能被动的接受信息，现在敌手可以主动的访问加密机。</p>
-<p>CPA不可区分实验$Privk^{CPA}_{A,\Pi}(n)$,敌手可以要求语言机加密消息$m_0、m_1$,从而获得$c_0 \gets Enc_k(m_0)$和$c_1 \gets Enc_k(m_1)$</p>
+<h5 id="命题存在这样的对称加密方案满足窃听者存在情况下不可区分的加密但不满足窃听者存在情况下不可区分的多次加密">命题：存在这样的对称加密方案，满足窃听者存在情况下不可区分的加密，但不满足窃听者存在情况下不可区分的多次加密。</h5>
+<p>需要概率加密。</p>
+<h4 id="选择明文攻击cpa的安全性">选择明文攻击(CPA)的安全性</h4>
+<p>CPA的想法是增强了敌手的能力，原先敌手只能被动的接受信息，现在敌手可以主动的访问加密机。</p>
+<p>CPA不可区分实验<span class="math inline">\(Privk^{CPA}_{A,\Pi}(n)\)</span>,敌手可以要求语言机加密消息<span class="math inline">\(m_0、m_1\)</span>,从而获得<span class="math inline">\(c_0 \gets Enc_k(m_0)\)</span>和<span class="math inline">\(c_1 \gets Enc_k(m_1)\)</span></p>
 <p>必须要把随机性作为加密过程的一部分，确保相同消息加密后密文是不同的。</p>
-<h4 id="伪随机函数"><a href="#伪随机函数" class="headerlink" title="伪随机函数"></a>伪随机函数</h4><p>如果一个函数$F_k$(对于一个均匀随机密钥k)，与一个均匀随机函数是不可区分的，那么我们称这个函数是伪随机函数。</p>
-<p>正式定义：对于一个长度保持的密钥函数$F:(0,1)^{l<em>{key}(n)}\times(0,1)^{l</em>{in}(n)}\to (0,1)^{l<em>{out}(n)},l</em>{key}(n)=l<em>{in}(n)=l</em>{out}(n)=n$,f是一个均匀随机函数，F是一个伪随机函数如果对于所有的PPT 区分器D，都有一个可忽略函数negl使得</p>
-<script type="math/tex; mode=display">|Pr[D^{F_k(\cdot)}(1^n)=1]-Pr[D^{f(\cdot)}(1^n)=1]|\leq negl(n)</script><p>随机函数接受两个输入，一个是密钥k，另一个是输入x，对于n位长的真随机函数，其规模是$2^{n2^n}$,而对于密钥长度为n的伪随机函数，其规模是$2^n$.如果</p>
-<h4 id="基于伪随机函数构造CPA安全加密"><a href="#基于伪随机函数构造CPA安全加密" class="headerlink" title="基于伪随机函数构造CPA安全加密"></a>基于伪随机函数构造CPA安全加密</h4><p>令F是伪随机函数，定义一个消息长度为n的对称密钥加密方案如下：</p>
-<p>Gen：输入$1^n$,均匀随机选择$k \gets {0,1}^n$,并将其作为密钥输出。</p>
-<p>Enc:输入密钥k，以及一个消息$m\in {0,1}^n$,均匀随机选择随机数$r\gets{0,1}^n$,输出密文<br>$c:=<r,F_k(r)\oplus m>$</r,F_k(r)\oplus></p>
-<p>Dec:输入一个密钥$k\in {0,1}^n$,以及一个密文c=<r,s>,输出明文消息<br>$m:=F_k(r)\oplus s$</r,s></p>
-<h4 id="如果F是伪随机函数，则构造方案如上的消息长度为n的定长对称密钥加密方案在CPA下具备不可区分加密。"><a href="#如果F是伪随机函数，则构造方案如上的消息长度为n的定长对称密钥加密方案在CPA下具备不可区分加密。" class="headerlink" title="如果F是伪随机函数，则构造方案如上的消息长度为n的定长对称密钥加密方案在CPA下具备不可区分加密。"></a>如果F是伪随机函数，则构造方案如上的消息长度为n的定长对称密钥加密方案在CPA下具备不可区分加密。</h4><p>令$\hat{\Pi}$为用真随机函数f取代Fk的构造方法。</p>
-<p>敌手A对他的加密预言机问询q(n)次，有$Pr[Privk^{cpa}_{A,\hat{\Pi}=1}]\leq \frac{1}{2}+\frac{q(n)}{2^n}$</p>
+<h4 id="伪随机函数">伪随机函数</h4>
+<p>如果一个函数<span class="math inline">\(F_k\)</span>(对于一个均匀随机密钥k)，与一个均匀随机函数是不可区分的，那么我们称这个函数是伪随机函数。</p>
+<p>正式定义：对于一个长度保持的密钥函数<span class="math inline">\(F:(0,1)^{l_{key}(n)}\times(0,1)^{l_{in}(n)}\to
+(0,1)^{l_{out}(n)},l_{key}(n)=l_{in}(n)=l_{out}(n)=n\)</span>,f是一个均匀随机函数，F是一个伪随机函数如果对于所有的PPT
+区分器D，都有一个可忽略函数negl使得 <span class="math display">\[|Pr[D^{F_k(\cdot)}(1^n)=1]-Pr[D^{f(\cdot)}(1^n)=1]|\leq
+negl(n)\]</span></p>
+<p>随机函数接受两个输入，一个是密钥k，另一个是输入x，对于n位长的真随机函数，其规模是<span class="math inline">\(2^{n2^n}\)</span>,而对于密钥长度为n的伪随机函数，其规模是<span class="math inline">\(2^n\)</span>.如果</p>
+<h4 id="基于伪随机函数构造cpa安全加密">基于伪随机函数构造CPA安全加密</h4>
+<p>令F是伪随机函数，定义一个消息长度为n的对称密钥加密方案如下：</p>
+<p>Gen：输入<span class="math inline">\(1^n\)</span>,均匀随机选择<span class="math inline">\(k \gets
+\{0,1\}^n\)</span>,并将其作为密钥输出。</p>
+<p>Enc:输入密钥k，以及一个消息<span class="math inline">\(m\in
+\{0,1\}^n\)</span>,均匀随机选择随机数<span class="math inline">\(r\gets\{0,1\}^n\)</span>,输出密文 <span class="math inline">\(c:=&lt;r,F_k(r)\oplus m&gt;\)</span></p>
+<p>Dec:输入一个密钥<span class="math inline">\(k\in
+\{0,1\}^n\)</span>,以及一个密文c=&lt;r,s&gt;,输出明文消息 <span class="math inline">\(m:=F_k(r)\oplus s\)</span></p>
+<h4 id="如果f是伪随机函数则构造方案如上的消息长度为n的定长对称密钥加密方案在cpa下具备不可区分加密">如果F是伪随机函数，则构造方案如上的消息长度为n的定长对称密钥加密方案在CPA下具备不可区分加密。</h4>
+<p>令<span class="math inline">\(\hat{\Pi}\)</span>为用真随机函数f取代Fk的构造方法。</p>
+<p>敌手A对他的加密预言机问询q(n)次，有<span class="math inline">\(Pr[Privk^{cpa}_{A,\hat{\Pi}=1}]\leq
+\frac{1}{2}+\frac{q(n)}{2^n}\)</span></p>
 <p>同样构造区分器D</p>
-<p>D被指定了输入$1^n$以及可以访问预言机$O:{0,1}^n \to {0,1}^n$</p>
+<p>D被指定了输入<span class="math inline">\(1^n\)</span>以及可以访问预言机<span class="math inline">\(O:\{0,1\}^n \to \{0,1\}^n\)</span></p>
 <p>运行A(1^n),用下面方式回答问询：</p>
-<p>1.均匀随机选择$r\gets {0,1}^n$<br>2.问询O(r),获得s’</p>
-<p>3.返回密文$&lt;r,s’\oplus m_b&gt;$</p>
+<p>1.均匀随机选择<span class="math inline">\(r\gets \{0,1\}^n\)</span>
+2.问询O(r),获得s'</p>
+<p>3.返回密文<span class="math inline">\(&lt;r,s&#39;\oplus
+m_b&gt;\)</span></p>
 <p>当A输出两个消息m，随机选择一个比特b</p>
 <p>1.均匀随机选择r</p>
-<p>2.问询O(r),获得相应s’</p>
-<p>3.返回挑战密文$&lt;r,s’\oplus m_b&gt;$</p>
-<p>最后A输出一个b’</p>
-<p>有$Pr[D^{F<em>k(\cdot)}(1^n)=1]=Pr[Privk^{cpa}</em>{A,\Pi}(n)=1]=\frac{1}{2}+\epsilon(n)$</p>
-<p>$Pr[D^{f(\cdot)}(1^n)=1]=Pr[Privk^{cpa}_{A,\hat{\Pi}}(n)=1]=\frac{1}{2}+\frac{q(n)}{2^n}$</p>
-<p>$|Pr[D^{F_k(\cdot)}(1^n)=1]-Pr[D^{f(\cdot)}(1^n)=1]|=\epsilon(n)-\frac{q(n)}{2^n}$<br>证毕</p>
-<h4 id="任意CPA安全的加密方案对多次加密也是安全的"><a href="#任意CPA安全的加密方案对多次加密也是安全的" class="headerlink" title="任意CPA安全的加密方案对多次加密也是安全的"></a>任意CPA安全的加密方案对多次加密也是安全的</h4><h4 id="排序和伪随机排序"><a href="#排序和伪随机排序" class="headerlink" title="排序和伪随机排序"></a>排序和伪随机排序</h4><p>设$Perm_n$是${0,1}^n$所有排列的集合，则$Perm_n$的规模是$(2^n)!$</p>
+<p>2.问询O(r),获得相应s'</p>
+<p>3.返回挑战密文<span class="math inline">\(&lt;r,s&#39;\oplus
+m_b&gt;\)</span></p>
+<p>最后A输出一个b'</p>
+<p>有<span class="math inline">\(Pr[D^{F_k(\cdot)}(1^n)=1]=Pr[Privk^{cpa}_{A,\Pi}(n)=1]=\frac{1}{2}+\epsilon(n)\)</span></p>
+<p><span class="math inline">\(Pr[D^{f(\cdot)}(1^n)=1]=Pr[Privk^{cpa}_{A,\hat{\Pi}}(n)=1]=\frac{1}{2}+\frac{q(n)}{2^n}\)</span></p>
+<p><span class="math inline">\(|Pr[D^{F_k(\cdot)}(1^n)=1]-Pr[D^{f(\cdot)}(1^n)=1]|=\epsilon(n)-\frac{q(n)}{2^n}\)</span>
+证毕</p>
+<h4 id="任意cpa安全的加密方案对多次加密也是安全的">任意CPA安全的加密方案对多次加密也是安全的</h4>
+<h4 id="排序和伪随机排序">排序和伪随机排序</h4>
+<p>设<span class="math inline">\(Perm_n\)</span>是<span class="math inline">\(\{0,1\}^n\)</span>所有排列的集合，则<span class="math inline">\(Perm_n\)</span>的规模是<span class="math inline">\((2^n)!\)</span></p>
 <p>一个伪随机排列就是输入一个k和x，输出y，并且没有一个有效的方法来区分这个排列和随机选择的函数，则称这个排列是一个伪随机排列。因为这两者看上去是相同的，除非能找到一对不同的值x和y，使得f(x)=f(y)</p>
-<p>当一个伪随机排列的长度足够长，那么他和一个伪随机函数是不可区分的，即如果F是一个伪随机排列。且$I_{in}&gt;n$,那么F也是一个伪随机函数。</p>
-<h4 id="强伪随机排列"><a href="#强伪随机排列" class="headerlink" title="强伪随机排列"></a>强伪随机排列</h4><p>如果给区分器使用逆排序预言机的能力，其依然无法区分$F_k$和一个随机置换，则称F是强伪随机置换。</p>
-<p>$F:{0,1}^<em>\times {0,1}^</em>\to {0,1}^*$是一个有效的带密钥的置换，如果对于所有多项式时间区分器D，存在一个可忽略函数negl,使得</p>
-<script type="math/tex; mode=display">|Pr[D^{F_k(\cdot)F_k^{-1}(\cdot)(1^n)}=1]-Pr[D^{f(\cdot)f^{-1}(\cdot)(1^n)}=1]|\leq negl(n)</script><p>则称F是强伪随机置换</p>
-<h4 id="PRFs-and-PRGs相互构造"><a href="#PRFs-and-PRGs相互构造" class="headerlink" title="PRFs and PRGs相互构造"></a>PRFs and PRGs相互构造</h4><h3 id="分组密码Block-Cipher"><a href="#分组密码Block-Cipher" class="headerlink" title="分组密码Block Cipher"></a>分组密码Block Cipher</h3><p>分组密码是一个高效的、含k输入的排列函数</p>
-<p>$F:{0,1}^n\times {0,1}^l\to {0,1}^l$</p>
-<p>F就是一个含k的排列函数，高效体现在给定k，可以很快计算出$F_k(x)$和他的逆$F_k^{-1}(x)$,n是键长，l是块长</p>
+<p>当一个伪随机排列的长度足够长，那么他和一个伪随机函数是不可区分的，即如果F是一个伪随机排列。且<span class="math inline">\(I_{in}&gt;n\)</span>,那么F也是一个伪随机函数。</p>
+<h4 id="强伪随机排列">强伪随机排列</h4>
+<p>如果给区分器使用逆排序预言机的能力，其依然无法区分<span class="math inline">\(F_k\)</span>和一个随机置换，则称F是强伪随机置换。</p>
+<p><span class="math inline">\(F:\{0,1\}^*\times \{0,1\}^*\to
+\{0,1\}^*\)</span>是一个有效的带密钥的置换，如果对于所有多项式时间区分器D，存在一个可忽略函数negl,使得
+<span class="math display">\[|Pr[D^{F_k(\cdot)F_k^{-1}(\cdot)(1^n)}=1]-Pr[D^{f(\cdot)f^{-1}(\cdot)(1^n)}=1]|\leq
+negl(n)\]</span> 则称F是强伪随机置换</p>
+<h4 id="prfs-and-prgs相互构造">PRFs and PRGs相互构造</h4>
+<h3 id="分组密码block-cipher">分组密码Block Cipher</h3>
+<p>分组密码是一个高效的、含k输入的排列函数</p>
+<p><span class="math inline">\(F:\{0,1\}^n\times \{0,1\}^l\to
+\{0,1\}^l\)</span></p>
+<p>F就是一个含k的排列函数，高效体现在给定k，可以很快计算出<span class="math inline">\(F_k(x)\)</span>和他的逆<span class="math inline">\(F_k^{-1}(x)\)</span>,n是键长，l是块长</p>
 <p>无论是分组密码还是流密码，其本身都不是一个加密的方式，其提供了一种操作模式</p>
 <p>分组密码+操作方式=长信息加密方式</p>
 <p>常见的操作方式有：</p>
@@ -217,205 +291,297 @@
 <p>密码块链接Cipher Block Chaining（CBC）模式；</p>
 <p>输出反馈Output Feedback（OFB）模式；</p>
 <p>计数器Counter（CTR）模式。</p>
-<p>让m代表明文，$m_1,m_2…m_l$代表明文块</p>
-<h5 id="ECB模式"><a href="#ECB模式" class="headerlink" title="ECB模式"></a>ECB模式</h5><p>ECB模式很简单，就是$c:=<F_k(m_1),F_k(m_2)...F_k(m_l )>$</F_k(m_1),F_k(m_2)...F_k(m_l></p>
+<p>让m代表明文，<span class="math inline">\(m_1,m_2...m_l\)</span>代表明文块</p>
+<h5 id="ecb模式">ECB模式</h5>
+<p>ECB模式很简单，就是<span class="math inline">\(c:=&lt;F_k(m_1),F_k(m_2)...F_k(m_l
+)&gt;\)</span></p>
 <p>安全性：由于是确定性算法，所以不是CPA安全的，不安全，永远不应该被应用。</p>
-<h5 id="CBC模式"><a href="#CBC模式" class="headerlink" title="CBC模式"></a>CBC模式</h5><p>第一段密文$c_0$赋值为一个随机数IV，然后逐个生成后面的密文：</p>
-<p>$c<em>i:=F_k(c</em>{i-1}\oplus m_i)$ for i=1…l</p>
-<p>生成密文$<c_0,c_1...c_l>$</c_0,c_1...c_l></p>
-<p>解密要用$F_k^{-1}$</p>
-<p>$m<em>i:=F_k^{-1}(c_i)\oplus c</em>{i-1}$</p>
+<h5 id="cbc模式">CBC模式</h5>
+<p>第一段密文<span class="math inline">\(c_0\)</span>赋值为一个随机数IV，然后逐个生成后面的密文：</p>
+<p><span class="math inline">\(c_i:=F_k(c_{i-1}\oplus m_i)\)</span> for
+i=1...l</p>
+<p>生成密文<span class="math inline">\(&lt;c_0,c_1...c_l&gt;\)</span></p>
+<p>解密要用<span class="math inline">\(F_k^{-1}\)</span></p>
+<p><span class="math inline">\(m_i:=F_k^{-1}(c_i)\oplus
+c_{i-1}\)</span></p>
 <p>分析：这个加密是概率性的，如果F是一个伪随机函数，那么CBC是CPA安全的，缺点是加密过程不能并行进行。</p>
-<h5 id="OFB模式"><a href="#OFB模式" class="headerlink" title="OFB模式"></a>OFB模式</h5><p>加密时生成一个随机串IV，为加密的每个块生成一个随机密码</p>
-<p>$y<em>0:=IV,y_i=F_k(y</em>{i-1})$,然后与明文块进行异或操作：$c_i=m_i\oplus y_i$</p>
-<p>密文是$<IV,c_1,c_2...c_l>$</IV,c_1,c_2...c_l></p>
-<p>分析：$F_k$不需要逆运算，如果F是伪随机函数，那么OFB模式是CPA安全的，同时支持预先操作，把要用的随机密码提前生成出来</p>
-<h5 id="CTR模式"><a href="#CTR模式" class="headerlink" title="CTR模式"></a>CTR模式</h5><p>在加密时生成一个随机数ctr，以如下方式为每一个块产生随机密码：</p>
-<p>$y_i=F_k(ctr+i),c_i=y_i\oplus m_i$,生成的密文是$<ctr,c_1,...c_l>$</ctr,c_1,...c_l></p>
+<h5 id="ofb模式">OFB模式</h5>
+<p>加密时生成一个随机串IV，为加密的每个块生成一个随机密码</p>
+<p><span class="math inline">\(y_0:=IV,y_i=F_k(y_{i-1})\)</span>,然后与明文块进行异或操作：<span class="math inline">\(c_i=m_i\oplus y_i\)</span></p>
+<p>密文是<span class="math inline">\(&lt;IV,c_1,c_2...c_l&gt;\)</span></p>
+<p>分析：<span class="math inline">\(F_k\)</span>不需要逆运算，如果F是伪随机函数，那么OFB模式是CPA安全的，同时支持预先操作，把要用的随机密码提前生成出来</p>
+<h5 id="ctr模式">CTR模式</h5>
+<p>在加密时生成一个随机数ctr，以如下方式为每一个块产生随机密码：</p>
+<p><span class="math inline">\(y_i=F_k(ctr+i),c_i=y_i\oplus
+m_i\)</span>,生成的密文是<span class="math inline">\(&lt;ctr,c_1,...c_l&gt;\)</span></p>
 <p>分析：如果F是伪随机函数，那么是CPA的，并且支持并行计算。</p>
-<h4 id="设计分组密码"><a href="#设计分组密码" class="headerlink" title="设计分组密码"></a>设计分组密码</h4><h5 id="The-avalanche-effect一个好的分组密码应该有雪崩效应"><a href="#The-avalanche-effect一个好的分组密码应该有雪崩效应" class="headerlink" title="The avalanche effect一个好的分组密码应该有雪崩效应"></a>The avalanche effect一个好的分组密码应该有雪崩效应</h5><p>输入改变一点点必须要影响输出的每一位</p>
-<h5 id="SPN-Substitution-Permutation-Networks替换排列网络"><a href="#SPN-Substitution-Permutation-Networks替换排列网络" class="headerlink" title="SPN: Substitution-Permutation Networks替换排列网络"></a>SPN: Substitution-Permutation Networks替换排列网络</h5><p>SPN满足confusion-diffusion paradigm(混淆扩散范式)</p>
+<h4 id="设计分组密码">设计分组密码</h4>
+<h5 id="the-avalanche-effect一个好的分组密码应该有雪崩效应">The
+avalanche effect一个好的分组密码应该有雪崩效应</h5>
+<p>输入改变一点点必须要影响输出的每一位</p>
+<h5 id="spn-substitution-permutation-networks替换排列网络">SPN:
+Substitution-Permutation Networks替换排列网络</h5>
+<p>SPN满足confusion-diffusion paradigm(混淆扩散范式)</p>
 <p>重复多次混淆步骤和扩散步骤：</p>
 <p>分组密码的输入被分成了若干小块，每一轮，先把每一个小块输入到一个随机排列中，再使用一个混合排列把所有小块混合到一起</p>
 <p>SPN是基于上面范式的变体来运行的：</p>
-<p>1.key mixing：在每一回合中，先将输入和子密钥(sub-key or round-key)进行异或操作</p>
-<p>2.substitution:在进行key mixing后，每一个子块i被输入到一个固定的，可逆的替换函数$S_i$(S盒)中</p>
+<p>1.key mixing：在每一回合中，先将输入和子密钥(sub-key or
+round-key)进行异或操作</p>
+<p>2.substitution:在进行key
+mixing后，每一个子块i被输入到一个固定的，可逆的替换函数<span class="math inline">\(S_i\)</span>(S盒)中</p>
 <p>3.Permutation：S盒的所有输出进行排列</p>
 <p>替换步骤和排列步骤的细节都是公开的，任何攻击者都可以知道。只有钥匙被保密。（这种设置被称为克霍夫原理）</p>
-<p>输出是最后一次进行key mixing后的结果，即先进行上面三步r次，最后再进行一次key mixing。</p>
-<h5 id="Feistel-network"><a href="#Feistel-network" class="headerlink" title="Feistel network"></a>Feistel network</h5><p>与SPN的区别是不需要函数可逆</p>
-<p>第i次round function $\hat{f_i}$有两个输入，一个是子密钥$k_i$，另一个是一个$\frac{l}{2}$长的字串，输出一个同样长度的字串。定义$f_i(R)=\hat{f_i(k_i,R)}$</p>
+<p>输出是最后一次进行key
+mixing后的结果，即先进行上面三步r次，最后再进行一次key mixing。</p>
+<h5 id="feistel-network">Feistel network</h5>
+<p>与SPN的区别是不需要函数可逆</p>
+<p>第i次round function <span class="math inline">\(\hat{f_i}\)</span>有两个输入，一个是子密钥<span class="math inline">\(k_i\)</span>，另一个是一个<span class="math inline">\(\frac{l}{2}\)</span>长的字串，输出一个同样长度的字串。定义<span class="math inline">\(f_i(R)=\hat{f_i(k_i,R)}\)</span></p>
 <p>加密流程：</p>
-<p>$L<em>i=R</em>{i-1}$</p>
-<p>$R<em>i=L</em>{i-1}\oplus f<em>i(R</em>{i-1})$</p>
+<p><span class="math inline">\(L_i=R_{i-1}\)</span></p>
+<p><span class="math inline">\(R_i=L_{i-1}\oplus
+f_i(R_{i-1})\)</span></p>
 <p>解密流程：</p>
-<p>$R_{i-1}=L_i$</p>
-<p>$L<em>{i-1}=R_i\oplus f_i(R</em>{i-1})$</p>
-<p>$\hat{f_i}$是固定的，并且是公开的，但是$f_i$不是。</p>
-<p><img src="/2024/09/20/Crypto/pic4.png" alt></p>
-<h4 id="分组密码样例"><a href="#分组密码样例" class="headerlink" title="分组密码样例"></a>分组密码样例</h4><h5 id="DES"><a href="#DES" class="headerlink" title="DES"></a>DES</h5><p><img src="/2024/09/20/Crypto/pic5.png" alt><br>缺点：key太短</p>
-<h5 id="3DES"><a href="#3DES" class="headerlink" title="3DES"></a>3DES</h5><p>实现112位安全，但是现在推荐最短长度为128，所以推荐用AES替代</p>
-<p><img src="/2024/09/20/Crypto/pic6.png" alt></p>
-<h5 id="AES"><a href="#AES" class="headerlink" title="AES"></a>AES</h5><p>128-bit block length.</p>
-<p>supports 128-bit (10 rounds), 192-bit (12 rounds), 256-bit(14 rounds)keys.</p>
-<h3 id="消息验证"><a href="#消息验证" class="headerlink" title="消息验证"></a>消息验证</h3><p>加密无法完成消息认证的完整性测试</p>
-<h4 id="消息鉴别码-MAC"><a href="#消息鉴别码-MAC" class="headerlink" title="消息鉴别码(MAC)"></a>消息鉴别码(MAC)</h4><p>消息鉴别码(MAC)是一个概率多项式时间算法三元组(Gen Mac Vrfy)满足：</p>
-<p>Gen输入参数$1^n$,输出密钥k，$|k|\geq n$</p>
-<p>Mac输入k和消息m，输出t，算法是随机的，即$t\gets Mac_k(m)$</p>
-<p>Vrfy输入密钥k，消息m和标记t，输出比特位b。$b:=Vrfy_k(m,t)$</p>
-<h4 id="消息鉴别码的安全性"><a href="#消息鉴别码的安全性" class="headerlink" title="消息鉴别码的安全性"></a>消息鉴别码的安全性</h4><h5 id="如何是攻破一个MAC方案？"><a href="#如何是攻破一个MAC方案？" class="headerlink" title="如何是攻破一个MAC方案？"></a>如何是攻破一个MAC方案？</h5><p>如果敌手能够输出任意消息以及标记，满足：</p>
+<p><span class="math inline">\(R_{i-1}=L_i\)</span></p>
+<p><span class="math inline">\(L_{i-1}=R_i\oplus
+f_i(R_{i-1})\)</span></p>
+<p><span class="math inline">\(\hat{f_i}\)</span>是固定的，并且是公开的，但是<span class="math inline">\(f_i\)</span>不是。</p>
+<p><img src="/2024/09/20/Crypto/pic4.png"></p>
+<h4 id="分组密码样例">分组密码样例</h4>
+<h5 id="des">DES</h5>
+<p><img src="/2024/09/20/Crypto/pic5.png"> 缺点：key太短</p>
+<h5 id="des-1">3DES</h5>
+<p>实现112位安全，但是现在推荐最短长度为128，所以推荐用AES替代</p>
+<p><img src="/2024/09/20/Crypto/pic6.png"></p>
+<h5 id="aes">AES</h5>
+<p>128-bit block length.</p>
+<p>supports 128-bit (10 rounds), 192-bit (12 rounds), 256-bit(14
+rounds)keys.</p>
+<h3 id="消息验证">消息验证</h3>
+<p>加密无法完成消息认证的完整性测试</p>
+<h4 id="消息鉴别码mac">消息鉴别码(MAC)</h4>
+<p>消息鉴别码(MAC)是一个概率多项式时间算法三元组(Gen Mac Vrfy)满足：</p>
+<p>Gen输入参数<span class="math inline">\(1^n\)</span>,输出密钥k，<span class="math inline">\(|k|\geq n\)</span></p>
+<p>Mac输入k和消息m，输出t，算法是随机的，即<span class="math inline">\(t\gets Mac_k(m)\)</span></p>
+<p>Vrfy输入密钥k，消息m和标记t，输出比特位b。<span class="math inline">\(b:=Vrfy_k(m,t)\)</span></p>
+<h4 id="消息鉴别码的安全性">消息鉴别码的安全性</h4>
+<h5 id="如何是攻破一个mac方案">如何是攻破一个MAC方案？</h5>
+<p>如果敌手能够输出任意消息以及标记，满足：</p>
 <p>1.t是消息m的有效标记，即Vrfy(m,t)=1</p>
 <p>2.敌手在之前没有获得过m的MAC标记（重放攻击并不被认为是攻破了消息鉴别码）</p>
-<h5 id="消息鉴别码实验-Mac-forge-A-Pi-n"><a href="#消息鉴别码实验-Mac-forge-A-Pi-n" class="headerlink" title="消息鉴别码实验$Mac-forge_{A,\Pi}(n)$"></a>消息鉴别码实验$Mac-forge_{A,\Pi}(n)$</h5><p>1.运行Gen获得一个随机密钥k</p>
-<p>2.敌手获得输入值$1^n$,并能够访问预言机$Mac_k()$,最后输出一对(m,t)的值，并用$Q$表示所有$A$对预言机的询问集合</p>
-<p>3.实验输出结果为1，当且仅当Vrfy(m,t)=1,$m\notin Q$</p>
+<h5 id="消息鉴别码实验mac-forge_apin">消息鉴别码实验<span class="math inline">\(Mac-forge_{A,\Pi}(n)\)</span></h5>
+<p>1.运行Gen获得一个随机密钥k</p>
+<p>2.敌手获得输入值<span class="math inline">\(1^n\)</span>,并能够访问预言机<span class="math inline">\(Mac_k()\)</span>,最后输出一对(m,t)的值，并用<span class="math inline">\(Q\)</span>表示所有<span class="math inline">\(A\)</span>对预言机的询问集合</p>
+<p>3.实验输出结果为1，当且仅当Vrfy(m,t)=1,<span class="math inline">\(m\notin Q\)</span></p>
 <p>如果没有敌手能在上述实验中以不可忽略概率成功，则认为Mac是安全的</p>
-<p>消息认证码$\Pi =(Gen，Mac，Vrfy)$在自适应选择消息攻击下是不可避免的或者安全的，如果对所有PPT敌手A，都有一个不可忽略函数negl使得$Pr[Mac-forge_{A,\Pi}(n)=1]\leq negl(n)$ </p>
+<p>消息认证码<span class="math inline">\(\Pi
+=(Gen，Mac，Vrfy)\)</span>在自适应选择消息攻击下是不可避免的或者安全的，如果对所有PPT敌手A，都有一个不可忽略函数negl使得<span class="math inline">\(Pr[Mac-forge_{A,\Pi}(n)=1]\leq
+negl(n)\)</span></p>
 <p>一个安全的MAC可以确保对手不能在任何以前从未进行过身份验证的新消息上生成有效的标记。</p>
 <p>然而上面的定义只能保证在面对新消息时敌手不能产生一个合法的标记，但是并不能保证在原先见过的消息中不能产生一个合法的新标记。一个强安全的MAC可以破解如上的弱点。</p>
-<h5 id="定义一个相似的实验叫做-Mac-sforge-A-Pi-n"><a href="#定义一个相似的实验叫做-Mac-sforge-A-Pi-n" class="headerlink" title="定义一个相似的实验叫做$Mac-sforge_{A,\Pi}(n)$"></a>定义一个相似的实验叫做$Mac-sforge_{A,\Pi}(n)$</h5><p>1.产生一个随机的k</p>
-<p>2.2.敌手获得输入值$1^n$,并能够访问预言机$Mac_k()$,最后输出一对(m,t)的值，并用$Q$表示所有$A$对预言机的询问的对的集合，这里的对指的是消息m和对应的标记t</p>
-<p>3.实验输出结果为1，当且仅当$Vrfy<em>k(m,t)=1,(m,t)\notin Q$,写作$Mac-sforge</em>{A,\Pi}(n)=1$</p>
-<p>一个MAC是强的，如果对所有PPT敌手A，有$Pr[Mac-sforge_{A,\Pi}(n)=1]\leq negl(n)$</p>
+<h5 id="定义一个相似的实验叫做mac-sforge_apin">定义一个相似的实验叫做<span class="math inline">\(Mac-sforge_{A,\Pi}(n)\)</span></h5>
+<p>1.产生一个随机的k</p>
+<p>2.2.敌手获得输入值<span class="math inline">\(1^n\)</span>,并能够访问预言机<span class="math inline">\(Mac_k()\)</span>,最后输出一对(m,t)的值，并用<span class="math inline">\(Q\)</span>表示所有<span class="math inline">\(A\)</span>对预言机的询问的对的集合，这里的对指的是消息m和对应的标记t</p>
+<p>3.实验输出结果为1，当且仅当<span class="math inline">\(Vrfy_k(m,t)=1,(m,t)\notin Q\)</span>,写作<span class="math inline">\(Mac-sforge_{A,\Pi}(n)=1\)</span></p>
+<p>一个MAC是强的，如果对所有PPT敌手A，有<span class="math inline">\(Pr[Mac-sforge_{A,\Pi}(n)=1]\leq
+negl(n)\)</span></p>
 <p>如果有时候需要发相同的消息，但是该消息已经在原先被发送过了，这样接收者在收到这个消息时会拒绝这样的消息。解决方案有如下两种：</p>
 <p>第一种是在加密过程中加入序列号，对i||m进行加密</p>
 <p>第二种是加入一个时间戳，将时间戳给负在加密过程中</p>
-<h4 id="构造安全MAC"><a href="#构造安全MAC" class="headerlink" title="构造安全MAC"></a>构造安全MAC</h4><p>构造一个定长的MAC：</p>
-<p>用Gen生成一个密钥k，存在一个函数l，Mac只对$m \in {0,1}^{l(n)}$有定义，我们把这种加密称作对消息长度为l(n)的消息的定长MAC。</p>
+<h4 id="构造安全mac">构造安全MAC</h4>
+<p>构造一个定长的MAC：</p>
+<p>用Gen生成一个密钥k，存在一个函数l，Mac只对<span class="math inline">\(m \in
+\{0,1\}^{l(n)}\)</span>有定义，我们把这种加密称作对消息长度为l(n)的消息的定长MAC。</p>
 <p>如果MAC的标记t是通过一个PRF获得的，那么对于一个原先未经身份验证的消息伪造标记需要对手在一个新的输入上正确猜测PRF的输出，然而这对任何PPT的对手都是不可行的。</p>
 <p>于是可以进行以下构造：</p>
-<p>Mac：在输入key $k\in {0,1}^n$,消息$m \in{0,1}^n$,输出$t:=F_k(m)$ </p>
-<p>Vrfy:在输入key $k\in {0,1}^n$,消息$m \in{0,1}^n$,标记t$ \in{0,1}^n$,输出1 iff $t=F_k(m)$ </p>
-<h4 id="对长消息进行身份验证"><a href="#对长消息进行身份验证" class="headerlink" title="对长消息进行身份验证"></a>对长消息进行身份验证</h4><p>对长消息分块后分别进行MAC，在ppt中提到了三种方式，但都是不安全的，具体内容可以重新阅读ppt；通常用的方式是CBC-MAC，但在对不同长度的消息进行身份验证时可能也是不安全的，在这种情况下可以使用CBC-MAC的变体，具体内容在ppt没有提及。</p>
-<h4 id="CBC-MAC"><a href="#CBC-MAC" class="headerlink" title="CBC-MAC"></a>CBC-MAC</h4><p>令F是一个PRF，固定长度函数l：</p>
+<p>Mac：在输入key <span class="math inline">\(k\in
+\{0,1\}^n\)</span>,消息<span class="math inline">\(m
+\in\{0,1\}^n\)</span>,输出<span class="math inline">\(t:=F_k(m)\)</span></p>
+<p>Vrfy:在输入key <span class="math inline">\(k\in
+\{0,1\}^n\)</span>,消息<span class="math inline">\(m
+\in\{0,1\}^n\)</span>,标记t$ {0,1}^n$,输出1 iff <span class="math inline">\(t=F_k(m)\)</span></p>
+<h4 id="对长消息进行身份验证">对长消息进行身份验证</h4>
+<p>对长消息分块后分别进行MAC，在ppt中提到了三种方式，但都是不安全的，具体内容可以重新阅读ppt；通常用的方式是CBC-MAC，但在对不同长度的消息进行身份验证时可能也是不安全的，在这种情况下可以使用CBC-MAC的变体，具体内容在ppt没有提及。</p>
+<h4 id="cbc-mac">CBC-MAC</h4>
+<p>令F是一个PRF，固定长度函数l：</p>
 <p>Mac:k，m=l(n)·n</p>
-<p>把m分成等长的块：$m=m_0m_1…m_l$</p>
-<p>令$t_0:=0^n$,然后从i=1到l:</p>
-<p>$t<em>i:=F_k(f</em>{i-1}\oplus m_i)$</p>
-<p>输出$t_l$作为标签</p>
-<p>Vrfy:输入是k，m，t<br>如果m的长度不是l(n)·n,输出0，否则当且仅当$t=Mac_k(m)$时输出1.</p>
-<h4 id="CBC-MAC-v-s-CBC-mode-encryption"><a href="#CBC-MAC-v-s-CBC-mode-encryption" class="headerlink" title="CBC-MAC v.s. CBC-mode encryption"></a>CBC-MAC v.s. CBC-mode encryption</h4><p>MAC不适用一个随机的初始串IV，并且只输出最后一个块</p>
-<h4 id="身份验证的加密-Authenticated-Encryption"><a href="#身份验证的加密-Authenticated-Encryption" class="headerlink" title="身份验证的加密 Authenticated Encryption"></a>身份验证的加密 Authenticated Encryption</h4><p>目的是同时完成对消息的加密和对身份的验证</p>
-<p>A private-key encryption is an authenticated encryption scheme if it is CCA-secure and unforgeable.即一个私钥加密方案是身份验证加密如果他是CCA安全的并且是不可伪造的</p>
-<h4 id="CCA安全"><a href="#CCA安全" class="headerlink" title="CCA安全"></a>CCA安全</h4><p>CCA不可分辨性实验：</p>
-<p>$Privk^{cca}_{A,\Pi}(n)$:</p>
-<p>1.通过Gen($1^n$)生成一个密钥k</p>
-<p>2.敌手给定输入$1^n$,也可以访问神预机的加密和解密$Enc_k,Dec_k$,输出一对等长消息$m_0,m_1$</p>
-<p>3.随机选择一个比特位，然后生成挑战密文$c\gets Enc_k(m_b)$并发送给A</p>
-<p>4.敌手继续访问神预机，但是不允许对挑战密文本身进行询问。最终，敌手输出b’.如果b=b’,则输出1，否则输出0.</p>
+<p>把m分成等长的块：<span class="math inline">\(m=m_0m_1...m_l\)</span></p>
+<p>令<span class="math inline">\(t_0:=0^n\)</span>,然后从i=1到l:</p>
+<p><span class="math inline">\(t_i:=F_k(f_{i-1}\oplus m_i)\)</span></p>
+<p>输出<span class="math inline">\(t_l\)</span>作为标签</p>
+<p>Vrfy:输入是k，m，t 如果m的长度不是l(n)·n,输出0，否则当且仅当<span class="math inline">\(t=Mac_k(m)\)</span>时输出1.</p>
+<h4 id="cbc-mac-v.s.-cbc-mode-encryption">CBC-MAC v.s. CBC-mode
+encryption</h4>
+<p>MAC不适用一个随机的初始串IV，并且只输出最后一个块</p>
+<h4 id="身份验证的加密-authenticated-encryption">身份验证的加密
+Authenticated Encryption</h4>
+<p>目的是同时完成对消息的加密和对身份的验证</p>
+<p>A private-key encryption is an authenticated encryption scheme if it
+is CCA-secure and
+unforgeable.即一个私钥加密方案是身份验证加密如果他是CCA安全的并且是不可伪造的</p>
+<h4 id="cca安全">CCA安全</h4>
+<p>CCA不可分辨性实验：</p>
+<p><span class="math inline">\(Privk^{cca}_{A,\Pi}(n)\)</span>:</p>
+<p>1.通过Gen(<span class="math inline">\(1^n\)</span>)生成一个密钥k</p>
+<p>2.敌手给定输入<span class="math inline">\(1^n\)</span>,也可以访问神预机的加密和解密<span class="math inline">\(Enc_k,Dec_k\)</span>,输出一对等长消息<span class="math inline">\(m_0,m_1\)</span></p>
+<p>3.随机选择一个比特位，然后生成挑战密文<span class="math inline">\(c\gets Enc_k(m_b)\)</span>并发送给A</p>
+<p>4.敌手继续访问神预机，但是不允许对挑战密文本身进行询问。最终，敌手输出b'.如果b=b',则输出1，否则输出0.</p>
 <p>一个加密方法在选择明文攻击下有完美不可分辨性，或者CCA安全，如果对所有的PPT敌手都有一个可忽略函数negl，有</p>
-<p>$Pr[Privk^{cca}_{A,\Pi}(n)=1]\leq \frac{1}{2}+negl(n)$</p>
+<p><span class="math inline">\(Pr[Privk^{cca}_{A,\Pi}(n)=1]\leq
+\frac{1}{2}+negl(n)\)</span></p>
 <p>到目前为止所有提到的加密方案都不是CCA安全的。CCA安全意味着不可延展性，如果敌手想去修改一个密文，要么这个密文是不合法的，要么是一个和原先的明文没有任何关系的明文所对应的密文。</p>
-<h4 id="消息完整性实验"><a href="#消息完整性实验" class="headerlink" title="消息完整性实验"></a>消息完整性实验</h4><p>$Enc-forge_{A,\Pi}(n)$:</p>
-<p>1.通过Gen($1^n$)生成一个密钥k</p>
-<p>2.敌手给定输入$1^n$,也可以访问神预机的加密$Enc_k$,输出一个密文c</p>
-<p>3.令$m=Dec_k(c)$,令Q是A所有询问结果的集合<br>这个实验输出1当且仅当(1).$m\neq\perp $,即解密失败 (2).$m \notin Q$(即m还没有被询问过)</p>
+<h4 id="消息完整性实验">消息完整性实验</h4>
+<p><span class="math inline">\(Enc-forge_{A,\Pi}(n)\)</span>:</p>
+<p>1.通过Gen(<span class="math inline">\(1^n\)</span>)生成一个密钥k</p>
+<p>2.敌手给定输入<span class="math inline">\(1^n\)</span>,也可以访问神预机的加密<span class="math inline">\(Enc_k\)</span>,输出一个密文c</p>
+<p>3.令<span class="math inline">\(m=Dec_k(c)\)</span>,令Q是A所有询问结果的集合
+这个实验输出1当且仅当(1).$m<span class="math inline">\(,即解密失败
+(2).\)</span>m Q$(即m还没有被询问过)</p>
 <p>一个私钥加密方案是不可伪造的如果对所有的PPT敌手，都有一个可忽略函数negl使得</p>
-<p>$Pr[Enc-forge_{A,\Pi}(n)=1]\leq negl(n)$</p>
-<h4 id="构造AE"><a href="#构造AE" class="headerlink" title="构造AE"></a>构造AE</h4><p>基础想法是结合一个CPA安全加密方案和一个MAC方案来构造AE。有三种方法来实现这个想法：<br>令$\Pi_E=(Enc,Dec)$是任意一个CPA安全的加密方案，$\Pi_M=(Mac,Vrfy)$是任意一个强MAC的方案</p>
-<h5 id="Encrypt-and-authenticate"><a href="#Encrypt-and-authenticate" class="headerlink" title="Encrypt-and-authenticate."></a>Encrypt-and-authenticate.</h5><p>发送方和接受方使用同样的密钥</p>
-<p>$k_E\gets^{$}{0,1}^n$,$k_M\gets^{$}{0,1}^n$</p>
+<p><span class="math inline">\(Pr[Enc-forge_{A,\Pi}(n)=1]\leq
+negl(n)\)</span></p>
+<h4 id="构造ae">构造AE</h4>
+<p>基础想法是结合一个CPA安全加密方案和一个MAC方案来构造AE。有三种方法来实现这个想法：
+令<span class="math inline">\(\Pi_E=(Enc,Dec)\)</span>是任意一个CPA安全的加密方案，<span class="math inline">\(\Pi_M=(Mac,Vrfy)\)</span>是任意一个强MAC的方案</p>
+<h5 id="encrypt-and-authenticate.">Encrypt-and-authenticate.</h5>
+<p>发送方和接受方使用同样的密钥</p>
+<p><span class="math inline">\(k_E\gets^{\$}\{0,1\}^n\)</span>,<span class="math inline">\(k_M\gets^{\$}\{0,1\}^n\)</span></p>
 <p>对于消息m，发送者计算</p>
-<p>$c\gets Enc<em>{k_E}(m),t\gets Enc</em>{k_M}(m)$</p>
-<p>把$(c,t)$发送给接收者</p>
-<p>接收者解密c获得m，假设没有错误，这时再验证标记t，如果$Vrfy(m,t)=1$,则输出m，否则输出error。</p>
+<p><span class="math inline">\(c\gets Enc_{k_E}(m),t\gets
+Enc_{k_M}(m)\)</span></p>
+<p>把<span class="math inline">\((c,t)\)</span>发送给接收者</p>
+<p>接收者解密c获得m，假设没有错误，这时再验证标记t，如果<span class="math inline">\(Vrfy(m,t)=1\)</span>,则输出m，否则输出error。</p>
 <p>缺点：消息保密不一定受到保护（因为安全的MAC不保证任何保密）。具体来说，加密和身份验证方案对于选择明文攻击可能是不安全的（因为在实践中使用的大多数MAC都是确定性的）。</p>
-<h5 id="Authenticate-then-encrypt"><a href="#Authenticate-then-encrypt" class="headerlink" title="Authenticate-then-encrypt"></a>Authenticate-then-encrypt</h5><p>发送方和接受方使用同样的密钥</p>
-<p>$k_E\gets^{$}{0,1}^n$,$k_M\gets^{$}{0,1}^n$</p>
+<h5 id="authenticate-then-encrypt">Authenticate-then-encrypt</h5>
+<p>发送方和接受方使用同样的密钥</p>
+<p><span class="math inline">\(k_E\gets^{\$}\{0,1\}^n\)</span>,<span class="math inline">\(k_M\gets^{\$}\{0,1\}^n\)</span></p>
 <p>对于消息m，发送者计算</p>
-<p>$t\gets Enc<em>{k_M}(m),c\gets Enc</em>{k_E}(m||t)$</p>
-<p>把$(c,t)$发送给接收者</p>
-<p>接收者解密c获得m||t，假设没有错误，这时再验证标记t，如果$Vrfy(m,t)=1$,则输出m，否则输出error。</p>
+<p><span class="math inline">\(t\gets Enc_{k_M}(m),c\gets
+Enc_{k_E}(m||t)\)</span></p>
+<p>把<span class="math inline">\((c,t)\)</span>发送给接收者</p>
+<p>接收者解密c获得m||t，假设没有错误，这时再验证标记t，如果<span class="math inline">\(Vrfy(m,t)=1\)</span>,则输出m，否则输出error。</p>
 <p>缺点：密文完整性没有得到保护，因此敌手可以操纵密文，此外，接受者必须先解密密文，才能获知消息是否真实。这种方案不应该被使用</p>
-<h5 id="Encrypt-then-authenticate"><a href="#Encrypt-then-authenticate" class="headerlink" title="Encrypt-then-authenticate"></a>Encrypt-then-authenticate</h5><p>Gen:$k_E\gets^{$}{0,1}^n$,$k_M\gets^{$}{0,1}^n$</p>
-<p>Enc:对于消息m，发送者计算$c\gets Enc<em>{k_E}(m)$，$t\gets Enc</em>{k_M}(c)$</p>
-<p>把$(c,t)$发送给接收者</p>
-<p>Dec:输出error如果$Vrfy(c,t)\neq 1$,否则输出$Dec_{k_E}(c)$.</p>
+<h5 id="encrypt-then-authenticate">Encrypt-then-authenticate</h5>
+<p>Gen:<span class="math inline">\(k_E\gets^{\$}\{0,1\}^n\)</span>,<span class="math inline">\(k_M\gets^{\$}\{0,1\}^n\)</span></p>
+<p>Enc:对于消息m，发送者计算<span class="math inline">\(c\gets
+Enc_{k_E}(m)\)</span>，<span class="math inline">\(t\gets
+Enc_{k_M}(c)\)</span></p>
+<p>把<span class="math inline">\((c,t)\)</span>发送给接收者</p>
+<p>Dec:输出error如果<span class="math inline">\(Vrfy(c,t)\neq
+1\)</span>,否则输出<span class="math inline">\(Dec_{k_E}(c)\)</span>.</p>
 <p>如上构造是一种经过认证的加密方案</p>
-<p>$\Pi_M$直接说明了如上的加密方案是不可伪造的</p>
-<p>如上构造的CCA安全降低到$\Pi_E$CPA安全性。</p>
+<p><span class="math inline">\(\Pi_M\)</span>直接说明了如上的加密方案是不可伪造的</p>
+<p>如上构造的CCA安全降低到<span class="math inline">\(\Pi_E\)</span>CPA安全性。</p>
 <p>这是构造AE的最理想的方法。</p>
-<h3 id="哈希函数"><a href="#哈希函数" class="headerlink" title="哈希函数"></a>哈希函数</h3><p>有时候我们需要把一个长字符串压缩成一个短的字符串，这样我们就用到哈希函数（有时叫做消息摘要函数）</p>
+<h3 id="哈希函数">哈希函数</h3>
+<p>有时候我们需要把一个长字符串压缩成一个短的字符串，这样我们就用到哈希函数（有时叫做消息摘要函数）</p>
 <p>我们使用哈希函数进行密码学的实际应用中，应该满足如下两个条件</p>
-<p><strong>1.抗碰撞：</strong><br>我们应该难以找到$m_0,m_1$,使得$hash(m_0)=hash(m_1)$</p>
-<p><strong>2.完全不可预测：</strong><br>应该和一个随机的映射是不可区分的</p>
-<p>哈希函数$H^s(x)=H(s,x)$,一般s是不保密的</p>
-<p>哈希函数的形式化定义(Gen,H),其中Gen是一个概率算法，输入一个$1^n$的安全密钥，输出一个密钥s</p>
-<p>H接受输入s和一个字符串x，输出一个对应的串$H^s(x)\in {0,1}^{l(n)}$</p>
-<h4 id="碰撞检测实验"><a href="#碰撞检测实验" class="headerlink" title="碰撞检测实验"></a>碰撞检测实验</h4><p>$Hash-coll_{A,\Pi}(n)$</p>
-<p>随机产生一个密钥s，敌手A把密钥s和两个字符串x,x’发送过去，输出1当且仅当$x\neq x’$ and $H^s(x)=H^s(x’)$</p>
-<p>一个哈希函数是抗碰撞的如果对所有的PPT敌手都有$Pr[Hash-coll_{A,\Pi}(n)=1]\leq negl(n)$</p>
+<p><strong>1.抗碰撞：</strong> 我们应该难以找到<span class="math inline">\(m_0,m_1\)</span>,使得<span class="math inline">\(hash(m_0)=hash(m_1)\)</span></p>
+<p><strong>2.完全不可预测：</strong>
+应该和一个随机的映射是不可区分的</p>
+<p>哈希函数<span class="math inline">\(H^s(x)=H(s,x)\)</span>,一般s是不保密的</p>
+<p>哈希函数的形式化定义(Gen,H),其中Gen是一个概率算法，输入一个<span class="math inline">\(1^n\)</span>的安全密钥，输出一个密钥s</p>
+<p>H接受输入s和一个字符串x，输出一个对应的串<span class="math inline">\(H^s(x)\in \{0,1\}^{l(n)}\)</span></p>
+<h4 id="碰撞检测实验">碰撞检测实验</h4>
+<p><span class="math inline">\(Hash-coll_{A,\Pi}(n)\)</span></p>
+<p>随机产生一个密钥s，敌手A把密钥s和两个字符串x,x'发送过去，输出1当且仅当<span class="math inline">\(x\neq x&#39;\)</span> and <span class="math inline">\(H^s(x)=H^s(x&#39;)\)</span></p>
+<p>一个哈希函数是抗碰撞的如果对所有的PPT敌手都有<span class="math inline">\(Pr[Hash-coll_{A,\Pi}(n)=1]\leq
+negl(n)\)</span></p>
 <p>在实践中一般不需要这么高的安全性</p>
 <p><strong>Second-preimage or taget-collision resistance:</strong></p>
-<p>如果给定一个s和一个随机的x，对任何PPT敌手，都不可能找到一个x’,使得$x\neq x’$且$H^s(x)=H^{s}(x’)$</p>
+<p>如果给定一个s和一个随机的x，对任何PPT敌手，都不可能找到一个x',使得<span class="math inline">\(x\neq x&#39;\)</span>且<span class="math inline">\(H^s(x)=H^{s}(x&#39;)\)</span></p>
 <p><strong>Preimage resistance:</strong></p>
-<p>给定一个s和一个随机的y，对任何PPT敌手，都不可能找到一个x，使得$H^s(x)=y$</p>
-<p>事实上有:$c.r.\to 2nd p.r. \to p.r.$</p>
-<h4 id="域扩展"><a href="#域扩展" class="headerlink" title="域扩展"></a>域扩展</h4><p>用定长的哈希来解决变长的输入：</p>
+<p>给定一个s和一个随机的y，对任何PPT敌手，都不可能找到一个x，使得<span class="math inline">\(H^s(x)=y\)</span></p>
+<p>事实上有:<span class="math inline">\(c.r.\to 2nd p.r. \to
+p.r.\)</span></p>
+<h4 id="域扩展">域扩展</h4>
+<p>用定长的哈希来解决变长的输入：</p>
 <p>The Merkle-Damgard Transform</p>
 <p>假设一个哈希函数是将一个a+b位的输入压缩成一个a位的输出，构造如下哈希函数：</p>
 <p>Gen和原先的哈希函数相同</p>
 <p>H接受一个密钥s和一个任意长度字符串x的输入，实行下面两个步骤：</p>
 <p><strong>1.划分和填充：</strong></p>
-<p>设输入的x的长度是L，其中L的长度小于$2^b$,把x用0进行若干次填充，使其长度是b的倍数,再将其划分成B+1块，其中$B=\left \lceil \frac{L}{b} \right \rceil:x<em>1,x_2,…x</em>{B+1} $</p>
+<p>设输入的x的长度是L，其中L的长度小于<span class="math inline">\(2^b\)</span>,把x用0进行若干次填充，使其长度是b的倍数,再将其划分成B+1块，其中$B=
+:x_1,x_2,...x_{B+1} $</p>
 <p><strong>2.连锁压缩:</strong></p>
 <p>选取初始随机向量IV，长度为a</p>
-<p>计算$z<em>i:=h^s(z</em>{i-1}||x<em>i)$,最终输出$H^s(x)=z</em>{B+1}$</p>
-<p><img src="/2024/09/20/Crypto/pic7.png" alt></p>
+<p>计算<span class="math inline">\(z_i:=h^s(z_{i-1}||x_i)\)</span>,最终输出<span class="math inline">\(H^s(x)=z_{B+1}\)</span></p>
+<p><img src="/2024/09/20/Crypto/pic7.png"></p>
 <p>如果原哈希函数是抗碰撞的，那么新的哈希函数也是抗碰撞的</p>
-<h4 id="MAC-and-HASH"><a href="#MAC-and-HASH" class="headerlink" title="MAC and HASH"></a>MAC and HASH</h4><p>用哈希函数来扩展MAC域</p>
+<h4 id="mac-and-hash">MAC and HASH</h4>
+<p>用哈希函数来扩展MAC域</p>
 <p>给定一个定长的MAC和一个任意长度的消息，如何用这个MAC来进行身份验证？</p>
 <p>先把这个消息给哈希到一个定长的消息，再对这个消息计算MAC生成标签。</p>
 <p>这个MAC是安全的变长MAC如果使用MAC是一个安全的定长MAC且哈希是抗碰撞哈希。</p>
-<p><img src="/2024/09/20/Crypto/pic8.png" alt></p>
-<h4 id="用哈希函数构建MACs"><a href="#用哈希函数构建MACs" class="headerlink" title="用哈希函数构建MACs"></a>用哈希函数构建MACs</h4><p>HMAC：已证明的安全的构造方法</p>
-<p><img src="/2024/09/20/Crypto/pic9.png" alt></p>
-<h4 id="哈希函数常见的攻击方式"><a href="#哈希函数常见的攻击方式" class="headerlink" title="哈希函数常见的攻击方式"></a>哈希函数常见的攻击方式</h4><p>1.生日攻击</p>
-<p>对于n个不同的数中挑选，只要$\sqrt{n}$次挑选，就有$\frac{1}{2}$的概率找到一个碰撞。</p>
-<p>由此，一个有n位输出的哈希函数，其安全性就只有$\frac{n}{2}$位了</p>
-<h3 id="One-Way-Functions-and-Hard-Core-Predicates-单向函数与硬核谓词"><a href="#One-Way-Functions-and-Hard-Core-Predicates-单向函数与硬核谓词" class="headerlink" title="One-Way Functions and Hard-Core Predicates (单向函数与硬核谓词)"></a>One-Way Functions and Hard-Core Predicates (单向函数与硬核谓词)</h3><p>one way fuctions(OWF)是一类函数，易于计算，但是很难求逆，单向函数的存在实现了很多有用的概念，如PRF、PRG等</p>
+<p><img src="/2024/09/20/Crypto/pic8.png"></p>
+<h4 id="用哈希函数构建macs">用哈希函数构建MACs</h4>
+<p>HMAC：已证明的安全的构造方法</p>
+<p><img src="/2024/09/20/Crypto/pic9.png"></p>
+<h4 id="哈希函数常见的攻击方式">哈希函数常见的攻击方式</h4>
+<p>1.生日攻击</p>
+<p>对于n个不同的数中挑选，只要<span class="math inline">\(\sqrt{n}\)</span>次挑选，就有<span class="math inline">\(\frac{1}{2}\)</span>的概率找到一个碰撞。</p>
+<p>由此，一个有n位输出的哈希函数，其安全性就只有<span class="math inline">\(\frac{n}{2}\)</span>位了</p>
+<h3 id="one-way-functions-and-hard-core-predicates-单向函数与硬核谓词">One-Way
+Functions and Hard-Core Predicates (单向函数与硬核谓词)</h3>
+<p>one way
+fuctions(OWF)是一类函数，易于计算，但是很难求逆，单向函数的存在实现了很多有用的概念，如PRF、PRG等</p>
 <p>定义：</p>
-<p>1.易于计算：存在PPT算法$M_f$来计算f，对所有x，$M_f(x)=f(x)$</p>
-<p>2.难于求逆：对任意PPT算法A，存在一个不可忽略函数negl,使得$Pr_{x\gets^{$} {0,1}^n}[A(1^n,f(x))\in f^{-1}(f(x))]\leq negl(n)$</p>
+<p>1.易于计算：存在PPT算法<span class="math inline">\(M_f\)</span>来计算f，对所有x，<span class="math inline">\(M_f(x)=f(x)\)</span></p>
+<p>2.难于求逆：对任意PPT算法A，存在一个不可忽略函数negl,使得<span class="math inline">\(Pr_{x\gets^{\$} \{0,1\}^n}[A(1^n,f(x))\in
+f^{-1}(f(x))]\leq negl(n)\)</span></p>
 <p>其中有两个要素，其一是x是均匀随机选取的，而非任意挑选其中一个x，我们求的是平均；其二是我们只需要求出其中一个原像，而不需要所有原像或者最初的x。</p>
-<p>可以定义一个实验$Invert_{A,f}(n)$</p>
-<p>难以求逆性质要求对所有PPT敌手A，都有一个不可忽略函数negl，使得$Pr[Invert_{A,f}(n)=1]\leq negl(n)$</p>
-<h4 id="OWF的候选人"><a href="#OWF的候选人" class="headerlink" title="OWF的候选人"></a>OWF的候选人</h4><p>目前还不清楚是否存在OWF，但是有几个候选人，至今未找到多项式时间的解决方案，于是暂定其是OWF；</p>
+<p>可以定义一个实验<span class="math inline">\(Invert_{A,f}(n)\)</span></p>
+<p>难以求逆性质要求对所有PPT敌手A，都有一个不可忽略函数negl，使得<span class="math inline">\(Pr[Invert_{A,f}(n)=1]\leq negl(n)\)</span></p>
+<h4 id="owf的候选人">OWF的候选人</h4>
+<p>目前还不清楚是否存在OWF，但是有几个候选人，至今未找到多项式时间的解决方案，于是暂定其是OWF；</p>
 <p>1.两个n位的质数相乘之后进行分解；</p>
-<p>2.子集和问题，给定n个数和一个index set I，给出对应的和，找出原始的I；</p>
-<p>3.离散对数问题。输出一个指数p和一个随机元素$g\in {2,3…p-1}$,定义$f_{p,g}=g^{x}$ mod p</p>
-<h4 id="Hard-core-predicates硬核谓词"><a href="#Hard-core-predicates硬核谓词" class="headerlink" title="Hard-core predicates硬核谓词"></a>Hard-core predicates硬核谓词</h4><p>f(x)是OWF能推出从f(x)中我们无法获得任何关于x的信息吗</p>
+<p>2.子集和问题，给定n个数和一个index set
+I，给出对应的和，找出原始的I；</p>
+<p>3.离散对数问题。输出一个指数p和一个随机元素<span class="math inline">\(g\in \{2,3...p-1\}\)</span>,定义<span class="math inline">\(f_{p,g}=g^{x}\)</span> mod p</p>
+<h4 id="hard-core-predicates硬核谓词">Hard-core predicates硬核谓词</h4>
+<p>f(x)是OWF能推出从f(x)中我们无法获得任何关于x的信息吗</p>
 <p>不一定。</p>
 <p>反例：</p>
 <p>假设g是一个OWF，f(x1||x2)=x1||g(x2),f是OWF，但是泄露了前面一半的信息</p>
 <p>我们用硬核谓词来建模f(x)隐藏的信息</p>
-<p>一个函数hc：${0,1}^*\to {0,1}$是一个函数f的硬核谓词如果hc可以在多项式时间内计算，并且对每一个PPT敌手A都有一个可忽略函数negl使得$Pr_{x\gets {0,1}^n}[A(1^n,f(x))=hc(x)]\leq \frac{1}{2}+negl(n)$</p>
+<p>一个函数hc：<span class="math inline">\(\{0,1\}^*\to
+\{0,1\}\)</span>是一个函数f的硬核谓词如果hc可以在多项式时间内计算，并且对每一个PPT敌手A都有一个可忽略函数negl使得<span class="math inline">\(Pr_{x\gets \{0,1\}^n}[A(1^n,f(x))=hc(x)]\leq
+\frac{1}{2}+negl(n)\)</span></p>
 <p>上述定义并不要求f(x)是OWF。</p>
 <p>Goldreich-Levin Theorem</p>
 <p>假设OWF存在。那么存在一个OWF g和一个g的硬核谓词hc</p>
 <p>例如给定OWF f和g，那么hc可以如下构造：</p>
-<p>$g(x,r)=(f(x),r) for |x|=|r|$</p>
-<p>$hc(x,r)=\oplus ^n_{i=1}x_i · r_i$</p>
-<h4 id="用OWF构造PRG"><a href="#用OWF构造PRG" class="headerlink" title="用OWF构造PRG"></a>用OWF构造PRG</h4><p>用最小扩展来构造PRG</p>
+<p><span class="math inline">\(g(x,r)=(f(x),r) for |x|=|r|\)</span></p>
+<p><span class="math inline">\(hc(x,r)=\oplus ^n_{i=1}x_i ·
+r_i\)</span></p>
+<h4 id="用owf构造prg">用OWF构造PRG</h4>
+<p>用最小扩展来构造PRG</p>
 <p>假设f是一个单向排列，hc是f的一个硬核谓词，那么G(s)=f(s)||hc(s)是一个扩展1位的PRG。</p>
 <p>用多项式扩展来构造PRG</p>
 <p>每次多生成一位。</p>
-<h3 id="Number-Theory-and-Cryptographic-Hardness-Assumptions-数论与密码学困难度假设"><a href="#Number-Theory-and-Cryptographic-Hardness-Assumptions-数论与密码学困难度假设" class="headerlink" title="Number Theory and Cryptographic Hardness Assumptions (数论与密码学困难度假设)"></a>Number Theory and Cryptographic Hardness Assumptions (数论与密码学困难度假设)</h3><p>a|b:a整除b</p>
+<h3 id="number-theory-and-cryptographic-hardness-assumptions-数论与密码学困难度假设">Number
+Theory and Cryptographic Hardness Assumptions
+(数论与密码学困难度假设)</h3>
+<p>a|b:a整除b</p>
 <p>余数表示的唯一性：a=qb+r</p>
 <p>存在X，Y，使得Xa+Yb=gcd(a,b),且gcd(a,b)是可以以这种形式表示的最小整数。且这种表示不是唯一的，存在无数组XY。</p>
 <p>gcd可以用欧几里得算法计算，XY可以用扩展欧几里得算法计算。</p>
-<p>$gcd_{loop}$(a, b)：<br>    r=0<br>    while (b $\neq$ 0) {<br>        r = a mod b;<br>        a = b;<br>        b = r;<br>        }<br>    return a;</p>
+<p><span class="math inline">\(gcd_{loop}\)</span>(a, b)： r=0 while (b
+<span class="math inline">\(\neq\)</span> 0) { r = a mod b; a = b; b =
+r; } return a;</p>
 <p>扩展欧几里得方法找到XY：</p>
-<p><img src="/2024/09/20/Crypto/pic10.png" alt></p>
+<p><img src="/2024/09/20/Crypto/pic10.png"></p>
 <p>在模运算意义下加减乘运算都封闭</p>
 <p>除法运算不封闭</p>
 <p>b是模N意义下可逆的：存在c，bc=1 mod N,c称为b的乘法逆元</p>
-<p>$b^{-1}$:b在1~N-1里面的唯一的逆元</p>
-<p>定义下面的除法操作：$[a/b mod N]=[ab^{-1} mod N]$</p>
-<p>因此只要除数的逆元存在，那么除数就是良定义的，ab=cb mod N 就能推出a=c mod N</p>
+<p><span class="math inline">\(b^{-1}\)</span>:b在1~N-1里面的唯一的逆元</p>
+<p>定义下面的除法操作：<span class="math inline">\([a/b mod N]=[ab^{-1}
+mod N]\)</span></p>
+<p>因此只要除数的逆元存在，那么除数就是良定义的，ab=cb mod N 就能推出a=c
+mod N</p>
 <p>b是可逆的当且仅当gcd(b,N)=1</p>
 <p>求乘法逆元可以用欧几里得扩展算法。</p>
-<h4 id="群论"><a href="#群论" class="headerlink" title="群论"></a>群论</h4><p>很多加密系统都是基于群论的</p>
+<h4 id="群论">群论</h4>
+<p>很多加密系统都是基于群论的</p>
 <p>一个群是一个代数结构，由一个元素集G和一个二元操作符组成的</p>
 <p>满足封闭性、满足结合律、有单位元、有逆元</p>
 <p>Closure. g, h ∈ G, g ◦ h ∈ G</p>
@@ -423,9 +589,21 @@
 <p>Existence of inverses. g ◦ h = e = h ◦ g</p>
 <p>Associativity. g1, g2, g3 ∈ G, (g1 ◦ g2) ◦ g3 = g1 ◦ (g2 ◦ g3)</p>
 <p>如果是可交换的，那么是阿贝尔群</p>
-<p>对于任意整数N，我们可以在模乘法意义下构造一个群吗：可以，$Z^*_N={b\in {1,…N-1}|gcd(b,N)=1}$</p>
-<p>所有元素都是与N互质的。这个集合称为N的简化剩余系，而$Z_N$成为N的完全剩余系。</p>
-<p>$\phi(N)=|Z^*_N|$,$\phi$成为欧拉phi函数。</p>
+<p>对于任意整数N，我们可以在模乘法意义下构造一个群吗：可以，<span class="math inline">\(Z^*_N=\{b\in
+\{1,...N-1\}|gcd(b,N)=1\}\)</span></p>
+<p>所有元素都是与N互质的。这个集合称为N的简化剩余系，而<span class="math inline">\(Z_N\)</span>成为N的完全剩余系。</p>
+<h4 id="欧拉phi函数">欧拉phi函数</h4>
+<p><span class="math inline">\(\phi(N)=|Z^*_N|\)</span>,<span class="math inline">\(\phi\)</span>成为欧拉phi函数。</p>
+<p>有如下定理：</p>
+<p>令<span class="math inline">\(N=\Pi_ip_i^{e_i}\)</span>,其中<span class="math inline">\(P_i\)</span>是不同的质数，<span class="math inline">\(e_i\geq 1\)</span>,那么<span class="math inline">\(\phi(n)=\Pi_ip_i^{e^i-1}(p_i-1)\)</span></p>
+<p>例如<span class="math inline">\(N=15=3*5，Z^*_N=\{1, 2, 4, 7, 8, 11,
+13, 14\}=8=(5-1)(3-1)\)</span></p>
+<h4 id="费马欧拉定理">费马欧拉定理：</h4>
+<p>对任意N&gt;1 和<span class="math inline">\(a\in Z^*_N\)</span>,<span class="math inline">\(a^{\phi(N)}=1\)</span> mod
+N.当N是质数p的时候，<span class="math inline">\(a^{p-1}=1\)</span> mod
+p</p>
+<p>令G是有限集，m=|G|,是群的阶数，对于任意元素<span class="math inline">\(g\in G,g^m=1\)</span></p>
+<p>质数检验：给定N，计算<span class="math inline">\(\sqrt{N}\)</span>,对里面的质数进行计算，看是不是N的因数，要都不是，那么N是质数。</p>
  
       <!-- reward -->
       
