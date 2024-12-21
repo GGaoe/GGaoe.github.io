@@ -88,7 +88,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-quill-pen-line"></i>
             <span class="post-meta-item-text"> 字数统计:</span>
-            <span class="post-count">9.5k</span>
+            <span class="post-count">10.8k</span>
         </span>
     </span>
 
@@ -97,7 +97,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-book-open-line"></i>
             <span class="post-meta-item-text"> 阅读时长≈</span>
-            <span class="post-count">38 分钟</span>
+            <span class="post-count">43 分钟</span>
         </span>
     </span>
 </div>
@@ -656,6 +656,68 @@ negl(n)\)</span></p>
 <p>离散对数假设是假设存在一个G，而离散对数问题是困难的。</p>
 <h3 id="key-management-and-the-public-key-revolution-密钥管理与公钥加密变革">Key
 Management and the Public-Key Revolution (密钥管理与公钥加密变革)</h3>
+<h4 id="kdc">KDC</h4>
+<p>密钥集散中心：和所有实体之间都有一个初始的密钥，当A想和B交流时，用A的密钥加密消息向KDC发出申请，KDC解密后知道A的请求，于是生成一个新的密钥，分别用A和B的密钥加密后发给A和B，这样A和B就可以用这个新密钥进行通信。</p>
+<p>在通信结束后，A和B都把这个密钥销毁。不过这种方法有一个缺点，就是KDC需要保存所有的密钥，如果KDC被攻破，那么所有的密钥都会泄露。</p>
+<h4 id="needham-schroeder-key-distribution-protocol">Needham-Schroeder
+key-distribution protocol</h4>
+<p><img src="/2024/09/20/Crypto/pic16.png"></p>
+<p>如何不依赖于KDC来建立一个安全的密钥交换协议？</p>
+<h4 id="the-diffie-hellman-key-exchange-protocol">The Diffie-Hellman
+key-exchange protocol</h4>
+<p>令$ $是一个PPT算法，输入<span class="math inline">\(1^n\)</span>，输出(G,q,g),其中G是一个生成元为g，阶数为q（q=n）的循环群</p>
+<p>D-H key-exchange protocol is constructed as follows</p>
+<p><img src="/2024/09/20/Crypto/pic17.png"></p>
+<p>正确性：<span class="math inline">\(K_A=h_B^x=(g^y)^x=g^{xy}=(g^x)^y=h_A^y=K_B\)</span></p>
+<p>安全性：敌手可以看到G,q,g,<span class="math inline">\(h_A\)</span>,<span class="math inline">\(h_B\)</span>，但是不能看到x,y</p>
+<p>通过定义实验来证明安全性：</p>
+<h4 id="the-key-exchange-experiment-ke_apieavn">The key-exchange
+experiment <span class="math inline">\(KE_{A,\Pi}^{eav}(n)\)</span></h4>
+<p>两个主体都持有<span class="math inline">\(1^n\)</span>,运行密钥交换协议，产生了一个包含有两者所有暴露信息的文本Trans，并且输出了一个两个主体所共同持有的密钥k</p>
+<p>随机选择一位b，如果b=0，那么<span class="math inline">\(\hat{k}:=k\)</span>，否则均匀随机选择<span class="math inline">\(\hat{k}\in \{0,1\}^n\)</span></p>
+<p><span class="math inline">\(\mathcal{A}\)</span> 给定Trans和<span class="math inline">\(\hat{k}\)</span>,输出一位b'</p>
+<p>实验输出1，当且仅当b=b'</p>
+<p>这个密钥交换协议在有窃听者在场的情况下是安全的，当且仅当如果对所有PPT敌手<span class="math inline">\(\mathcal{A}\)</span>，都有一个可忽略函数negl使得<span class="math inline">\(Pr[KE_{A,\Pi}^{eav}(n)=1]\leq
+\frac{1}{2}+negl(n)\)</span></p>
+<p>为了简化这个问题，随机生成的一个k修改为从G中随机选一个元素，这样问题被重新定义为<span class="math inline">\(\hat{KE}^{eav}_{A,\Pi}(n)\)</span></p>
+<h5 id="如果和mathcalg相关判定性diffie-hellman问题是困难的那么这个密钥交换协议是安全的">如果和<span class="math inline">\(\mathcal{G}\)</span>相关判定性diffie-hellman问题是困难的，那么这个密钥交换协议是安全的。</h5>
+<p><img src="/2024/09/20/Crypto/pic18.png">
+DH密钥很容易受到中间人攻击，因此在实践中不单独使用</p>
+<h3 id="公钥加密">公钥加密</h3>
+<p>一个公钥加密方案可以写成一个PPT算法的三元组</p>
+<p>Gen：输入<span class="math inline">\(1^n\)</span>，输出一个公钥pk和一个私钥sk</p>
+<p>Enc：输入pk和一个消息m，输出密文<span class="math inline">\(c\gets
+Enc_{pk}(m)\)</span></p>
+<p>Dec：输入sk和密文c，输出消息m，<span class="math inline">\(m:=Dec_{sk}(c)\)</span></p>
+<p>在有窃听者的情况下设计实验来考虑公钥加密的安全性：</p>
+<h4 id="the-eavesdropping-indistinguishability-experiment-pubkeav_an">The
+eavesdropping indistinguishability experiment PubK^{eav}_{A,}(n)</h4>
+<p>运行Gen(1^n)获得(pk,sk)</p>
+<p>敌手给定公钥pk，输出两个消息m0,m1</p>
+<p>随机选择一个比特位b，生成密文<span class="math inline">\(c\gets
+Enc_{pk}(m_b)\)</span>，把c发送给敌手A,c称为挑战密文</p>
+<p>A输出一个比特b'，实验输出1当且仅当b=b'</p>
+<p>一个公钥加密方案在窃听者存在时进行无法区分的加密，如果对所有PPT敌手A，都有一个可忽略函数negl使得<span class="math inline">\(Pr[PubK^{eav}_{A,\Pi}(n)=1]\leq
+\frac{1}{2}+negl(n)\)</span></p>
+<p>与私钥加密不同，<strong>如果一个公钥加密方案在窃听者存在的情况下具有难以区分的加密，那么它是CPA安全的</strong>，即对CPA对手具有难以区分的加密。</p>
+<p>因为(1)
+A是pk（用于加密），(2)Enc是公开已知的。因此，A可以自己加密任何消息，这相当于有一个加密神预机。</p>
+<p><strong>如果一个公钥加密方案是CPA安全的，那么他也有对多条消息加密的不可区分性。</strong></p>
+<p>CPA安全的定长加密方案意味着CPA安全的任意长度加密方案。</p>
+<h4 id="用如下实验来定义cca安全pubkcca_apin">用如下实验来定义CCA安全<span class="math inline">\(PubK^{cca}_{A,\Pi}(n)\)</span></h4>
+<p>Gen(<span class="math inline">\(1^n\)</span>)获得(pk,sk)</p>
+<p>敌手给定公钥pk，可以访问解密预言机<span class="math inline">\(Dec_{sk}(·)\)</span>,输出一对等长的消息m0,m1</p>
+<p>随机选择一个比特位b，生成密文<span class="math inline">\(c\gets
+Enc_{pk}(m_b)\)</span>，把c发送给敌手A,c称为挑战密文</p>
+<p>A继续访问解密预言机，但是不允许对挑战密文本身进行询问。最终，敌手输出b'，实验输出1当且仅当b=b'</p>
+<p>一个公钥加密方案是CCA安全的，如果对所有的PPT敌手A，都有一个可忽略函数negl使得<span class="math inline">\(Pr[PubK^{cca}_{A,\Pi}(n)=1]\leq
+\frac{1}{2}+negl(n)\)</span></p>
+<p>类似于cpa安全的公钥加密，我们有：<strong>如果加密方案是cca安全的，那么在chosen
+ciphertext attacks下也有无法区分的（多个）加密。</strong></p>
+<p><strong>!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!have trouble in
+understanding the following content</strong></p>
+<p><strong>但是和公钥加密的CPA安全不同，将定长的CCA安全的公钥加密方案扩展到任意长度的消息并不是CCA安全的</strong></p>
+<p>因为敌手可以对挑战密文块重新排序，从而获得一个新的密文。</p>
  
       <!-- reward -->
       
