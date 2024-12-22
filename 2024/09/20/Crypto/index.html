@@ -88,7 +88,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-quill-pen-line"></i>
             <span class="post-meta-item-text"> 字数统计:</span>
-            <span class="post-count">11.2k</span>
+            <span class="post-count">11.6k</span>
         </span>
     </span>
 
@@ -97,7 +97,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-book-open-line"></i>
             <span class="post-meta-item-text"> 阅读时长≈</span>
-            <span class="post-count">44 分钟</span>
+            <span class="post-count">46 分钟</span>
         </span>
     </span>
 </div>
@@ -532,6 +532,24 @@
 <p>3.选择一个e，使得gcd(e,$\phi(N)$)=1</p>
 <p>4.计算d:=[$e^{-1}$ mod $\phi(N)$]</p>
 <p>5.Return (N,e,d)</p>
+<p>给定密钥生成算法GenRSA，RSA加密方案是如下的三元组：</p>
+<h4 id="The-plain-RSA-encryption-scheme"><a href="#The-plain-RSA-encryption-scheme" class="headerlink" title="The plain RSA encryption scheme"></a>The plain RSA encryption scheme</h4><p>Gen:运行GenRSA($1^n$)获得(N,e,d),公钥是(N,e),私钥是(N,d)</p>
+<p>Enc：输入公钥pk=(N,e)和一个消息m$\in Z^*_N$，输出密文c=[$m^e$ mod N]</p>
+<p>Dec:输入私钥sk=(N,d)和密文$c\in Z^*_N$，输出$m:=c^d$ mod N</p>
+<p>为什么plain RSA是不安全的：</p>
+<p>plain RSA不是CPA安全的，或者说在有窃听者在场的情况下没有不可区分的加密</p>
+<p><strong>No deterministic public-key encryption scheme is CPA-secure.</strong></p>
+<p>因为缺少随机性，敌手可以让其加密两条消息m0和m1，然后将结果与挑战密文相互比较</p>
+<p>RSA加密的安全性的先决条件是要求被加密的m是随机选择的，但是在这里m不是从$Z^*_N$中均匀随机选择的，c也不是均匀分布的，因此RSA假设并不适用于plain RSA</p>
+<h4 id="Padded-RSA"><a href="#Padded-RSA" class="headerlink" title="Padded RSA"></a>Padded RSA</h4><p>为了克服如上缺点，使用了填充RSA的方法。</p>
+<p>在加密之前，消息被“随机填充”（或随机映射）到$Z_N^*$中的一个长消息。长随机消息被输入加密算法并生成密文。</p>
+<p>要解密，需要将密文输入解密算法，并使用“去填充”操作从输出中恢复原始消息（这需要映射是可逆的）。</p>
+<p>安全性主要取决于所使用的特定映射。</p>
+<p>RSA Laboratories Public-Key Cryptography Standard (PKCS)</p>
+<p><img src="/2024/09/20/Crypto/pic2·.png" alt></p>
+<p>如果r的长度是N的一半，那么它是CPA安全的</p>
+<p>optimal asymmetric encryption padding (OAEP)</p>
+<p><img src="/2024/09/20/Crypto/pic1·.png" alt></p>
  
       <!-- reward -->
       
